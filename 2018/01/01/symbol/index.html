@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="es6中Symbol的用法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入解析 ES6：Symbol">
+<meta property="og:url" content="http://yoursite.com/2018/01/01/symbol/index.html">
+<meta property="og:site_name" content="Rz">
+<meta property="og:description" content="es6中Symbol的用法">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-03T07:41:10.446Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入解析 ES6：Symbol">
+<meta name="twitter:description" content="es6中Symbol的用法">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/01/symbol/"/>
+
+
+
+
+
+  <title>深入解析 ES6：Symbol | Rz</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Rz</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-es6" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/01/symbol/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rz">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深入解析 ES6：Symbol</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-01T03:46:08+08:00">
+                2018-01-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  es6中Symbol的用法
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="深入解析-ES6：Symbol"><a href="#深入解析-ES6：Symbol" class="headerlink" title="深入解析 ES6：Symbol"></a>深入解析 ES6：<code>Symbol</code></h3><blockquote>
+<p>引用：<a href="http://bubkoo.com/2015/07/24/es6-in-depth-symbols/" target="_blank" rel="noopener">http://bubkoo.com/2015/07/24/es6-in-depth-symbols/</a></p>
+</blockquote>
+<p><code>Symbol</code><strong> 是什么？</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="built_in">Symbol</span>()</span><br><span class="line"><span class="string">"symbol"</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>JavaScript</code> 在 1997 年被标准化时，就有 6 种数据类型，直到 ES6 出现之前，程序中的变量一定是以下 6 种数据类型之一：</p>
+<ul>
+<li>Undefined</li>
+<li>Null</li>
+<li>Boolean</li>
+<li>Number</li>
+<li>String</li>
+<li>Object</li>
+</ul>
+<p>而symbol则是javascript中的第<strong>七</strong>种数据类型</p>
+</li>
+<li><p><code>Symbol</code> 是完全不一样的东西。一旦创建后就不可更改，不能对它们设置属性（如果在严格模式下尝试这样做，你将得到一个 <code>TypeError</code>）。它们可以作为属性名，这时它们和字符串的属性名没有什么区别。</p>
+</li>
+<li><p>每个 <code>Symbol</code> 都是独一无二的，不与其它 <code>Symbol</code> 重复（即便是使用相同的 <code>Symbol</code> 描述创建），创建一个 <code>Symbol</code> 就跟创建一个对象一样方便。</p>
+</li>
+<li><p><code>ES6</code> 中的 <code>Symbol</code>与传统语言（如 <code>Lisp</code> 和 <code>Ruby</code>）中的 <code>Symbol</code> 中的类似，但并不是完全照搬到 <code>JavaScript</code> 中。在 <code>Lisp</code> 中，所有标识符都是 <code>Symbol</code>；在 <code>JavaScript</code> 中，标识符和大多数属性仍然是字符串，<code>Symbol</code> 只是提供了一个额外的选择。</p>
+</li>
+<li><p>值得注意的是：与其它类型不同的是，<code>Symbol</code> 不能自动被转换为字符串，当尝试将一个 <code>Symbol</code> 强制转换为字符串时，将返回一个 <code>TypeError</code>。</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">var</span> sym = <span class="built_in">Symbol</span>(<span class="string">"&lt;3"</span>);</span><br><span class="line">&gt; <span class="string">"your symbol is "</span> + sym</span><br><span class="line"><span class="comment">// TypeError: can't convert symbol to string</span></span><br><span class="line">&gt; <span class="string">`your symbol is <span class="subst">$&#123;sym&#125;</span>`</span></span><br><span class="line"><span class="comment">// TypeError: can't convert symbol to string</span></span><br></pre></td></tr></table></figure>
+<p>应该避免这样的强制转换，应该使用 <code>String(sym)</code> 或 <code>sym.toString()</code> 来转换。</p>
+<p><strong>获取 </strong><code>Symbol</code><strong> 的三种方法</strong></p>
+<ul>
+<li><code>Symbol()</code> 每次调用时都返回一个唯一的 Symbol。</li>
+<li><code>Symbol.for(string)</code> 从 <code>Symbol</code>注册表中返回相应的 <code>Symbol</code>，与上个方法不同的是，<code>Symbol</code>注册表中的 <code>Symbol</code> 是共享的。也就是说，如果你调用 <code>Symbol.for(&quot;cat&quot;)</code> 三次，都将返回相同的 <code>Symbol</code>。当不同页面或同一页面不同模块需要共享 <code>Symbol</code> 时，注册表就非常有用。</li>
+<li><code>Symbol.iterator</code> 返回语言预定义的一些 <code>Symbol</code>，每个都有其特殊的用途。</li>
+</ul>
+<p>如果你仍不确定 <code>Symbol</code> 是否有用，那么接下来的内容将非常有趣，因为我将为你演示 <code>Symbol</code> 的实际应用。</p>
+<p><code>Symbol</code><strong> 在 </strong><code>ES6</code><strong> 规范中的应用</strong></p>
+<ul>
+<li>可以使用 <code>Symbol</code> 来避免代码冲突。</li>
+<li>在使用 <code>iterator</code> 时，我们解析<code>for (var item of myArray)</code> 内部是以调用 <code>myArray[Symbol.iterator]()</code> 开始的，这个方法可以使用 <code>myArray.iterator()</code> 来代替，但是使用 <code>Symbol</code> 的后向兼容性更好。</li>
+</ul>
+<p>在 <code>ES6</code> 中还有一些地方使用到了 <code>Symbol</code>。（这些特性还没有在 <code>FireFox</code> 中实现。）</p>
+<ul>
+<li>使 <code>instanceof</code> 可扩展。在 <code>ES6</code>中，<code>object instanceof constructor</code> 表达式被标准化为构造函数的一个方法：<code>constructor[Symbol.hasInstance](object)</code>，这意味着它是可扩展的。</li>
+<li>消除新特性和旧代码之间的冲突。</li>
+<li>支持新类型的字符串匹配。在 <code>ES5</code> 中，调用 <code>str.match(myObject)</code> 时，首先会尝试将 <code>myObject</code>转换为 <code>RegExp</code>对象。在 <code>ES6</code>中，首先将检查 <code>myObject</code>中是否有 <code>myObject[Symbol.match](str)</code> 方法，在所有正则表达式工作的地方都可以提供一个自定义的字符串解析方法。</li>
+</ul>
+<p>这些用途还比较窄，但仅仅通过我文章中的代码很难看到这些新特性产生的重大影响。JavaScript 的 Symbol 是 PHP 和 Python 中 __doubleUnderscores 的改进版本，标准组织将使用它来为语言添加新特性，而不会对已有代码产生影响。</p>
+<p><strong>案例</strong><br><em>一个布尔值引出的问题：</em><br>有时，把一些属于其他对象的数据暂存在另一个对象中是非常方便的。例如，假设你正在编写一个 <code>JS</code> 库，使用 <code>CSS</code> 中的 <code>transition</code> 来让一个 <code>DOM</code>元素在屏幕上飞奔，你已经知道不能同时将多个 <code>transition</code> 应用在同一个 <code>div</code>上，否则将使得动画非常不美观，你也确实有办法来解决这个问题，但是首先你需要知道该 <code>div</code>是否已经在移动中。</p>
+<p>怎么解决这个问题呢？</p>
+<p>其中一个方法是使用浏览器提供的 API 来探测元素是否处于动画状态，但杀鸡焉用牛刀，在将元素设置为移动时，你的库就知道了该元素正在移动。</p>
+<p>你真正需要的是一种机制来跟踪哪些元素正在移动，你可以将正在移动的元素保存在一个数组中，每次要为一个元素设置动画时，首先检查一下这个元素是否已经在这个列表中。</p>
+<p>啊哈，但是如果你的数组非常庞大，即便是这样的线性搜索也会产生性能问题。</p>
+<p>那么，你真正想做的就是直接在元素上设置一个标志：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (element.isMoving) &#123;</span><br><span class="line">  smoothAnimations(element);</span><br><span class="line">&#125;</span><br><span class="line">element.isMoving = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+<p>这也有一些潜在的问题，不得不承认这样一个事实：还有其他代码也可能操作该 ODM 元素。</p>
+<ul>
+<li>在其他代码中，你创建的属性会被 for-in 或 Object.keys() 枚举出来；</li>
+<li>在其他一些库中也许已经使用了同样的方式（在元素上设置了相同的属性），那么这将和你的代码发生冲突，产生不可预计的结果；</li>
+<li>其他一些库可能在将来会使用同样的方式，这也会与你的代码发生冲突；</li>
+<li>标准委员会可能会为每个元素添加一个 .isMoving() 原生方法，那么你的代码就彻底不能工作了。</li>
+</ul>
+<p>当然，对于最后三个问题，你可以选择一个无意义的不会有人会使用到的字符串：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (element.__$jorendorff_animation_library$PLEASE_DO_NOT_USE_THIS_PROPERTY$isMoving__) &#123;</span><br><span class="line">  smoothAnimations(element);</span><br><span class="line">&#125;</span><br><span class="line">element.__$jorendorff_animation_library$PLEASE_DO_NOT_USE_THIS_PROPERTY$isMoving__ = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+<p>这似乎太不靠谱了，看了让人眼睛痛。</p>
+<p>你还可以用加密算法来生成一个几乎唯一的字符串：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// get 1024 Unicode characters of gibberish</span></span><br><span class="line"><span class="keyword">var</span> isMoving = SecureRandom.generateName();</span><br><span class="line">...</span><br><span class="line"><span class="keyword">if</span> (element[isMoving]) &#123;</span><br><span class="line">  smoothAnimations(element);</span><br><span class="line">&#125;</span><br><span class="line">element[isMoving] = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+<p><code>object[name]</code> 语法允许我们将任何字符串作为属性名，代码能正常工作，冲突几乎是不可能了，代码看起来也美观多了。<br>但是，这回导致糟糕的调试体验，每次使用 <code>console.log()</code> 打印出包含该属性的元素时，你回看到一个庞大的垃圾字符串，并且如果还不止一个这样的属性呢？每次刷新后属性名都发生了变化，怎么样使这些属性看起来更加直观呢？</p>
+<p>为什么这么难？我们只是为了保存一个小小的标志位。</p>
+<p><em>用 Symbol 来解决问题 </em></p>
+<p>Symbol 值可以由程序创建，并可以作为属性名，而且不用担心属性名冲突。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mySymbol = <span class="built_in">Symbol</span>();</span><br></pre></td></tr></table></figure>
+<p>调用 <code>Symbol()</code> 方法将创建一个新的 <code>Symbol</code> 类型的值，并且该值不与其它任何值相等。<br>与数字和字符串一样，<code>Symbol</code> 类型的值也可以作为对象的属性名，正是由于它不与任何其它值相等，对应的属性也不会发生冲突：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">obj[mySymbol] = <span class="string">"ok!"</span>;  <span class="comment">// guaranteed not to collide</span></span><br><span class="line"><span class="built_in">console</span>.log(obj[mySymbol]);  <span class="comment">// ok!</span></span><br></pre></td></tr></table></figure>
+<p>下面是使用 Symbol 来解决上面的问题：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// create a unique symbol</span></span><br><span class="line"><span class="keyword">var</span> isMoving = <span class="built_in">Symbol</span>(<span class="string">"isMoving"</span>);</span><br><span class="line">...</span><br><span class="line"><span class="keyword">if</span> (element[isMoving]) &#123;</span><br><span class="line">  smoothAnimations(element);</span><br><span class="line">&#125;</span><br><span class="line">element[isMoving] = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+<p><em>上面代码需要注意几点：</em></p>
+<ul>
+<li>方法 <code>Symbol(&quot;isMoving&quot;)</code> 中的 <code>&quot;isMoving&quot;</code> 字符串被称为 <code>Symbol</code>的描述信息，这对调试非常有帮助。可以通过 <code>console.log(isMoving)</code> 打印出来，或通过 <code>isMoving.toString()</code> 将 <code>isMoving</code> 转换为字符串时，或在一些错误信息中显示出来。</li>
+<li><code>element[isMoving]</code> 访问的是 <code>symbol-keyed</code> 属性，除了属性名是 <code>Symbol</code> 类型的值之外，与其它属性都一样。</li>
+<li>和数组一样，<code>symbol-keyed</code> 属性不能通过 <code>.</code> 操作符来访问，必须使用方括号的方式。</li>
+<li>操作 <code>symbol-keyed</code> 属性也非常方便，通过上面代码我们已经知道如何获取和设置 <code>element[isMoving]</code> 的值，我们还可以这样使用：<code>if (isMoving in element)</code> 或 <code>delete element[isMoving]</code>。</li>
+<li>另一方面，只有在 <code>isMoving</code> 的作用域范围内才可以使用上述代码，这可以实现弱封装机制：在一个模块内创建一些<code>Symbol</code>，只有在该模块内部的对象才能使用，而不用担心与其它模块的代码发生冲突。</li>
+</ul>
+<p>由于 <code>Symbol</code> 的设计初衷是为了避免冲突，当遍历 <code>JavaScript</code>对象时，并不会枚举到以 <code>Symbol</code> 作为建的属性，比如，<code>for-in</code> 循环只会遍历到以字符串作为键的属性，<code>Object.keys(obj)</code> 和 <code>Object.getOwnPropertyNames(obj)</code> 也一样，但这并不意味着 <code>Symbol</code> 为键的属性是不可枚举的：使用 <code>Object.getOwnPropertySymbols(obj)</code> 这个新方法可以枚举出来，还有 <code>Reflect.ownKeys(obj)</code> 这个新方法可以返回对象中所有字符串和 <code>Symbol</code>键。</p>
+<p>库和框架的设计者将会发现很多 <code>Symbol</code> 的用途，<code>JavaScript</code>语言本身也对其有广泛的应用。</p>
+<p><strong>兼容性</strong><br>对于还没有原生支持 Symbol 的浏览器，你可以使用 polyfill，如 <a href="https://github.com/zloirock/core-js#ecmascript-6-symbols" target="_blank" rel="noopener">core.js</a>，但该 polyfill 实现并不完美，请阅读<a href="https://github.com/zloirock/core-js#caveats-when-using-symbol-polyfill" target="_blank" rel="noopener">注意事项</a>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/01/mo-ban-zi-fu-chuan/" rel="next" title="模板字符串">
+                <i class="fa fa-chevron-left"></i> 模板字符串
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/01/class/" rel="prev" title="class详解">
+                class详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Rz</p>
+              <p class="site-description motion-element" itemprop="description">description</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#深入解析-ES6：Symbol"><span class="nav-number">1.</span> <span class="nav-text">深入解析 ES6：Symbol</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rz</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
