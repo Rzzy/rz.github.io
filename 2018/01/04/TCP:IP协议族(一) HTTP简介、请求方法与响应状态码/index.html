@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="es6," />
+  <meta name="keywords" content="TCP/IP,http," />
 
 
 
@@ -79,18 +79,27 @@
 
 
 
-<meta name="description" content="迭代器（Iterator）是一个接口，为各种不同的数据结构提供统一的访问机制。任何数据只要部署了 Iterator 接口，就可以完成遍历操作...">
-<meta name="keywords" content="es6">
+<meta name="description" content="TCP/IP不单单指的就是TCP和IP这两个协议，而是指的与其相关的各种协议。比如HTTP, FTP, DNS, TCP, UDP, IP, SNMP等等都属于TCP/IP协议族的范畴。">
+<meta name="keywords" content="TCP&#x2F;IP,http">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iterator 迭代器">
-<meta property="og:url" content="http://yoursite.com/2018/01/01/iterator-die-dai-qi/index.html">
+<meta property="og:title" content="TCP&#x2F;IP协议族(一) HTTP简介、请求方法与响应状态码">
+<meta property="og:url" content="http://yoursite.com/2018/01/04/TCP:IP协议族(一) HTTP简介、请求方法与响应状态码/index.html">
 <meta property="og:site_name" content="Rz">
-<meta property="og:description" content="迭代器（Iterator）是一个接口，为各种不同的数据结构提供统一的访问机制。任何数据只要部署了 Iterator 接口，就可以完成遍历操作...">
+<meta property="og:description" content="TCP/IP不单单指的就是TCP和IP这两个协议，而是指的与其相关的各种协议。比如HTTP, FTP, DNS, TCP, UDP, IP, SNMP等等都属于TCP/IP协议族的范畴。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-03T09:35:00.076Z">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201612/545446-20161229102156007-1915216235.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201612/545446-20161229104407007-880090461.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201612/545446-20161229112835961-1345666201.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201612/545446-20161229142426976-1390461229.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201612/545446-20161229145352789-1841121502.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201612/545446-20161229150242351-1635943589.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201612/545446-20161229151043757-620968303.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201612/545446-20161229151433679-2036356360.png">
+<meta property="og:updated_time" content="2018-01-04T15:57:26.958Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iterator 迭代器">
-<meta name="twitter:description" content="迭代器（Iterator）是一个接口，为各种不同的数据结构提供统一的访问机制。任何数据只要部署了 Iterator 接口，就可以完成遍历操作...">
+<meta name="twitter:title" content="TCP&#x2F;IP协议族(一) HTTP简介、请求方法与响应状态码">
+<meta name="twitter:description" content="TCP/IP不单单指的就是TCP和IP这两个协议，而是指的与其相关的各种协议。比如HTTP, FTP, DNS, TCP, UDP, IP, SNMP等等都属于TCP/IP协议族的范畴。">
+<meta name="twitter:image" content="https://images2015.cnblogs.com/blog/545446/201612/545446-20161229102156007-1915216235.png">
 
 
 
@@ -120,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/01/iterator-die-dai-qi/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/04/TCP:IP协议族(一) HTTP简介、请求方法与响应状态码/"/>
 
 
 
 
 
-  <title>iterator 迭代器 | Rz</title>
+  <title>TCP/IP协议族(一) HTTP简介、请求方法与响应状态码 | Rz</title>
   
 
 
@@ -282,12 +291,12 @@
   
   
 
-  <article class="post post-type-es6" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-TCP/IP" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/01/iterator-die-dai-qi/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/04/TCP:IP协议族(一) HTTP简介、请求方法与响应状态码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rz">
@@ -304,7 +313,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">iterator 迭代器</h1>
+          <h1 class="post-title" itemprop="name headline">TCP/IP协议族(一) HTTP简介、请求方法与响应状态码</h1>
         
 
         <div class="post-meta">
@@ -316,8 +325,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-01T00:48:56+08:00">
-                2018-01-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-04T20:30:46+08:00">
+                2018-01-04
               </time>
             
 
@@ -339,8 +348,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">javaScript</span>
+                  <a href="/categories/TCP-IP/" itemprop="url" rel="index">
+                    <span itemprop="name">TCP/IP</span>
                   </a>
                 </span>
 
@@ -363,7 +372,7 @@
 
           
               <div class="post-description">
-                  迭代器（Iterator）是一个接口，为各种不同的数据结构提供统一的访问机制。任何数据只要部署了 Iterator 接口，就可以完成遍历操作...
+                  TCP/IP不单单指的就是TCP和IP这两个协议，而是指的与其相关的各种协议。比如HTTP, FTP, DNS, TCP, UDP, IP, SNMP等等都属于TCP/IP协议族的范畴。
               </div>
           
 
@@ -380,85 +389,88 @@
       
 
       
-        <h3 id="iterator-迭代器"><a href="#iterator-迭代器" class="headerlink" title="iterator 迭代器"></a>iterator 迭代器</h3><p>引用：<br><a href="http://tingandpeng.com/archives/" target="_blank" rel="noopener">高鹏</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator" target="_blank" rel="noopener">Symbol.iterator
-</a></p>
-<p>迭代器（Iterator）是一个接口，为各种不同的数据结构提供统一的访问机制。任何数据只要部署了 Iterator 接口，就可以完成遍历操作。</p>
-<p><strong>Symbol.iterator 属性的属性特性：</strong></p>
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>属性特性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>writable:</code></td>
-<td><code>false</code></td>
-</tr>
-<tr>
-<td><code>enumerable:</code></td>
-<td><code>false</code></td>
-</tr>
-<tr>
-<td><code>configurable:</code></td>
-<td><code>false</code></td>
-</tr>
-</tbody>
-</table>
-<p><strong>描述</strong></p>
-<blockquote>
-<p>当需要对一个对象进行迭代时（比如开始用于一个for..of循环中），它的@@iterator方法都会在不传参情况下被调用，返回的迭代器用于获取要迭代的值。</p>
+        <blockquote>
+<p>转载：<a href="http://www.cnblogs.com/ludashi/p/6232060.html" target="_blank" rel="noopener">http://www.cnblogs.com/ludashi/p/6232060.html</a></p>
 </blockquote>
-<p>一些内置类型拥有默认的迭代器行为，其他类型（如 Object）则没有。下表中的内置类型拥有默认的@@iterator方法：</p>
+<p>接下来想系统的回顾一下TCP/IP协议族的相关东西，当然这些东西大部分是在大学的时候学过的，但是那句话，基础的东西还是要不时的回顾回顾的。接下来的几篇博客都是关于TCP/IP协议族的，本篇博客就先简单的聊一下TCP/IP协议族，然后聊一下HTTP协议，然后再聊一下SSL上的HTTP（也就是HTTPS）了。当然TCP/IP协议族是个老生常谈的话题，网络上关于该内容的文章一抓一大把呢，但是鉴于其重要性，还是有必要系统的总结一下的。</p>
+<h4 id="TCP-IP协议组简述"><a href="#TCP-IP协议组简述" class="headerlink" title="TCP/IP协议组简述"></a>TCP/IP协议组简述</h4><p>在聊HTTP与HTTPS之前呢，我们先简单的聊一下TCP/IP协议族。TCP/IP不单单指的就是TCP和IP这两个协议，而是指的与其相关的各种协议。比如HTTP, FTP, DNS, TCP, UDP, IP, SNMP等等都属于TCP/IP协议族的范畴。</p>
+<h5 id="TCP-IP协议的分层"><a href="#TCP-IP协议的分层" class="headerlink" title="TCP/IP协议的分层"></a>TCP/IP协议的分层</h5><p>TCP/IP协议族是分层管理的，在OSI标准中可以分为7层（应用层、表示层、会话层、传输层、网络层、数据链路层、物理层，可记为：应表会传网数物），本篇博客我们采用的是TCP/IP协议族中的四层（应用层、传输层、网络层、链路层）。下方是对四层中每层的简单介绍：</p>
 <ul>
-<li>Array.prototype<a href="">@@iterator</a></li>
-<li>TypedArray.prototype<a href="">@@iterator</a></li>
-<li>String.prototype<a href="">@@iterator</a></li>
-<li>Map.prototype<a href="">@@iterator</a></li>
-<li>Set.prototype<a href="">@@iterator</a></li>
+<li>应用层：该层是面向用户的一层，也就是说用户可以直接操作该层，该层决定了向用户提供应用服务时的通信活动。本篇博客要聊的HTTP（HyperText Transfer Protocol：超文本传输协议）就位于该层。我们经常使用的FTP(File Transfer Protocol: 文件传输协议)和DNS (Domain Name System: 域名系统)都位于该层。FTP简单的说就是用来文件传输的。而DNS则负责域名解析的，通过DNS可以将域名（比如：www.cnblogs.com）与IP地址（201.33.xx.09）进行相互的转换。在7层中，又将该层分为：应用层、表示层和会话层。</li>
+<li>传输层：应用层的下方是传输层，应用层胡将数据交付给传输层进行传输。TCP(Transmission Control Prococol:传输控制协议)和UDP(User Data Protocol: 用户数据协议)位于该层，当然见名知意，该层是用来提供处于网络连接中的两台计算机直接的数据传输的。TCP建立连接是需要三次握手来确认连接情况，而UDP则没有三次握手的过程。稍后会介绍。</li>
+<li>网络层：传输层的下方是网络层，网络层用来处理在网络上流动的数据包，IP(Internet Protocol: 网际协议)就位于这层。该层负责在众多网络线路中选择一条传输线路。当然这个选择传输线路的过程需要IP地址和MAC地址的支持。</li>
+<li>链路层：在7层协议中，将链路层分为数据链路层和物理层。该部分主要是用来处理网络的硬件部分，我们常说的NIC（Net Work Card），也就是网卡就位于这一部分，当然光纤也是链路层的一部分。</li>
 </ul>
-<p><strong>作用</strong></p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201612/545446-20161229102156007-1915216235.png" alt="分层图例"></p>
+<p>在TCP/IP协议族中的每次直接在传输数据时的协作关系，以及交互过程，还是引用《图解HTTP》一书上的一张图来解释吧。下图就是这四层协议在数据传输过程中的工作方式。下面这张图还是相当直观的。在发送端是应用层–&gt;链路层这个方向的封包过程，没经过一层都会增加该层的头部。而接收端则是从链路层–&gt;应用层解包的过程，每经过一层则会去掉相应的首部。</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201612/545446-20161229104407007-880090461.png" alt="TCP/IP协议族中的每次直接在传输数据时的协作关系，以及交互过程"></p>
+<h5 id="TCP协议的三次握手"><a href="#TCP协议的三次握手" class="headerlink" title="TCP协议的三次握手"></a>TCP协议的三次握手</h5><p>在聊HTTP协议之前，我们先简单的聊一下TCP三次握手的过程，在后面的博客中我们将会对TCP和IP协议进行详述，本篇博客就先简单的聊一下做HTTP协议的基础。</p>
+<p>TCP协议位于传输层，为了确保传输的可靠性，TCP协议在建立连接时需要三次握手（Three-way handshaking）。下方这个简图就是TCP协议建立连接时三次握手的过程。</p>
 <ul>
-<li>各种数据结构提供一个统一的、简便的访问接口；</li>
-<li>使数据结构成员能够按某种次序排列；</li>
-<li>ES6 创造了一种新的遍历命令 for…of 循环，Iterator 接口主要供 for…of 消费</li>
+<li>第一次握手：发送端发送一个带SYN(Synchronize)标志的数据包给接收端，用于询问接收端是否可以接收。如果可以，就进行第二次握手。</li>
+<li>第二次握手：接收端回传给发送端一个带有SYN/ACK(Acknowledgement)的数据包，给发送端说，我收到你给我发送的SYN标志了，我再给你传一个ACK标志，你能收到吗？如果发送端收到了SYN/ACK这个数据包，就可以确认接收端收到了之前发送的SYN, 然后进行第三次握手。</li>
+<li>第三次握手：发送端会给接收端发送一个带有ACK标志的数据包，告诉接收端我可以收到你给我发送的SYN/ACK标志。接收端如果收到了这个来自客户端的ACK标志，就意味着三次握手完成，连接建立，就可以开始传输数据了。</li>
 </ul>
-<p><strong>示例</strong></p>
-<p><em>自定义迭代器</em><br>我们可以像下面这样创建自定义的迭代器：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myIterable = &#123;&#125;</span><br><span class="line">myIterable[<span class="built_in">Symbol</span>.iterator] = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">3</span>;</span><br><span class="line">&#125;;</span><br><span class="line">[...myIterable] <span class="comment">// [1, 2, 3]</span></span><br></pre></td></tr></table></figure>
-<p><em>不符合标准的迭代器</em><br>如果一个迭代器 @@iterator 没有返回一个迭代器对象，那么它就是一个不符合标准的迭代器，这样的迭代器将会在运行期抛出异常，甚至非常诡异的 Bug。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> nonWellFormedIterable = &#123;&#125;</span><br><span class="line">nonWellFormedIterable[<span class="built_in">Symbol</span>.iterator] = <span class="function"><span class="params">()</span> =&gt;</span> <span class="number">1</span></span><br><span class="line">[...nonWellFormedIterable] <span class="comment">// TypeError: [] is not a function</span></span><br></pre></td></tr></table></figure>
-<p>就拿 for…of 语句来说，它首先调用被遍历对象的 <a href="">Symbol.iterator</a> 方法，该方法返回一个迭代器对象，迭代器对象可以是拥有 next 方法的任何对象。然后， 在 for…of 的每一次循环中，都将调用该迭代器对象上的 next 方法。<br>每一次调用 next 方法，都会返回数据结构的当前成员信息。具体来说就是返回一个包含 value 和 done 两个属性的对象。其中 value 是当前成员的值，done 是一 个布尔值，表示遍历是否结束。</p>
-<p>下面的代码实现了一个简单的迭代器对象：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sampleIterator = &#123;</span><br><span class="line">  index: <span class="number">0</span>,</span><br><span class="line">  [<span class="built_in">Symbol</span>.iterator]: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">  &#125;,</span><br><span class="line">  next: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.index &lt; <span class="number">3</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        done: <span class="literal">false</span>,</span><br><span class="line">        value: <span class="keyword">this</span>.index++</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        done: <span class="literal">true</span>,</span><br><span class="line">        value: <span class="literal">undefined</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> val <span class="keyword">of</span> sampleIterator) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(val)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 结果为：</span></span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// [Finished in 2.7s]</span></span><br></pre></td></tr></table></figure>
-<p>上面的代码中，当使用 <code>for…of</code> 遍历 <code>sampleIterator</code> 时，首先调用了该对象的 <code>[Symool.itirator]</code> 方法，该方法返回对象本身。而该对象中包含有 <code>next</code> 方法，所以该对象本身就是一个 <code>Iterator</code>对象。可以供 <code>for..of</code>消费。当 <code>this.index &gt;= 3</code> 时，返回 <code>{done: true, value: undefined}</code>, 循环结束。</p>
-<p><strong> 数据结构的默认 </strong><code>Iterator</code><strong> 接口</strong></p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201612/545446-20161229112835961-1345666201.png" alt="三次握手"></p>
+<h4 id="HTTP报文结构"><a href="#HTTP报文结构" class="headerlink" title="HTTP报文结构"></a>HTTP报文结构</h4><p>HTTP协议全称是HyperText Transfer Protocol，即超文本传输协议，用户客户端和服务器之前的通信，目前普遍使用版本为HTTP/1.1。协议本质上就是规范，我们之前提到过的“面向接口”编程，其实就是“面向协议”编程。先定义好类的协议，也就是接口，相关类都遵循该协议，这样一来我们就规范了这些类的调用方式。而HTTP协议是规范客户端和服务器之间通信的协议。也就是说所有的客户端或者服务器都遵循了HTTP这个通信协议，那么也就是意味着他们对外传输数据的接口是一直的，就可以在其中间连接上管道，这样一来就可以进行传输了。</p>
+<p>这些协议就是接口，有着共同的通信协议，多个端就可以相互通信。采用相同的协议，就是便于个个设备之间进行沟通交流。HTTP协议的作用如下所示。</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201612/545446-20161229142426976-1390461229.png" alt="HTTP协议的作用"></p>
+<p>HTTP协议的作用是用来规范通信内容的，在HTTP协议中可以分为请求报文和响应报文。顾名思义，请求报文是请求方发出的信息，而响应报文是响应端收到请求后响应的内容。接下来我们就来看看请求报文和响应报文的整体结构。</p>
+<h5 id="请求报文（Request-Message）结构"><a href="#请求报文（Request-Message）结构" class="headerlink" title="请求报文（Request Message）结构"></a>请求报文（Request Message）结构</h5><p>下方是请求报文的整体结构。请求报文主要分为两大部分:</p>
 <ul>
-<li><code>Iterator</code> 接口的目的，就是为所有的数据结构提供一种统一的访问机制，即 <code>for...of</code> 循环。当使用 <code>for…of</code> 循环遍历某种数据结构时，该循环会自动去寻找 <code>Iterator</code> 接口。</li>
-<li>ES6 规定，默认的 <code>Iterator</code> 接口就部署在数据结构的 Symbol.iterator 属性。调用该方法，就会得到当前数据结构默认的迭代器生成函数。</li>
-<li>ES6 中，有三类数据结构原生具备 <code>Iterator</code> 接口：数组、类似数组的对象（如 <code>NodeList</code> ）、<code>Set</code> 和 <code>Map</code> 结构。</li>
+<li>一个是请求头（Request Headers）</li>
+<li>请求体（Request Body）。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>]</span><br><span class="line"><span class="comment">// 迭代器接口部署在数组的 `Symbol.iterator` 属性上，调用该属性就可以得到迭代器对象（一个包含 next 函数的对象）</span></span><br><span class="line"><span class="keyword">var</span> iterator = arr[<span class="built_in">Symbol</span>.iterator]()</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next())</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next())</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next())</span><br><span class="line"><span class="built_in">console</span>.log(iterator.next())</span><br><span class="line"><span class="comment">// 输出结果：</span></span><br><span class="line"><span class="comment">// &#123; value: 1, done: false &#125;</span></span><br><span class="line"><span class="comment">// &#123; value: 2, done: false &#125;</span></span><br><span class="line"><span class="comment">// &#123; value: 4, done: false &#125;</span></span><br><span class="line"><span class="comment">// &#123; value: undefined, done: true &#125;</span></span><br><span class="line"><span class="comment">// [Finished in 2.6s]</span></span><br></pre></td></tr></table></figure>
-<p>类似数组的对象（存在数值键名和 <code>length</code> 属性），可以直接在 <code>Symbol.iterator</code> 属性上部署数组的 <code>Iterator</code> 接口：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> iterable = &#123;</span><br><span class="line">  <span class="number">0</span>: <span class="string">'a'</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="string">'b'</span>,</span><br><span class="line">  <span class="number">2</span>: <span class="string">'c'</span>,</span><br><span class="line">  <span class="number">3</span>: <span class="string">'d'</span>,</span><br><span class="line">  length: <span class="number">4</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> item <span class="keyword">of</span> iterable) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(item)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出结果：</span></span><br><span class="line"><span class="comment">// a</span></span><br><span class="line"><span class="comment">// b</span></span><br><span class="line"><span class="comment">// c</span></span><br><span class="line"><span class="comment">// d</span></span><br><span class="line"><span class="comment">// [Finished in 2.6 s]</span></span><br><span class="line"><span class="comment">// 如果 iterable 的 length 属性为 3：</span></span><br><span class="line"><span class="comment">// a</span></span><br><span class="line"><span class="comment">// b</span></span><br><span class="line"><span class="comment">// c</span></span><br><span class="line"><span class="comment">// [Finished in 2.7s]</span></span><br><span class="line"><span class="comment">// 如果 iterable 的 length 属性为 5：</span></span><br><span class="line"><span class="comment">// a</span></span><br><span class="line"><span class="comment">// b</span></span><br><span class="line"><span class="comment">// c</span></span><br><span class="line"><span class="comment">// d</span></span><br><span class="line"><span class="comment">// undefined</span></span><br><span class="line"><span class="comment">// [Finished in 2.7s]</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注：普通对象部署数组的 <code>Symbol.iterator</code> 方法，并没有效果。如果 <code>Symbol.iterator</code> 方法对应的不是遍历器生成函数，解释引擎会报错。</p>
-</blockquote>
-<p><strong>调用 Iterator 接口的场合</strong><br>除了 <code>for…of</code> 循环，还有几个场合会默认调用 <code>Iterator</code> 接口（即 <code>Symbol.iterator</code>).</p>
-<ol>
-<li>解构赋值</li>
-<li>扩展运算符</li>
-<li>yield*</li>
-<li>由于数组遍历调用迭代器接口，所以任何接受数组作为参数的场合，其实都调用了 Iterator 接口：<ul>
-<li>for…of</li>
-<li>Array.from()</li>
-<li>Map(), Set(), WeakMap(), WeakSet()</li>
-<li>Promise.all()</li>
-<li>Promise.race()</li>
-<li>…</li>
-</ul>
+<p>这两者之间由空行分割。在请求头中又分为请求行（Request Line），请求头部字段，通用头部字段和实体头部字段等，这个稍后会详细介绍。下方就是请求报文的结构。</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201612/545446-20161229145352789-1841121502.png" alt="请求报文的结构"></p>
+<p>下方这个截图就是请求博客园某个页面时的Request Headers。在请求行中的第一个“GET”是当前请求的方法，稍后会做介绍。中间的就是请求资源的路径，最后一个HTTP/1.1就是当前使用请求协议及其版本。下方这些就是请求头了，稍后会对常用的请求头进行解说。而请求体就是你往服务端传输的数据，比如form表单神马的。</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201612/545446-20161229150242351-1635943589.png" alt="示例"></p>
+<h5 id="响应报文（Response-Message）结构"><a href="#响应报文（Response-Message）结构" class="headerlink" title="响应报文（Response Message）结构"></a>响应报文（Response Message）结构</h5><p>聊完请求报文，接下来我们来聊聊响应报文，响应报文的结构与请求报文的结构类似，也分为报文头和报文体。下方就是响应报文的结构图。响应头（Response Headers）分为状态行（State Line），响应头部字段，通用头部字段、实体头部字段等。响应头与响应体中间也是有空行进行分割的。</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201612/545446-20161229151043757-620968303.png" alt="响应报文结构"></p>
+<p>下方截图就是上述请求报文发出后的响应头，响应体就是对于的HTML等前端资源了。在响应头中，第一行就是状态行，“HTTP/1.1”表示使用的HTTP协议的1.1版本，状态200表示响应成功，”OK”则是状态原因短语。常用状态，稍后会详细介绍。</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201612/545446-20161229151433679-2036356360.png" alt="示例"></p>
+<h4 id="HTTP的请求方法以及响应状态码"><a href="#HTTP的请求方法以及响应状态码" class="headerlink" title="HTTP的请求方法以及响应状态码"></a>HTTP的请求方法以及响应状态码</h4><p>上面在介绍请求报文中提到的“GET”就是请求请求方法，而在响应报文中提到的“200”状态码，就是稍后要聊的响应状态码。请求方法和响应状态码在HTTP协议中算是比较重要的内容了。之前我们在使用Perfect框架开发服务器端的时候，曾聊过请求方法中的GET、POST、PUT以及DELETE，并且这四种方法可以结合着REST使用。本部分是以HTTP协议的角度来聊的请求方法，所以与之前会有稍稍的不同。本部分我们就来聊一下HTTP协议的请求方法和响应状态码。</p>
+<h5 id="请求方法"><a href="#请求方法" class="headerlink" title="请求方法"></a>请求方法</h5><p>接下来我们要聊的请求方法有GET、POST、PUT、HEAD、DELETE、OPTIONS、TRACE、CONNECT。当然上述方法是基于HTTP/1.1的，HTTP/1.0中独有的方法就不说了。</p>
+<ul>
+<li><p>GET—-获取资源<br>GET方法一般用来从服务器上获取资源的方法。服务器端接到GET请求后，就会明白客户端是要从服务器端获取相应的资源，然后就会根据请求报文中相应的参数，将需要的资源返回给客户端。使用GET方式的请求，传输的参数是拼接在URI上的。</p>
 </li>
+<li><p>POST—-数据提交<br>POST方法一般用于表单提交，将客户端的数据塞到请求体中发送给服务器端。</p>
+</li>
+<li><p>PUT—-上传文件<br>PUT方法主要用来上传文件，将文件内容塞到请求报文体中，传输给服务器。因为HTTP/1.1的PUT方法自身不带验证机制，所以任何人都可以上传文件，存在安全性，所以上传文件时不推荐使用。但是之前我们在设计接口使用REST标准时，可以使用PUT来做相应内容的更新。</p>
+</li>
+<li><p>HEAD—-获取响应报文头<br>响应端收到HEAD请求后，只会返回相应的响应头，不会返回响应体。</p>
+</li>
+<li><p>DELETE—-删除文件<br>DELETE用于删除URI指定的资源，与PUT一样，自身也是不带验证机制的，不过在REST标准中可以用来做相应API的删除功能。</p>
+</li>
+<li><p>OPTIONS—-查询支持的方法<br>OPTIONS方法是用来查询服务器可对那些请求方法做出相应，返回内容就是响应端所支持的方法。</p>
+</li>
+<li><p>TRACE—-追踪路径<br>TRACE方法可追踪请求经过的代理路径，在发送请求时会为Max-Forwards头部字段填入数字，每经过一个代理中转Max-Forwards的值就会减一，直至Max-Forwards为零后，才会返回200。因为该方法易引起XST(Cross-Site Tracing，跨站追踪)攻击，所以不常用呢。</p>
+</li>
+<li><p>CONNECT—-要求用隧道协议连接代理<br>CONNECT方法要求在与代理服务器通信时建立隧道，实现用隧道协议进行TCP通信。主要使用SSL(Secure Sockets Layer, 安全套接层)和TLS(Transport Layer Security, 传输安全层)协议将通信内容进行加密后经网络隧道传输。</p>
+</li>
+</ul>
+<h5 id="响应状态码"><a href="#响应状态码" class="headerlink" title="响应状态码"></a>响应状态码</h5><p>聊完请求方法后，接下来我们来聊聊HTTP协议的响应状态码。顾名思义，响应状态码是用来标志HTTP响应状态的，响应状态由响应状态码和响应原因短语构成，当然状态码有很多中，本部分就挑出来常用的状态码进行讨论。下方是响应状态码可以分为的几大类：</p>
+<ul>
+<li>1xx —- Informational（信息性状态码），表示接受的请求正在处理。</li>
+<li>2xx —- Success (成功)，表示请求正常处理完毕。</li>
+<li>3xx —- Redirection (重定向)，表示要对请求进行重定向操作，当然其中的304除外。</li>
+<li>4xx —- Client Error (客户端错误)，服务器无法处理请求。</li>
+<li>5xx —- Server Error (服务器错误)，服务器处理请求时出错。</li>
+</ul>
+<p>上面是响应状态码的整体分类，接下来介绍一些常用的响应状态码。</p>
+<ol>
+<li>200 OK : 表示服务端正确处理了客户端发送过来的请求。</li>
+<li>204 No Content : 表示服务端正确处理请求，但没有报文实体要返回。</li>
+<li>206 Partial Content ：表示服务端正确处理了客户端的范围请求，并按照请求范围返回该指定范围内的实体内容。</li>
+<li>301 Moved Permanently：永久性重定向，若之前的URI保存到了书签，则更新书签中的URI。</li>
+<li>302 Found：临时重定向，该重定向不会变更书签中的内容。</li>
+<li>303 See Other：临时重定向，与302功能相同，但是303状态吗明确表示客户端应当采用GET方法获取资源。</li>
+<li>304 Not Modified: 资源未变更，该状态码与重定向并没有什么关系，当返回该状态码时，告诉客户端请求的资源并没有更新，响应报文体中并不会返回所请求的内容。</li>
+<li>400 Bad Request： 错误请求，表示请求报文中包含语法错误。</li>
+<li>401 Unauthorized：请求未认证，表示此发送的请求需要客户端进行HTTP认证（稍后会提到）。</li>
+<li>404 Not Found：找不到相应的资源，表示服务器找不到客户端请求的资源。</li>
+<li>500 Internal Server Error：服务器内部错误，表示服务器在处理请求时出现了错误，发生了异常。</li>
+<li>503 Service Unavailable：服务不可用，表示服务器处于停机状态，无法处理客户端发来的请求。</li>
 </ol>
 
       
@@ -477,7 +489,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/es6/" rel="tag"># es6</a>
+            <a href="/tags/TCP-IP/" rel="tag"># TCP/IP</a>
+          
+            <a href="/tags/http/" rel="tag"># http</a>
           
         </div>
       
@@ -490,8 +504,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/31/jian-tou-han-shu/" rel="next" title="箭头函数">
-                <i class="fa fa-chevron-left"></i> 箭头函数
+              <a href="/2018/01/03/ES6模块/" rel="next" title="ES6模块Modules">
+                <i class="fa fa-chevron-left"></i> ES6模块Modules
               </a>
             
           </div>
@@ -500,8 +514,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/01/mo-ban-zi-fu-chuan/" rel="prev" title="模板字符串">
-                模板字符串 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/01/04/TCP:IP应用程序的通信连接模式/" rel="prev" title="TCP/IP 应用程序的通信连接模式">
+                TCP/IP 应用程序的通信连接模式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -656,7 +670,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#iterator-迭代器"><span class="nav-number">1.</span> <span class="nav-text">iterator 迭代器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP-IP协议组简述"><span class="nav-number">1.</span> <span class="nav-text">TCP/IP协议组简述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#TCP-IP协议的分层"><span class="nav-number">1.1.</span> <span class="nav-text">TCP/IP协议的分层</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#TCP协议的三次握手"><span class="nav-number">1.2.</span> <span class="nav-text">TCP协议的三次握手</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP报文结构"><span class="nav-number">2.</span> <span class="nav-text">HTTP报文结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#请求报文（Request-Message）结构"><span class="nav-number">2.1.</span> <span class="nav-text">请求报文（Request Message）结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#响应报文（Response-Message）结构"><span class="nav-number">2.2.</span> <span class="nav-text">响应报文（Response Message）结构</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP的请求方法以及响应状态码"><span class="nav-number">3.</span> <span class="nav-text">HTTP的请求方法以及响应状态码</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#请求方法"><span class="nav-number">3.1.</span> <span class="nav-text">请求方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#响应状态码"><span class="nav-number">3.2.</span> <span class="nav-text">响应状态码</span></a></li></ol></li></ol></div>
             
 
           </div>
