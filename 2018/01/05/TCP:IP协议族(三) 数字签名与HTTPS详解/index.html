@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="TCP/IP,http," />
 
 
 
@@ -79,16 +79,27 @@
 
 
 
-<meta name="description" content="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Rz">
-<meta property="og:url" content="http://yoursite.com/tags/es6/index.html">
+<meta name="description" content="因为HTTP协议本身存在着明文传输、不能很好的验证通信方的身份和无法验证报文的完整性等一些安全方面的确点，所以才有了HTTPS的缺陷。HTTPS确切的的说不是一种协议，而是HTTP + SSL (TSL)的结合体。HTTP报文经过SSL层加密后交付给TCP层进行传输。SSL(安全套节层)主要采取的是RSA（非对称加密）与AES（对称加密）结合的加密方式。先通过RSA交互AES的密钥，然后通过AES">
+<meta name="keywords" content="TCP&#x2F;IP,http">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP&#x2F;IP协议族(三) 数字签名与HTTPS详解">
+<meta property="og:url" content="http://yoursite.com/2018/01/05/TCP:IP协议族(三) 数字签名与HTTPS详解/index.html">
 <meta property="og:site_name" content="Rz">
-<meta property="og:description" content="description">
+<meta property="og:description" content="因为HTTP协议本身存在着明文传输、不能很好的验证通信方的身份和无法验证报文的完整性等一些安全方面的确点，所以才有了HTTPS的缺陷。HTTPS确切的的说不是一种协议，而是HTTP + SSL (TSL)的结合体。HTTP报文经过SSL层加密后交付给TCP层进行传输。SSL(安全套节层)主要采取的是RSA（非对称加密）与AES（对称加密）结合的加密方式。先通过RSA交互AES的密钥，然后通过AES">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103102253472-2054638254.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103110054831-1096826423.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103135901253-1997250857.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103150606519-1987788124.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103153812784-1556239221.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103151200550-1287415863.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103165008972-1952177713.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201701/545446-20170104161159112-1899339253.png">
+<meta property="og:updated_time" content="2018-01-04T16:16:45.877Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rz">
-<meta name="twitter:description" content="description">
+<meta name="twitter:title" content="TCP&#x2F;IP协议族(三) 数字签名与HTTPS详解">
+<meta name="twitter:description" content="因为HTTP协议本身存在着明文传输、不能很好的验证通信方的身份和无法验证报文的完整性等一些安全方面的确点，所以才有了HTTPS的缺陷。HTTPS确切的的说不是一种协议，而是HTTP + SSL (TSL)的结合体。HTTP报文经过SSL层加密后交付给TCP层进行传输。SSL(安全套节层)主要采取的是RSA（非对称加密）与AES（对称加密）结合的加密方式。先通过RSA交互AES的密钥，然后通过AES">
+<meta name="twitter:image" content="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103102253472-2054638254.png">
 
 
 
@@ -118,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/es6/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/05/TCP:IP协议族(三) 数字签名与HTTPS详解/"/>
 
 
 
 
 
-  <title>标签: es6 | Rz</title>
+  <title>TCP/IP协议族(三) 数字签名与HTTPS详解 | Rz</title>
   
 
 
@@ -143,7 +154,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -271,310 +282,216 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>es6<small>标签</small>
-        </h1>
-      </div>
+  <article class="post post-type-TCP/IP" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/05/TCP:IP协议族(三) 数字签名与HTTPS详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rz">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">TCP/IP协议族(三) 数字签名与HTTPS详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-05T00:00:56+08:00">
+                2018-01-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/TCP-IP/" itemprop="url" rel="index">
+                    <span itemprop="name">TCP/IP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  因为HTTP协议本身存在着明文传输、不能很好的验证通信方的身份和无法验证报文的完整性等一些安全方面的确点，所以才有了HTTPS的缺陷。HTTPS确切的的说不是一种协议，而是HTTP + SSL (TSL)的结合体。HTTP报文经过SSL层加密后交付给TCP层进行传输。SSL(安全套节层)主要采取的是RSA（非对称加密）与AES（对称加密）结合的加密方式。先通过RSA交互AES的密钥，然后通过AES进行报文加密和解密。本篇博客主要聊的就是HTTPS具体的工作过程
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-es6" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/03/ES6模块/" itemprop="url">
-              
-                <span itemprop="name">ES6模块Modules</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-03T23:21:00+08:00"
-              content="2018-01-03" >
-          01-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-es6" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/03/Generator 函数/" itemprop="url">
-              
-                <span itemprop="name">Generator函数详解</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-03T22:42:54+08:00"
-              content="2018-01-03" >
-          01-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-es6" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/03/map/" itemprop="url">
-              
-                <span itemprop="name">Map</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-03T21:27:32+08:00"
-              content="2018-01-03" >
-          01-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-es6" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/02/ji-cheng-zhong-fang-fa-shu-xing-de-zhong-xie/" itemprop="url">
-              
-                <span itemprop="name">继承中方法属性的重写</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-02T23:12:03+08:00"
-              content="2018-01-02" >
-          01-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-es6" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/02/set-and-map/" itemprop="url">
-              
-                <span itemprop="name">Set详解</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-02T00:46:10+08:00"
-              content="2018-01-02" >
-          01-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-es6" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/01/class/" itemprop="url">
-              
-                <span itemprop="name">class详解</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-01T23:22:45+08:00"
-              content="2018-01-01" >
-          01-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-es6" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/01/symbol/" itemprop="url">
-              
-                <span itemprop="name">深入解析 ES6：Symbol</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-01T03:46:08+08:00"
-              content="2018-01-01" >
-          01-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-es6" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/01/mo-ban-zi-fu-chuan/" itemprop="url">
-              
-                <span itemprop="name">模板字符串</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-01T02:47:21+08:00"
-              content="2018-01-01" >
-          01-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-es6" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/01/iterator-die-dai-qi/" itemprop="url">
-              
-                <span itemprop="name">iterator 迭代器</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-01T00:48:56+08:00"
-              content="2018-01-01" >
-          01-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-es6" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/31/jian-tou-han-shu/" itemprop="url">
-              
-                <span itemprop="name">箭头函数</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-31T19:45:37+08:00"
-              content="2017-12-31" >
-          12-31
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <blockquote>
+<p>转载：<a href="http://www.cnblogs.com/ludashi/p/6237715.html" target="_blank" rel="noopener">http://www.cnblogs.com/ludashi/p/6237715.html</a></p>
+</blockquote>
+<p>前面几篇博客聊了HTTP的相关东西，今天就来聊一聊HTTPS的东西。因为HTTP协议本身存在着明文传输、不能很好的验证通信方的身份和无法验证报文的完整性等一些安全方面的确点，所以才有了HTTPS的缺陷。HTTPS确切的的说不是一种协议，而是HTTP + SSL (TSL)的结合体。HTTP报文经过SSL层加密后交付给TCP层进行传输。SSL(安全套节层)主要采取的是RSA（非对称加密）与AES（对称加密）结合的加密方式。先通过RSA交互AES的密钥，然后通过AES进行报文加密和解密。本篇博客主要聊的就是HTTPS具体的工作过程。</p>
+<h4 id="RSA与AES简述"><a href="#RSA与AES简述" class="headerlink" title="RSA与AES简述"></a>RSA与AES简述</h4><p>在本篇博客的第一部分呢，先聊一下RAS与AES这两个加密策略，如果你在公司做过支付相关的东西，对数据传输的安全性要求比较高，这时候就得采取一些加密措施将传输的报文进行加密，必要时再进行MD5验签。当然本部分聊的RAS与AES是比较简洁的，关于这两者具体的内容，请自行Google吧。因为HTTPS在传输的过程中使用到了RSA与AES加密算法，所以在聊HTTP+SSL之前呢，我们先简单的聊一下AES与RSA。</p>
+<h5 id="Advanced-Encryption-Standard-（AES-高级加密标准）"><a href="#Advanced-Encryption-Standard-（AES-高级加密标准）" class="headerlink" title="Advanced Encryption Standard （AES: 高级加密标准）"></a>Advanced Encryption Standard （AES: 高级加密标准）</h5><p>AES，全称：Advanced Encryption Standard—-高级加密标准。该加密算法有一个密钥，该密钥可以用来加密，也可以用来解密，所以AES是对称加密算法。下方这个就是AES加密和解密的过程。Client端与Server端有一个共同的Key, 这个Key是用来加密和解密的。如果报文在传输的过程中被窃取了，没有这个key, 对加密的内容进行破解是非常困难的，当然窃取者如果有key的话，也是可以轻而易举的解密的。所以在AES中，key是关键。这也就相当于你们家的门钥匙，谁拿到钥匙后都可以打开你们家的门。即使门锁再结实，再安全，在钥匙面前也是不行呢。</p>
+<p>所以对于AES加密策略来说这个Key的保密措施要做足一些，如果之后有时间的话可以分享一些具体的AES加密策略。比如每次加密的Key都是从一个密码本中动态生成的，而这个密码本服务端和客户端都有同一本，每次传输的是一些参数。这些参数在经过一些算法的映射，从密码本中取出相应的key用来解密。这样一来，就相当于给AES加了一层防盗门，加大了破解的难度。这样做的好处是每次加密的key都是不同的，而且需要密码本以及映射算法的支持。</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103102253472-2054638254.png" alt="示例"></p>
+<h5 id="RSA-公钥加密算法"><a href="#RSA-公钥加密算法" class="headerlink" title="RSA 公钥加密算法"></a>RSA 公钥加密算法</h5><p>RAS这个名字，就是该算法三位发明者的名字的首字母的组合。RAS是非对称加密，其在加密和解密的过程中，需要两个Key，一个公钥（public key），一个是私钥（private key）。公钥负责加密，而私钥负责解密。从名字就可以看出，公钥是可以开放出去的，任何人都可以持有公钥进行加密。而私钥必须得进行保护，因为是用来解密的。</p>
+<p>这样一来，加密和解密就可以用不同的钥匙来处理。对于加密放来说，即使你可以对报文进行加密，如果没有私有的话也是不可以对你加密的内容进行解密的。这就相当于一个盒子，盒子上有把锁。你可以把东西放进去，然后再锁上盒子。但是如果你没有钥匙的话，也是打不开这把锁的。</p>
+<p>下方这个简图就是服务端单向验证的RAS非对称加密算法，Client内置了一个公钥，该公钥与Server端的私钥是配对的，所以Client端可以使用这个内置的Public key加密，而服务端就可以使用这个private key进行解密。目前最常用的是服务端单向认证机制。</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103110054831-1096826423.png" alt="图解"></p>
+<h4 id="CA证书"><a href="#CA证书" class="headerlink" title="CA证书"></a>CA证书</h4><p>如果你自己通过RAS算法生成了一个私钥和公钥，在公钥发送给客户端的过程中有可能被篡改成其他的公钥，而客户端在没有其他措施的保护下是不知道该公钥是否就是服务器那边的私钥对应的公钥的。这种自己做的RAS的公钥和私钥有可能在公钥分发的过程中被篡改。下方就是Client从Server端获取公钥时被中间者篡改了，将public换成了自己的伪public key, 同样这个中间者持有这个伪public key所对应的伪private key。如果客户端使用的伪public key进行加密传输的话，那么中间者是可以使用自己的private key进行解密的。</p>
+<p>举个例子来类比一下这个问题。</p>
+<p>假设你在古代，你出门在外，妻子在家养子。你们家有个箱子，箱子上有把锁，这就是你和你妻子互通的工具。你媳妇儿负责往箱子里放东西，然后上锁。你有把独特的钥匙，你负责开锁，取东西。可是你再将箱子给镖局托运的的过程中，被镖局的“小黑”掉包了，箱子的外表一致，锁看起来也一样，可是已经不是你的箱子了。因为路途遥远，古代又没有什么iPhone啥的，你媳妇没办法来辨别该箱子是否是原装的。然后就将一些东西放在了箱子里边，然后上锁交给了镖局的“小黑”。</p>
+<p>因为“小黑”掉包的箱子，所以小黑有箱子的钥匙呢，然后就可以打开这个箱子，取东西了。原来的箱子又在小黑那，小黑就可以往原来的箱子里边随便往箱子放点没有价值的东西给你就行了。当你发现箱子里的东西不是你想要的时候，完了，小黑从镖局辞职了，找不到人了。找镖局的人讨说法，可是镖局的人说“小黑”是镖局的临时工，这个责任镖局说了，我们不能担。鉴于你无权无势，这事儿也就此罢了。（故事纯属虚构，如有雷同纯属巧合）</p>
+<p>关于更多骗子的故事请移步网络剧《毛骗》一二三季。</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103135901253-1997250857.png" alt="小黑骗钱"></p>
+<p>为了防止“小黑”再次作案，所以颁布一个公正机构来证明你媳妇收到的箱子就是你发出的箱子。在RAS加密中也有一个第三方机构来充当这个角色，负责证明客户端收到的证书就是你发送的证书，中间没有被篡改。这个中间认证机构，就是数组证书认证机构, 其颁发的证书也就是我们常说的CA证书（CA , Certificate Authority）。</p>
+<p>下面我们就来详细的叙述一下证书签名，证书分发以及证书验证的整个过程。</p>
+<ol>
+<li>服务端人员使用RSA算法生成两个密钥，一个用来加密一个用来解密。将负责加密的那个密钥公布出去，所以我们称之为公钥（Public Key），而用来解密的那个密钥，不能对外公布，只有服务端持有，所以我们称之为私钥（Private Key）。服务端在将Public Key进行分发证书之前需要向CA机构申请给将要分发的公钥进行数字签名。（服务器公钥负责加密，服务器私钥负责解密）</li>
+<li>生成数字签名公钥证书：对于CA机构来说，其也有两个密钥，我们暂且称之为CA私钥和CA公钥。CA机构将服务端的Public Key作为输入参数将其转换为一个特有的Hash值。然后使用CA私钥将这个Hash值进行加密处理，并与服务端的Public Key绑定在一起，生成数字签名证书。其实数字签名证书的本质就是服务端的公钥+CA私钥加密的Hash值。（CA私钥负责签名，CA公钥负责验证）</li>
+<li>服务器获取到这个已经含有数字签名并带有公钥的证书，将该证书发送给客户端。当客户端收到该公钥数字证书后，会验证其有效性。大部分客户端都会预装CA机构的公钥，也就是CA公钥。客户端使用CA公钥对数字证书上的签名进行验证，这个验证的过程就是使用CA公钥对CA私钥加密的内容进行解密，将解密后的内容与服务端的Public Key所生成的Hash值进行匹配，如果匹配成功，则说明该证书就是相应的服务端发过来的。否则就是非法证书。</li>
+<li>验证完服务端公钥的合法性后，就可以使用该公钥进行加密通信了。</li>
+</ol>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103150606519-1987788124.png" alt="CA"></p>
+<p>下方这个截图就是苹果的根证书的一些信息，从下方可以看出，CA证书内容中包括加密算法，公共密钥以及数字签名。</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103153812784-1556239221.png" alt="苹果的根证书的一些信息-1"></p>
+<p>下方就是公钥以及数字签名的具体内容，当对下方公共密钥进行验证时，需要使用内置的CA公钥将数字签名进行解密。然后将解密后的内容，与公钥生成的Hash值进行比较，如果匹配成功，那么该证书就是CA机构颁布的合法证书。</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103151200550-1287415863.png" alt="苹果的根证书的一些信息-2"></p>
+<h4 id="HTTPS安全通信机制的建立"><a href="#HTTPS安全通信机制的建立" class="headerlink" title="HTTPS安全通信机制的建立"></a>HTTPS安全通信机制的建立</h4><p>上面我们聊完AES与RSA加密策略，然后又聊了带有数字签名的公共密钥。上面这两部分内容都是为HTTPS做铺垫的，接下来就看一看HTTP+SSL是如何进行数据传输的。</p>
+<h5 id="HTTPS简介"><a href="#HTTPS简介" class="headerlink" title="HTTPS简介"></a>HTTPS简介</h5><p>在开头的部分也说了，HTTPS不是一个新的通信协议，而是HTTP与SSL（或TSL）的组合。SSL–安全套节层(Secure Socket Layer), TSL（Transport Layer Security 安全传输层）是以SSL为原型开发的协议，IETF以SSL3.0为基准后又制定了TLS1.0、TLS1.1和TLS1.2，当前主流版本为SSL3.0与TLS1.0。</p>
+<p>HTTPS就是在HTTP与TCP层中间添加了一个SSL层。因为HTTPS被HTTP多了这层加密的流程，所以HTTPS的速度要比HTTP慢的多。</p>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103165008972-1952177713.png" alt="HTTPS"></p>
+<h5 id="HTTPS的通信过程"><a href="#HTTPS的通信过程" class="headerlink" title="HTTPS的通信过程"></a>HTTPS的通信过程</h5><p>SSL的加密过程是RSA与AES混合进行的。简单概括一下，就是通过RSA加密方式来交换AES加解密的密钥，然后使用AES加密的方式来传输报文。下方是SSL建立连接以及传输数据的图解。在下图中大体可以分为四步：</p>
+<ul>
+<li>第一步：有客户端发起的第一次握手，此次握手过程的主要目的是从服务端获取数字签名证书，服务端在发送数字签名证书之前要先确认客户端的SSL版本、加密算法等信息。</li>
+<li>第二步：完成第一次握手后，接着进行第二次握手。第二次握手是在客户端收到证书后发起的，主要目的是将AES加解密使用的Key （Pre-master secret）发送给服务端。当然这个AES_KEY是使用第一次握手获取的公钥进行加密的。客户端收到这个使用公钥加密后的AES_KEY，使用服务端的私钥进行解密。这样客户端和服务端经过二次握手后都持有了AES加解密的KEY。</li>
+<li>第三步：当Client与Server端都持有AES_KEY后，就可以对HTTP报文进行加解密了。<br>END: 最后就是断开连接了。具体如下图所示：</li>
+</ul>
+<p><img src="https://images2015.cnblogs.com/blog/545446/201701/545446-20170104161159112-1899339253.png" alt="https加密过程"></p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/TCP-IP/" rel="tag"># TCP/IP</a>
+          
+            <a href="/tags/http/" rel="tag"># http</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/04/TCP:IP协议族(二) HTTP报文头解析/" rel="next" title="TCP/IP协议族(二) HTTP报文头解析">
+                <i class="fa fa-chevron-left"></i> TCP/IP协议族(二) HTTP报文头解析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/tags/es6/page/2/">2</a><a class="extend next" rel="next" href="/tags/es6/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -582,6 +499,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -602,8 +523,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -685,6 +615,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#RSA与AES简述"><span class="nav-number">1.</span> <span class="nav-text">RSA与AES简述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Advanced-Encryption-Standard-（AES-高级加密标准）"><span class="nav-number">1.1.</span> <span class="nav-text">Advanced Encryption Standard （AES: 高级加密标准）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#RSA-公钥加密算法"><span class="nav-number">1.2.</span> <span class="nav-text">RSA 公钥加密算法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CA证书"><span class="nav-number">2.</span> <span class="nav-text">CA证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTPS安全通信机制的建立"><span class="nav-number">3.</span> <span class="nav-text">HTTPS安全通信机制的建立</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#HTTPS简介"><span class="nav-number">3.1.</span> <span class="nav-text">HTTPS简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTTPS的通信过程"><span class="nav-number">3.2.</span> <span class="nav-text">HTTPS的通信过程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -818,6 +764,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
