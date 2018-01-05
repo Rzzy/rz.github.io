@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Rz">
 <meta property="og:description" content="Proxy 对象用于定义基本操作的自定义行为（如属性查找，赋值，枚举，函数调用等）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-05T10:19:12.515Z">
+<meta property="og:updated_time" content="2018-01-05T10:21:27.532Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="es6中的代理Proxy">
 <meta name="twitter:description" content="Proxy 对象用于定义基本操作的自定义行为（如属性查找，赋值，枚举，函数调用等）">
@@ -466,10 +466,30 @@
 </tr>
 <tr>
 <td><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/get" target="_blank" rel="noopener"><code>handler.get()</code></a></td>
+<td>在读取代理对象的某个属性时触发该操作，比如在执行 proxy.foo 时</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/set" target="_blank" rel="noopener"><code>handler.set()</code></a></td>
+<td>在给代理对象的某个属性赋值时触发该操作，比如在执行 proxy.foo = 1 时</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/deleteProperty" target="_blank" rel="noopener"><code>handler.deleteProperty()</code></a></td>
+<td>在删除代理对象的某个属性时触发该操作，比如在执行 delete proxy.foo 时</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/ownKeys" target="_blank" rel="noopener"><code>handler.ownKeys()</code></a></td>
+<td>在获取代理对象的所有属性键时触发该操作，比如在执行 Object.getOwnPropertyNames(proxy) 时</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/apply" target="_blank" rel="noopener"><code>handler.apply()</code></a></td>
+<td>在调用一个目标对象为函数的代理对象时触发该操作，比如在执行 proxy() 时</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/construct" target="_blank" rel="noopener"><code>handler.construct()</code></a></td>
+<td>在给一个目标对象为构造函数的代理对象构造实例时触发该操作，比如在执行new proxy() 时</td>
 </tr>
 </tbody>
 </table>
-<p>在读取代理对象的某个属性时触发该操作，比如在执行 proxy.foo 时|<br>|<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/set" target="_blank" rel="noopener"><code>handler.set()</code></a>|在给代理对象的某个属性赋值时触发该操作，比如在执行 proxy.foo = 1 时|<br>|<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/deleteProperty" target="_blank" rel="noopener"><code>handler.deleteProperty()</code></a>|在删除代理对象的某个属性时触发该操作，比如在执行 delete proxy.foo 时|<br>|<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/ownKeys" target="_blank" rel="noopener"><code>handler.ownKeys()</code></a>|在获取代理对象的所有属性键时触发该操作，比如在执行 Object.getOwnPropertyNames(proxy) 时|<br>|<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/apply" target="_blank" rel="noopener"><code>handler.apply()</code></a>|在调用一个目标对象为函数的代理对象时触发该操作，比如在执行 proxy() 时|<br>|<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/construct" target="_blank" rel="noopener"><code>handler.construct()</code></a>|在给一个目标对象为构造函数的代理对象构造实例时触发该操作，比如在执行new proxy() 时|</p>
 <h5 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h5><h6 id="基础示例"><a href="#基础示例" class="headerlink" title="基础示例"></a>基础示例</h6><p>在以下简单的例子中，当对象中不存在属性名时，缺省返回数为37。例子中使用了 get。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> handler = &#123;</span><br><span class="line">    get: <span class="function"><span class="keyword">function</span>(<span class="params">target, name</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name <span class="keyword">in</span> target ? target[name] : <span class="number">37</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;, handler);</span><br><span class="line"></span><br><span class="line">p.a = <span class="number">1</span>;</span><br><span class="line">p.b = <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(p.a, p.b);    <span class="comment">// 1, undefined</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'c'</span> <span class="keyword">in</span> p, p.c);    <span class="comment">// false, 37</span></span><br></pre></td></tr></table></figure>
 <h6 id="无操作转发代理"><a href="#无操作转发代理" class="headerlink" title="无操作转发代理"></a>无操作转发代理</h6><p>在以下例子中，我们使用了一个原生 JavaScript 对象，代理会将所有应用到它的操作转发到这个对象上。</p>
