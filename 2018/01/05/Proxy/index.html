@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="es6," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Proxy 对象用于定义基本操作的自定义行为（如属性查找，赋值，枚举，函数调用等）">
+<meta name="keywords" content="es6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es6中的代理Proxy">
+<meta property="og:url" content="http://yoursite.com/2018/01/05/Proxy/index.html">
+<meta property="og:site_name" content="Rz">
+<meta property="og:description" content="Proxy 对象用于定义基本操作的自定义行为（如属性查找，赋值，枚举，函数调用等）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-05T08:48:35.889Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="es6中的代理Proxy">
+<meta name="twitter:description" content="Proxy 对象用于定义基本操作的自定义行为（如属性查找，赋值，枚举，函数调用等）">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/05/Proxy/"/>
+
+
+
+
+
+  <title>es6中的代理Proxy | Rz</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Rz</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-es6" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/05/Proxy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rz">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">es6中的代理Proxy</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-05T16:02:57+08:00">
+                2018-01-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">javaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  Proxy 对象用于定义基本操作的自定义行为（如属性查找，赋值，枚举，函数调用等）
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h5><table>
+<thead>
+<tr>
+<th>术语名称</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>handler</td>
+<td>包含陷阱（traps）的占位符对象。</td>
+</tr>
+<tr>
+<td>traps</td>
+<td>提供属性访问的方法。这类似于操作系统中陷阱的概念。</td>
+</tr>
+<tr>
+<td>target</td>
+<td>代理虚拟化的对象。它通常用作代理的存储后端。根据目标验证关于对象不可扩展性或不可配置属性的不变量（保持不变的语义）。</td>
+</tr>
+</tbody>
+</table>
+<h5 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</span><br></pre></td></tr></table></figure>
+<p><strong>参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>用Proxy包装的目标对象（可以是任何类型的对象，包括原生数组，函数，甚至另一个代理）</td>
+</tr>
+<tr>
+<td>handler</td>
+<td>一个对象，其属性是当执行一个操作时定义代理的行为的函数。</td>
+</tr>
+</tbody>
+</table>
+<h5 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h5><p><code>Proxy.revocable()</code>:<br>创建一个可撤销的Proxy对象。</p>
+<h5 id="handler-对象的方法"><a href="#handler-对象的方法" class="headerlink" title="handler 对象的方法"></a>handler 对象的方法</h5><p>handler 对象是一个占位符对象，它包含Proxy的陷阱。</p>
+<h5 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h5><h6 id="基础示例"><a href="#基础示例" class="headerlink" title="基础示例"></a>基础示例</h6><p>在以下简单的例子中，当对象中不存在属性名时，缺省返回数为37。例子中使用了 get。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> handler = &#123;</span><br><span class="line">    get: <span class="function"><span class="keyword">function</span>(<span class="params">target, name</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name <span class="keyword">in</span> target ? target[name] : <span class="number">37</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;, handler);</span><br><span class="line"></span><br><span class="line">p.a = <span class="number">1</span>;</span><br><span class="line">p.b = <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(p.a, p.b);    <span class="comment">// 1, undefined</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'c'</span> <span class="keyword">in</span> p, p.c);    <span class="comment">// false, 37</span></span><br></pre></td></tr></table></figure>
+<h6 id="无操作转发代理"><a href="#无操作转发代理" class="headerlink" title="无操作转发代理"></a>无操作转发代理</h6><p>在以下例子中，我们使用了一个原生 JavaScript 对象，代理会将所有应用到它的操作转发到这个对象上。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> target = &#123;&#125;;</span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, &#123;&#125;);</span><br><span class="line"></span><br><span class="line">p.a = <span class="number">37</span>;   <span class="comment">// 操作转发到目标</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(target.a);    <span class="comment">// 37. 操作已经被正确地转发</span></span><br></pre></td></tr></table></figure>
+<h6 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h6><p>通过代理，你可以轻松地验证向一个对象的传值。这个例子使用了 set。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> validator = &#123;</span><br><span class="line">  set: <span class="function"><span class="keyword">function</span>(<span class="params">obj, prop, value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (prop === <span class="string">'age'</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!<span class="built_in">Number</span>.isInteger(value)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'The age is not an integer'</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (value &gt; <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">RangeError</span>(<span class="string">'The age seems invalid'</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// The default behavior to store the value</span></span><br><span class="line">    obj[prop] = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;, validator);</span><br><span class="line"></span><br><span class="line">person.age = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.age); </span><br><span class="line"><span class="comment">// 100</span></span><br><span class="line"></span><br><span class="line">person.age = <span class="string">'young'</span>; </span><br><span class="line"><span class="comment">// 抛出异常: Uncaught TypeError: The age is not an integer</span></span><br><span class="line"></span><br><span class="line">person.age = <span class="number">300</span>; </span><br><span class="line"><span class="comment">// 抛出异常: Uncaught RangeError: The age seems invalid</span></span><br></pre></td></tr></table></figure>
+<h6 id="扩展构造函数"><a href="#扩展构造函数" class="headerlink" title="扩展构造函数"></a>扩展构造函数</h6><p>方法代理可以轻松地通过一个新构造函数来扩展一个已有的构造函数。这个例子使用了construct和apply。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">extend</span>(<span class="params">sup,base</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> descriptor = <span class="built_in">Object</span>.getOwnPropertyDescriptor(</span><br><span class="line">    base.prototype,<span class="string">"constructor"</span></span><br><span class="line">  );</span><br><span class="line">  base.prototype = <span class="built_in">Object</span>.create(sup.prototype);</span><br><span class="line">  <span class="keyword">var</span> handler = &#123;</span><br><span class="line">    construct: <span class="function"><span class="keyword">function</span>(<span class="params">target, args</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> obj = <span class="built_in">Object</span>.create(base.prototype);</span><br><span class="line">      <span class="keyword">this</span>.apply(target,obj,args);</span><br><span class="line">      <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;,</span><br><span class="line">    apply: <span class="function"><span class="keyword">function</span>(<span class="params">target, that, args</span>) </span>&#123;</span><br><span class="line">      sup.apply(that,args);</span><br><span class="line">      base.apply(that,args);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(base,handler);</span><br><span class="line">  descriptor.value = proxy;</span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(base.prototype, <span class="string">"constructor"</span>, descriptor);</span><br><span class="line">  <span class="keyword">return</span> proxy;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Person = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Boy = extend(Person, <span class="function"><span class="keyword">function</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">Boy.prototype.sex = <span class="string">"M"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Peter = <span class="keyword">new</span> Boy(<span class="string">"Peter"</span>, <span class="number">13</span>);</span><br><span class="line"><span class="built_in">console</span>.log(Peter.sex);  <span class="comment">// "M"</span></span><br><span class="line"><span class="built_in">console</span>.log(Peter.name); <span class="comment">// "Peter"</span></span><br><span class="line"><span class="built_in">console</span>.log(Peter.age);  <span class="comment">// 13</span></span><br></pre></td></tr></table></figure>
+<h6 id="操作-DOM-节点"><a href="#操作-DOM-节点" class="headerlink" title="操作 DOM 节点"></a>操作 DOM 节点</h6><p>有时你希望切换两个不同的元素的属性或类名。下面展示了如何使用 set。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> view = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;</span><br><span class="line">  selected: <span class="literal">null</span></span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">  set: <span class="function"><span class="keyword">function</span>(<span class="params">obj, prop, newval</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> oldval = obj[prop];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (prop === <span class="string">'selected'</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (oldval) &#123;</span><br><span class="line">        oldval.setAttribute(<span class="string">'aria-selected'</span>, <span class="string">'false'</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (newval) &#123;</span><br><span class="line">        newval.setAttribute(<span class="string">'aria-selected'</span>, <span class="string">'true'</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// The default behavior to store the value</span></span><br><span class="line">    obj[prop] = newval;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> i1 = view.selected = <span class="built_in">document</span>.getElementById(<span class="string">'item-1'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(i1.getAttribute(<span class="string">'aria-selected'</span>)); <span class="comment">// 'true'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> i2 = view.selected = <span class="built_in">document</span>.getElementById(<span class="string">'item-2'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(i1.getAttribute(<span class="string">'aria-selected'</span>)); <span class="comment">// 'false'</span></span><br><span class="line"><span class="built_in">console</span>.log(i2.getAttribute(<span class="string">'aria-selected'</span>)); <span class="comment">// 'true'</span></span><br></pre></td></tr></table></figure>
+<h6 id="值修正及附加属性"><a href="#值修正及附加属性" class="headerlink" title="值修正及附加属性"></a>值修正及附加属性</h6><p>以下products代理会计算传值并根据需要转换为数组。这个代理对象同时支持一个叫做 latestBrowser的附加属性，这个属性可以同时作为 getter 和 setter。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> products = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;</span><br><span class="line">  browsers: [<span class="string">'Internet Explorer'</span>, <span class="string">'Netscape'</span>]</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">  get: <span class="function"><span class="keyword">function</span>(<span class="params">obj, prop</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 附加属性</span></span><br><span class="line">    <span class="keyword">if</span> (prop === <span class="string">'latestBrowser'</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> obj.browsers[obj.browsers.length - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 缺省行为是返回属性值</span></span><br><span class="line">    <span class="keyword">return</span> obj[prop];</span><br><span class="line">  &#125;,</span><br><span class="line">  set: <span class="function"><span class="keyword">function</span>(<span class="params">obj, prop, value</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 附加属性</span></span><br><span class="line">    <span class="keyword">if</span> (prop === <span class="string">'latestBrowser'</span>) &#123;</span><br><span class="line">      obj.browsers.push(value);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果不是数组则进行转换</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> value === <span class="string">'string'</span>) &#123;</span><br><span class="line">      value = [value];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 缺省行为是保存属性值</span></span><br><span class="line">    obj[prop] = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(products.browsers); <span class="comment">// ['Internet Explorer', 'Netscape']</span></span><br><span class="line">products.browsers = <span class="string">'Firefox'</span>; <span class="comment">// ?传入一个 string (错误地)</span></span><br><span class="line"><span class="built_in">console</span>.log(products.browsers); <span class="comment">// ['Firefox'] &lt;- ?没问题, ?得到的是一个 array</span></span><br><span class="line"></span><br><span class="line">products.latestBrowser = <span class="string">'Chrome'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(products.browsers); <span class="comment">// ['Firefox', 'Chrome']</span></span><br><span class="line"><span class="built_in">console</span>.log(products.latestBrowser); <span class="comment">// 'Chrome'</span></span><br></pre></td></tr></table></figure>
+<h6 id="通过属性查找数组中的特定对象"><a href="#通过属性查找数组中的特定对象" class="headerlink" title="通过属性查找数组中的特定对象"></a>通过属性查找数组中的特定对象</h6><p>以下代理为数组扩展了一些实用工具。可以看到，你可以灵活地“定义”属性，而不需要使用 Object.defineProperties方法。以下例子可以用于通过单元格来查找表格中的一行。在这种情况下，target 是table.rows。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> products = <span class="keyword">new</span> <span class="built_in">Proxy</span>([</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">'Firefox'</span>, <span class="attr">type</span>: <span class="string">'browser'</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">'SeaMonkey'</span>, <span class="attr">type</span>: <span class="string">'browser'</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">'Thunderbird'</span>, <span class="attr">type</span>: <span class="string">'mailer'</span> &#125;</span><br><span class="line">],</span><br><span class="line">&#123;</span><br><span class="line">  get: <span class="function"><span class="keyword">function</span>(<span class="params">obj, prop</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 缺省行为是返回属性值， prop ?通常是一个整数</span></span><br><span class="line">    <span class="keyword">if</span> (prop <span class="keyword">in</span> obj) &#123;</span><br><span class="line">      <span class="keyword">return</span> obj[prop];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取 products 的 number; 它是 products.length 的别名</span></span><br><span class="line">    <span class="keyword">if</span> (prop === <span class="string">'number'</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> obj.length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> result, types = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> product <span class="keyword">of</span> obj) &#123;</span><br><span class="line">      <span class="keyword">if</span> (product.name === prop) &#123;</span><br><span class="line">        result = product;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (types[product.type]) &#123;</span><br><span class="line">        types[product.type].push(product);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        types[product.type] = [product];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通过 name 获取 product</span></span><br><span class="line">    <span class="keyword">if</span> (result) &#123;</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通过 type 获取 products</span></span><br><span class="line">    <span class="keyword">if</span> (prop <span class="keyword">in</span> types) &#123;</span><br><span class="line">      <span class="keyword">return</span> types[prop];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取 product type</span></span><br><span class="line">    <span class="keyword">if</span> (prop === <span class="string">'types'</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Object</span>.keys(types);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(products[<span class="number">0</span>]); <span class="comment">// &#123; name: 'Firefox', type: 'browser' &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(products[<span class="string">'Firefox'</span>]); <span class="comment">// &#123; name: 'Firefox', type: 'browser' &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(products[<span class="string">'Chrome'</span>]); <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(products.browser); <span class="comment">// [&#123; name: 'Firefox', type: 'browser' &#125;, &#123; name: 'SeaMonkey', type: 'browser' &#125;]</span></span><br><span class="line"><span class="built_in">console</span>.log(products.types); <span class="comment">// ['browser', 'mailer']</span></span><br><span class="line"><span class="built_in">console</span>.log(products.number); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<h6 id="一个完整的-traps-列表示例"><a href="#一个完整的-traps-列表示例" class="headerlink" title="一个完整的 traps 列表示例"></a>一个完整的 traps 列表示例</h6><p>出于教学目的，这里为了创建一个完整的 traps 列表示例，我们将尝试代理化一个非原生对象，这特别适用于这类操作：由 发布在 document.cookie页面上的“小型框架”创建的docCookies全局对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  var docCookies = ... get the "docCookies" object here:  </span></span><br><span class="line"><span class="comment">  https://developer.mozilla.org/zh-CN/docs/DOM/document.cookie#A_little_framework.3A_a_complete_cookies_reader.2Fwriter_with_full_unicode_support</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> docCookies = <span class="keyword">new</span> <span class="built_in">Proxy</span>(docCookies, &#123;</span><br><span class="line">  <span class="string">"get"</span>: <span class="function"><span class="keyword">function</span> (<span class="params">oTarget, sKey</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> oTarget[sKey] || oTarget.getItem(sKey) || <span class="literal">undefined</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"set"</span>: <span class="function"><span class="keyword">function</span> (<span class="params">oTarget, sKey, vValue</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (sKey <span class="keyword">in</span> oTarget) &#123; <span class="keyword">return</span> <span class="literal">false</span>; &#125;</span><br><span class="line">    <span class="keyword">return</span> oTarget.setItem(sKey, vValue);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"deleteProperty"</span>: <span class="function"><span class="keyword">function</span> (<span class="params">oTarget, sKey</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (sKey <span class="keyword">in</span> oTarget) &#123; <span class="keyword">return</span> <span class="literal">false</span>; &#125;</span><br><span class="line">    <span class="keyword">return</span> oTarget.removeItem(sKey);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"enumerate"</span>: <span class="function"><span class="keyword">function</span> (<span class="params">oTarget, sKey</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> oTarget.keys();</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"ownKeys"</span>: <span class="function"><span class="keyword">function</span> (<span class="params">oTarget, sKey</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> oTarget.keys();</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"has"</span>: <span class="function"><span class="keyword">function</span> (<span class="params">oTarget, sKey</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> sKey <span class="keyword">in</span> oTarget || oTarget.hasItem(sKey);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"defineProperty"</span>: <span class="function"><span class="keyword">function</span> (<span class="params">oTarget, sKey, oDesc</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (oDesc &amp;&amp; <span class="string">"value"</span> <span class="keyword">in</span> oDesc) &#123; oTarget.setItem(sKey, oDesc.value); &#125;</span><br><span class="line">    <span class="keyword">return</span> oTarget;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"getOwnPropertyDescriptor"</span>: <span class="function"><span class="keyword">function</span> (<span class="params">oTarget, sKey</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> vValue = oTarget.getItem(sKey);</span><br><span class="line">    <span class="keyword">return</span> vValue ? &#123;</span><br><span class="line">      <span class="string">"value"</span>: vValue,</span><br><span class="line">      <span class="string">"writable"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="string">"enumerable"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="string">"configurable"</span>: <span class="literal">false</span></span><br><span class="line">    &#125; : <span class="literal">undefined</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Cookies 测试 */</span></span><br><span class="line"></span><br><span class="line">alert(docCookies.my_cookie1 = <span class="string">"First value"</span>);</span><br><span class="line">alert(docCookies.getItem(<span class="string">"my_cookie1"</span>));</span><br><span class="line"></span><br><span class="line">docCookies.setItem(<span class="string">"my_cookie1"</span>, <span class="string">"Changed value"</span>);</span><br><span class="line">alert(docCookies.my_cookie1);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/es6/" rel="tag"># es6</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/05/TCP:IP协议族(三) 数字签名与HTTPS详解/" rel="next" title="TCP/IP协议族(三) 数字签名与HTTPS详解">
+                <i class="fa fa-chevron-left"></i> TCP/IP协议族(三) 数字签名与HTTPS详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Rz</p>
+              <p class="site-description motion-element" itemprop="description">description</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Rzzy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/243566431" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:243566431@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#术语"><span class="nav-number">1.</span> <span class="nav-text">术语</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#语法"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法"><span class="nav-number">3.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#handler-对象的方法"><span class="nav-number">4.</span> <span class="nav-text">handler 对象的方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#示例"><span class="nav-number">5.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#基础示例"><span class="nav-number">5.1.</span> <span class="nav-text">基础示例</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#无操作转发代理"><span class="nav-number">5.2.</span> <span class="nav-text">无操作转发代理</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#验证"><span class="nav-number">5.3.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#扩展构造函数"><span class="nav-number">5.4.</span> <span class="nav-text">扩展构造函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#操作-DOM-节点"><span class="nav-number">5.5.</span> <span class="nav-text">操作 DOM 节点</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#值修正及附加属性"><span class="nav-number">5.6.</span> <span class="nav-text">值修正及附加属性</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#通过属性查找数组中的特定对象"><span class="nav-number">5.7.</span> <span class="nav-text">通过属性查找数组中的特定对象</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#一个完整的-traps-列表示例"><span class="nav-number">5.8.</span> <span class="nav-text">一个完整的 traps 列表示例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rz</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
