@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ios," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="按照时间顺序，事件的生命周期是这样的：事件的产生和传递（事件如何从父控件传递到子控件并寻找到最合适的view、寻找最合适的view的底层实现、拦截事件的处理）;找到最合适的view后事件的处理（touches方法的重写，也就是事件的响应）">
+<meta name="keywords" content="ios">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS中事件的产生和传递">
+<meta property="og:url" content="http://yoursite.com/2017/12/28/iOS中事件的产生和传递/index.html">
+<meta property="og:site_name" content="Rz">
+<meta property="og:description" content="按照时间顺序，事件的生命周期是这样的：事件的产生和传递（事件如何从父控件传递到子控件并寻找到最合适的view、寻找最合适的view的底层实现、拦截事件的处理）;找到最合适的view后事件的处理（touches方法的重写，也就是事件的响应）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1932148-1c4e39f1487a6d54.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1932148-7e8ce35dc4d4b2ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/305">
+<meta property="og:updated_time" content="2018-01-08T05:58:01.886Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS中事件的产生和传递">
+<meta name="twitter:description" content="按照时间顺序，事件的生命周期是这样的：事件的产生和传递（事件如何从父控件传递到子控件并寻找到最合适的view、寻找最合适的view的底层实现、拦截事件的处理）;找到最合适的view后事件的处理（touches方法的重写，也就是事件的响应）">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1932148-1c4e39f1487a6d54.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/28/iOS中事件的产生和传递/"/>
+
+
+
+
+
+  <title>iOS中事件的产生和传递 | Rz</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Rz</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-ios" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/28/iOS中事件的产生和传递/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rz">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS中事件的产生和传递</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-28T01:26:02+08:00">
+                2017-12-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  按照时间顺序，事件的生命周期是这样的：事件的产生和传递（事件如何从父控件传递到子控件并寻找到最合适的view、寻找最合适的view的底层实现、拦截事件的处理）;找到最合适的view后事件的处理（touches方法的重写，也就是事件的响应）
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>转载：<a href="https://www.jianshu.com/p/585760924a92" target="_blank" rel="noopener">https://www.jianshu.com/p/585760924a92</a></p>
+<p><strong>iOS中的事件可以分为3大类型</strong>：</p>
+<blockquote>
+<p>按照时间顺序，事件的生命周期是这样的：<br>事件的产生和传递（事件如何从父控件传递到子控件并寻找到最合适的view、寻找最合适的view的底层实现、拦截事件的处理）-&gt;找到最合适的view后事件的处理（touches方法的重写，也就是事件的响应）</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/1932148-1c4e39f1487a6d54.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt="事件分类"></p>
+<p><em>响应者对象</em></p>
+<ul>
+<li>在iOS中不是任何对象都能处理事件，只有继承了UIResponder的对象才能接收并处理事件。我们称之为“响应者对象”</li>
+<li>UIApplication、UIViewController、UIView都继承自UIResponder，因此它们都是响应者对象，都能够接收并处理事件</li>
+</ul>
+<h3 id="UIResponder"><a href="#UIResponder" class="headerlink" title="UIResponder"></a><code>UIResponder</code></h3><p>UIResponder内部提供了以下方法来处理事件</p>
+<p><code>触摸事件</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;</span><br><span class="line"></span><br><span class="line">-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;</span><br><span class="line"></span><br><span class="line">-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;</span><br><span class="line"></span><br><span class="line">-(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;</span><br></pre></td></tr></table></figure>
+<p><code>加速计事件</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-(void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event;</span><br><span class="line"></span><br><span class="line">-(void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event;</span><br><span class="line"></span><br><span class="line">-(void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event;</span><br></pre></td></tr></table></figure>
+<p><code>远程控制事件</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-(void)remoteControlReceivedWithEvent:(UIEvent *)event;</span><br></pre></td></tr></table></figure>
+<h3 id="UIView的触摸事件处理"><a href="#UIView的触摸事件处理" class="headerlink" title="UIView的触摸事件处理"></a><code>UIView</code>的触摸事件处理</h3><p>UIView是UIResponder的子类，可以实现下列4个方法处理不同的触摸事件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 一根或者多根手指开始触摸view，系统会自动调用view的下面方法</span><br><span class="line">-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event</span><br><span class="line"></span><br><span class="line">// 一根或者多根手指在view上移动，系统会自动调用view的下面方法（随着手指的移动，会持续调用该方法）</span><br><span class="line">-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event</span><br><span class="line"></span><br><span class="line">// 一根或者多根手指离开view，系统会自动调用view的下面方法</span><br><span class="line">-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent  *)event</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 触摸结束前，某个系统事件(例如电话呼入)会打断触摸过程，系统会自动调用view的下面方法</span><br><span class="line">-(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>提示：touches中存放的都是UITouch对象</p>
+</blockquote>
+<h3 id="UITouch"><a href="#UITouch" class="headerlink" title="UITouch"></a><code>UITouch</code></h3><ul>
+<li>当用户用一根手指触摸屏幕时，会创建一个与手指相关联的UITouch对象</li>
+<li>一根手指对应一个UITouch对象</li>
+</ul>
+<p><em><strong>UITouch的作用</strong></em></p>
+<ol>
+<li><p>保存着跟手指相关的信息，比如触摸的位置、时间、阶段</p>
+</li>
+<li><p>当手指移动时，系统会更新同一个UITouch对象，使之能够一直保存该手指的触摸位置。</p>
+</li>
+<li><p>当手指离开屏幕时，系统会销毁相应的UITouch对象</p>
+</li>
+</ol>
+<blockquote>
+<p>提示：iPhone开发中，要避免使用双击事件！’</p>
+</blockquote>
+<p><em><strong>UITouch的属性</strong></em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 触摸产生时所处的窗口</span><br><span class="line">@property(nonatomic,readonly,retain)UIWindow *window;</span><br><span class="line"></span><br><span class="line">// 触摸产生时所处的视图</span><br><span class="line">@property(nonatomic,readonly,retain)UIView *view;</span><br><span class="line"></span><br><span class="line">// 短时间内点按屏幕的次数，可以根据tapCount判断单击、双击或更多的点击</span><br><span class="line">@property(nonatomic,readonly)NSUInteger tapCount;</span><br><span class="line"></span><br><span class="line">// 记录了触摸事件产生或变化时的时间，单位是秒</span><br><span class="line">@property(nonatomic,readonly)NSTimeInterval timestamp;</span><br><span class="line"></span><br><span class="line">// 当前触摸事件所处的状态</span><br><span class="line">@property(nonatomic,readonly)UITouchPhase phase;</span><br></pre></td></tr></table></figure>
+<p><em><strong>UITouch的方法</strong></em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-(CGPoint)locationInView:(UIView *)view;</span><br><span class="line">// 返回值表示触摸在view上的位置</span><br><span class="line">// 这里返回的位置是针对view的坐标系的（以view的左上角为原点(0, 0)）</span><br><span class="line">// 调用时传入的view参数为nil的话，返回的是触摸点在UIWindow的位置</span><br><span class="line"></span><br><span class="line">-(CGPoint)previousLocationInView:(UIView *)view;</span><br><span class="line">// 该方法记录了前一个触摸点的位置</span><br></pre></td></tr></table></figure>
+<h3 id="UIEvent"><a href="#UIEvent" class="headerlink" title="UIEvent"></a><code>UIEvent</code></h3><ul>
+<li>每产生一个事件，就会产生一个UIEvent对象</li>
+<li>UIEvent：称为事件对象，记录事件产生的时刻和类型</li>
+</ul>
+<p><strong>常见属性</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 事件类型</span><br><span class="line">@property(nonatomic,readonly)UIEventType type;</span><br><span class="line">@property(nonatomic,readonly)UIEventSubtype subtype;</span><br><span class="line"></span><br><span class="line">// 事件产生的时间</span><br><span class="line">@property(nonatomic,readonly)NSTimeInterval timestamp;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>UIEvent还提供了相应的方法可以获得在某个view上面的触摸对像（UITouch）</li>
+</ul>
+<p><em><strong>touches和event参数</strong></em></p>
+<ul>
+<li>一次完整的触摸过程，会经历3个状态：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 触摸开始：</span><br><span class="line">-(void)touchesBegan:(NSSet *)touches withEvent:(UIEven *)event</span><br><span class="line"></span><br><span class="line">// 触摸移动：</span><br><span class="line">-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event</span><br><span class="line"></span><br><span class="line">// 触摸结束：</span><br><span class="line">-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event</span><br><span class="line"></span><br><span class="line">// 触摸取消（可能会经历）：</span><br><span class="line">-(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event</span><br></pre></td></tr></table></figure>
+<p><em><strong>4个触摸事件处理方法中，都有NSSet </strong></em><strong>touches和UIEvent </strong><em><strong>event两个参数</strong></em></p>
+<ul>
+<li><p>一次完整的触摸过程中，只会产生一个事件对象，4个触摸方法都是同一个event参数</p>
+</li>
+<li><p>如果两根手指同时触摸一个view，那么view只会调用一次touchesBegan:withEvent:方法，touches参数中装着2个UITouch对象</p>
+</li>
+<li><p>如果这两根手指一前一后分开触摸同一个view，那么view会分别调用2次touchesBegan:withEvent:方法，并且每次调用时的touches参数中只包含一个UITouch对象</p>
+</li>
+<li><p>根据touches中UITouch的个数可以判断出是单点触摸还是多点触摸</p>
+</li>
+</ul>
+<h5 id="Q："><a href="#Q：" class="headerlink" title="Q："></a>Q：</h5><p>默认触摸方法NSSet里面只能获得一个UITouch对象,为什么?</p>
+<h5 id="A："><a href="#A：" class="headerlink" title="A："></a>A：</h5><p>UIView默认不支持多点触控。也就是说不支持多只手指同时触摸。</p>
+<h5 id="Q：-1"><a href="#Q：-1" class="headerlink" title="Q："></a>Q：</h5><p>如何让视图接收多点触摸?</p>
+<h5 id="A：-1"><a href="#A：-1" class="headerlink" title="A："></a>A：</h5><p>需要设置它的multipleTouchEnabled属性为YES，默认状态下这个属性值为NO，即视图默认不接收多点触摸。。</p>
+<h5 id="Q：-2"><a href="#Q：-2" class="headerlink" title="Q："></a>Q：</h5><p>如何判断用户当前是双击还是单击?</p>
+<h5 id="A：-2"><a href="#A：-2" class="headerlink" title="A："></a>A：</h5><p>根据UITouch的tapCount属性的值。tapCount表示短时间内轻击屏幕的次数。因此可以根据tapCount判断单击、双击或更多的轻击。</p>
+<blockquote>
+<p>根据tapCount点击的次数来设置当前视图的背景色(双击改变背景颜色)<br>轻击操作很容易引起歧义，比如当用户点了一次之后，并不知道用户是想单击还是只是双击的一部分，或者点了两次之后并不知道用户是想双击还是继续点击。为了解决这个问题，一般可以使用“延迟调用”函数,或手势识别器</p>
+</blockquote>
+<ol>
+<li>使用“延迟调用”函数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event &#123;</span><br><span class="line">    UITouch *touch = [touches anyObject];</span><br><span class="line">    if(touch.tapCount != 2)&#123; // 如果不是双击</span><br><span class="line">        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(setBackgroundColor:)  object:[UIColor orangeColor]];</span><br><span class="line">    &#125; else &#123; // 延时1执行改变背景的方法</span><br><span class="line">        [self performSelector:@selector(setBackgroundColor:) withObject:[UIColor orangeColor] afterDelay:1.0];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>使用Gesture Recognizer<br>使用Gesture Recognizer识别就会简单许多，只需添加两个手势识别器，分别检测单击和双击事件，设置必要的属性即可</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">- (id)init &#123;  </span><br><span class="line">    if ((self = [super init])) &#123;  </span><br><span class="line">    self.userInteractionEnabled = YES;  </span><br><span class="line">        UITapGestureRecognizer *singleTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleSingleTap:)];  </span><br><span class="line">        singleTapGesture.numberOfTapsRequired = 1;  </span><br><span class="line">        singleTapGesture.numberOfTouchesRequired  = 1;  </span><br><span class="line">        [self addGestureRecognizer:singleTapGesture];  </span><br><span class="line"></span><br><span class="line">        UITapGestureRecognizer *doubleTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleDoubleTap:)];  </span><br><span class="line">        doubleTapGesture.numberOfTapsRequired = 2;  </span><br><span class="line">        doubleTapGesture.numberOfTouchesRequired = 1;  </span><br><span class="line">        [self addGestureRecognizer:doubleTapGesture];  </span><br><span class="line"></span><br><span class="line">        [singleTapGesture requireGestureRecognizerToFail:doubleTapGesture];  </span><br><span class="line">    &#125;  </span><br><span class="line">    return self;  </span><br><span class="line">&#125;  </span><br><span class="line">-(void)handleSingleTap:(UIGestureRecognizer *)sender&#123;  </span><br><span class="line">    CGPoint touchPoint = [sender locationInView:self];  </span><br><span class="line">    //...  </span><br><span class="line">&#125;  </span><br><span class="line">-(void)handleDoubleTap:(UIGestureRecognizer *)sender&#123;  </span><br><span class="line">    CGPoint touchPoint = [sender locationInView:self];  </span><br><span class="line">    //...  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>唯一需要注意的是:<br><code>[singleTapGesture requireGestureRecognizerToFail:doubleTapGesture]</code>;<br>这句话的意思时，只有当doubleTapGesture识别失败的时候(即识别出这不是双击操作)，singleTapGesture才能开始识别，同我们一开始讲的是同一个问题。</p>
+<blockquote>
+<p>提示：iPhone开发中，要避免使用双击事件!</p>
+</blockquote>
+<p>NSObject类的cancelPreviousPerformRequestWithTarget:selector:object方法取消指定对象的方法调用。</p>
+<blockquote>
+<p>Cancels perform requests previously registered with performSelector:withObject:afterDelay:.<br>All perform requests are canceled that have the same target as aTarget, argument as anArgument, and selector as aSelector.<br>(如果是带参数，那取消时的参数也要一致，否则不能取消成功)</p>
+</blockquote>
+<p><em><strong>细节</strong></em><br>检测tapCount可以放在touchesBegan也可以touchesEnded，不过一般后者更准确，因为touchesEnded可以保证所有的手指都已经离开屏幕，这样就不会把轻击动作和按下拖动等动作混淆。</p>
+<p><em>*不管是一个手指还是多个手指，轻击操作都会使每个触摸对象的tapCount加1，因此可以直接调用touches的anyObject方法来获取任意一个触摸对象然后判断其tapCount的值即可。</em></p>
+<h4 id="事件的产生和传递"><a href="#事件的产生和传递" class="headerlink" title="事件的产生和传递"></a>事件的产生和传递</h4><ul>
+<li><p><strong>发生触摸事件后，系统会将该事件加入到一个由UIApplication管理的事件队列中, 为什么是队列而不是栈？因为队列的特定是先进先出，先产生的事件先处理才符合常理，所以把事件添加到队列。</strong></p>
+</li>
+<li><p><strong>UIApplication会从事件队列中取出最前面的事件，并将事件分发下去以便处理，通常，先发送事件给应用程序的主窗口（keyWindow）</strong></p>
+</li>
+</ul>
+<h5 id="应用如何找到最合适的控件来处理事件？"><a href="#应用如何找到最合适的控件来处理事件？" class="headerlink" title="应用如何找到最合适的控件来处理事件？"></a><em>应用如何找到最合适的控件来处理事件</em>？</h5><blockquote>
+<ol>
+<li>首先判断主窗口（keyWindow）自己是否能接受触摸事件,不能,则传给UIApplication处理.,能,转2</li>
+<li>判断触摸点是否在自己身上</li>
+<li>子控件数组中从后往前遍历子控件，重复前面的两个步骤（所谓从后往前遍历子控件，就是首先查找子控件数组中最后一个元素，然后执行1、2步骤）</li>
+<li>如果没有符合条件的子控件，那么就认为自己最合适处理这个事件，也就是自己是最合适的view。</li>
+</ol>
+</blockquote>
+<ul>
+<li><strong>主窗口会在视图层次结构中找到一个最合适的视图来处理触摸事件，但是这仅仅是整个事件处理过程的第一步</strong></li>
+<li><strong>找到合适的视图控件后，就会调用视图控件的touches方法来作具体的事件处理</strong></li>
+</ul>
+<blockquote>
+<p>touchesBegan…<br>touchesMoved…<br>touchedEnded…<br>注意: 如果父控件不能接受触摸事件，那么子控件就不可能接收到触摸事件</p>
+</blockquote>
+<h4 id="UIView不接收触摸事件的三种情况"><a href="#UIView不接收触摸事件的三种情况" class="headerlink" title="UIView不接收触摸事件的三种情况"></a><code>UIView</code>不接收触摸事件的三种情况</h4><p>1.不接收用户交互</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userInteractionEnabled = NO</span><br></pre></td></tr></table></figure>
+<p>2.隐藏</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hidden = YES</span><br></pre></td></tr></table></figure>
+<p>3.透明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alpha = 0.0 ~ 0.01</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>提示：UIImageView的userInteractionEnabled默认就是NO，因此UIImageView以及它的子控件默认是不能接收触摸事件的</p>
+</blockquote>
+<h5 id="事件传递示例"><a href="#事件传递示例" class="headerlink" title="事件传递示例"></a><strong>事件传递示例</strong></h5><p><img src="https://upload-images.jianshu.io/upload_images/1932148-7e8ce35dc4d4b2ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/305" alt="事件传递示例"></p>
+<p><em><strong>触摸事件的传递是从父控件传递到子控件</strong></em></p>
+<p>–点击了绿色的view：<br>UIApplication -&gt;UIWindow-&gt;白色 -&gt;绿色</p>
+<p>–点击了蓝色的view：<br>UIApplication-&gt;UIWindow-&gt;白色 -&gt;橙色 -&gt;蓝色</p>
+<p>–点击了黄色的view：<br>UIApplication-&gt;UIWindow-&gt;白色 -&gt;橙色 -&gt;蓝色 -&gt;黄色</p>
+<p><em><strong>触摸事件处理的详细过程</strong></em></p>
+<ul>
+<li>用户点击屏幕后产生的一个触摸事件，经过一系列的传递过程后，会找到最合适的视图控件来处理这个事件</li>
+<li>找到最合适的视图控件后，就会调用控件的touches方法来作具体的事件处理</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touchesBegan…</span><br><span class="line">touchesMoved…</span><br><span class="line">touchedEnded…</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这些touches方法的默认做法是将事件顺着响应者链条向上传递，将事件交给上一个响应者进行处理<h5 id="响应者链条"><a href="#响应者链条" class="headerlink" title="响应者链条"></a><strong>响应者链条</strong></h5></li>
+<li>响应者链条：是由多个响应者对象连接起来的链条</li>
+<li>作用：能很清楚的看见每个响应者之间的联系，并且可以让一个事件多个对象处理。</li>
+<li>响应者对象：能处理事件的对象</li>
+</ul>
+<h5 id="事件传递的完整过程"><a href="#事件传递的完整过程" class="headerlink" title="事件传递的完整过程"></a><em><strong>事件传递的完整过程</strong></em></h5><ol>
+<li><p>先将事件对象由上往下传递(由父控件传递给子控件)，找到最合适的控件来处理这个事件。</p>
+</li>
+<li><p>调用最合适控件的touches….方法</p>
+</li>
+<li><p>如果调用了[super touches….];就会将事件顺着响应者链条往上传递，传递给上一个响应者</p>
+</li>
+<li><p>接着就会调用上一个响应者的touches….方法</p>
+</li>
+</ol>
+<h5 id="如何判断上一个响应者"><a href="#如何判断上一个响应者" class="headerlink" title="如何判断上一个响应者"></a><em><strong>如何判断上一个响应者</strong></em></h5><ol>
+<li>如果当前这个view是控制器的view,那么控制器就是上一个响应者</li>
+<li>如果当前这个view不是控制器的view<ul>
+<li>当前这个view的父类不是自定义的view,那么父控件就是上一个响应者</li>
+<li>当前这个view的父类是自定义的view,那么父类就是上一个响应者</li>
+</ul>
+</li>
+</ol>
+<h5 id="响应者链的事件传递过程"><a href="#响应者链的事件传递过程" class="headerlink" title="响应者链的事件传递过程"></a><em><strong>响应者链的事件传递过程</strong></em></h5><ol>
+<li>如果view的控制器存在，就传递给控制器；如果控制器不存在，则将其传递给它的父视图</li>
+<li>在视图层次结构的最顶级视图，如果也不能处理收到的事件或消息，则其将事件或消息传递给window对象进行处理</li>
+<li>如果window对象也不处理，则其将事件或消息传递给UIApplication对象</li>
+<li>如果UIApplication也不能处理该事件或消息，则将其丢弃</li>
+</ol>
+<h4 id="hitTest-withEvent-方法和pointInside-withEvent"><a href="#hitTest-withEvent-方法和pointInside-withEvent" class="headerlink" title="hitTest:withEvent:方法和pointInside:withEvent:"></a><code>hitTest:withEvent:</code>方法和<code>pointInside:withEvent:</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1. hitTest调用时机:当一个事件传递给一个控件的时候，系统就会调用这个方法</span><br><span class="line">2. hitTest作用: 寻找到最合适处理事件的view。</span><br><span class="line">* （回顾下事件传递），UIApplication -&gt; UIWindow</span><br><span class="line">*  UIWindow去寻找最合适的view? [UIWindow hitTest:withEvent:]里面做了什么事情？</span><br><span class="line">1&gt; 判断窗口能不能处理事件? 如果不能，意味着窗口不是最合适的view，而且也不会去寻找比自己更合适的view,直接返回nil,通知UIApplication，没有最合适的view。</span><br><span class="line">2&gt; 判断点在不在窗口</span><br><span class="line">3&gt; 遍历自己的子控件，寻找有没有比自己更合适的view</span><br><span class="line">4&gt; 如果子控件不接收事件，意味着子控件没有找到最合适的view,然后返回nil,告诉窗口没有找到更合适的view,窗口就知道没有比自己更合适的view,就自己处理事件。</span><br><span class="line"></span><br><span class="line"> * 验证下hitTest方法返回nil，里面的子控件能处理事件吗？ 重写view的hitTest:withEvent:方法，</span><br><span class="line"> * 验证这个方法是否真能找到最合适的view？</span><br><span class="line"> * 如果点击屏幕任何一个地方，都由控制器的view来处理事件，怎么做? 直接返回白色的view,就不会继续去找白色view的子控件了。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">2&gt; hitTest:withEvent:方法的处理流程如下:</span><br><span class="line">    1、调用当前视图的pointInside:withEvent:方法判断触摸点是否在当前视图内</span><br><span class="line">        若返回NO,则hitTest:withEvent:返回nil;</span><br><span class="line">        若返回YES,则向当前视图的所有子视图(subviews)发送hitTest:withEvent:消息，所有</span><br><span class="line">        子视图的遍历顺序是从top到bottom，即从subviews数组的末尾向前遍历,直到有子视图返</span><br><span class="line">        回非空对象或者全部子视图遍历完毕。</span><br><span class="line">    2、若第一次有子视图返回非空对象,则hitTest:withEvent:方法返回此对象，处理结束。</span><br><span class="line">    3、如所有子视图都返回nil,则hitTest:withEvent:方法返回自身(self)。</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ios/" rel="tag"># ios</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/27/MJExtension使用指导/" rel="next" title="MJExtension使用指导">
+                <i class="fa fa-chevron-left"></i> MJExtension使用指导
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/28/UIView/" rel="prev" title="UIView">
+                UIView <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Rz</p>
+              <p class="site-description motion-element" itemprop="description">description</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Rzzy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/243566431" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:243566431@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#UIResponder"><span class="nav-number">1.</span> <span class="nav-text">UIResponder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UIView的触摸事件处理"><span class="nav-number">2.</span> <span class="nav-text">UIView的触摸事件处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UITouch"><span class="nav-number">3.</span> <span class="nav-text">UITouch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UIEvent"><span class="nav-number">4.</span> <span class="nav-text">UIEvent</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Q："><span class="nav-number">4.0.1.</span> <span class="nav-text">Q：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#A："><span class="nav-number">4.0.2.</span> <span class="nav-text">A：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Q：-1"><span class="nav-number">4.0.3.</span> <span class="nav-text">Q：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#A：-1"><span class="nav-number">4.0.4.</span> <span class="nav-text">A：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Q：-2"><span class="nav-number">4.0.5.</span> <span class="nav-text">Q：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#A：-2"><span class="nav-number">4.0.6.</span> <span class="nav-text">A：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件的产生和传递"><span class="nav-number">4.1.</span> <span class="nav-text">事件的产生和传递</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#应用如何找到最合适的控件来处理事件？"><span class="nav-number">4.1.1.</span> <span class="nav-text">应用如何找到最合适的控件来处理事件？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UIView不接收触摸事件的三种情况"><span class="nav-number">4.2.</span> <span class="nav-text">UIView不接收触摸事件的三种情况</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#事件传递示例"><span class="nav-number">4.2.1.</span> <span class="nav-text">事件传递示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#响应者链条"><span class="nav-number">4.2.2.</span> <span class="nav-text">响应者链条</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#事件传递的完整过程"><span class="nav-number">4.2.3.</span> <span class="nav-text">事件传递的完整过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#如何判断上一个响应者"><span class="nav-number">4.2.4.</span> <span class="nav-text">如何判断上一个响应者</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#响应者链的事件传递过程"><span class="nav-number">4.2.5.</span> <span class="nav-text">响应者链的事件传递过程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hitTest-withEvent-方法和pointInside-withEvent"><span class="nav-number">4.3.</span> <span class="nav-text">hitTest:withEvent:方法和pointInside:withEvent:</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rz</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

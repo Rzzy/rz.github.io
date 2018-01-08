@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="es6," />
+  <meta name="keywords" content="ios," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="es6中Symbol的用法">
-<meta name="keywords" content="es6">
+<meta name="description" content="主要讲述UIView的使用">
+<meta name="keywords" content="ios">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深入解析 ES6：Symbol">
-<meta property="og:url" content="http://yoursite.com/2018/01/01/symbol/index.html">
+<meta property="og:title" content="UIView">
+<meta property="og:url" content="http://yoursite.com/2017/12/28/UIView/index.html">
 <meta property="og:site_name" content="Rz">
-<meta property="og:description" content="es6中Symbol的用法">
+<meta property="og:description" content="主要讲述UIView的使用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-03T09:35:15.666Z">
+<meta property="og:updated_time" content="2018-01-08T05:50:36.750Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入解析 ES6：Symbol">
-<meta name="twitter:description" content="es6中Symbol的用法">
+<meta name="twitter:title" content="UIView">
+<meta name="twitter:description" content="主要讲述UIView的使用">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/01/symbol/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/12/28/UIView/"/>
 
 
 
 
 
-  <title>深入解析 ES6：Symbol | Rz</title>
+  <title>UIView | Rz</title>
   
 
 
@@ -282,12 +282,12 @@
   
   
 
-  <article class="post post-type-es6" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-ios" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/01/symbol/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/28/UIView/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rz">
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">深入解析 ES6：Symbol</h1>
+          <h1 class="post-title" itemprop="name headline">UIView</h1>
         
 
         <div class="post-meta">
@@ -316,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-01T03:46:08+08:00">
-                2018-01-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-28T17:29:23+08:00">
+                2017-12-28
               </time>
             
 
@@ -339,8 +339,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">javaScript</span>
+                  <a href="/categories/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
                   </a>
                 </span>
 
@@ -363,7 +363,7 @@
 
           
               <div class="post-description">
-                  es6中Symbol的用法
+                  主要讲述UIView的使用
               </div>
           
 
@@ -380,93 +380,7 @@
       
 
       
-        <h3 id="深入解析-ES6：Symbol"><a href="#深入解析-ES6：Symbol" class="headerlink" title="深入解析 ES6：Symbol"></a>深入解析 ES6：<code>Symbol</code></h3><blockquote>
-<p>引用：<a href="http://bubkoo.com/2015/07/24/es6-in-depth-symbols/" target="_blank" rel="noopener">http://bubkoo.com/2015/07/24/es6-in-depth-symbols/</a></p>
-</blockquote>
-<p><code>Symbol</code><strong> 是什么？</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="built_in">Symbol</span>()</span><br><span class="line"><span class="string">"symbol"</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p><code>JavaScript</code> 在 1997 年被标准化时，就有 6 种数据类型，直到 ES6 出现之前，程序中的变量一定是以下 6 种数据类型之一：</p>
-<ul>
-<li>Undefined</li>
-<li>Null</li>
-<li>Boolean</li>
-<li>Number</li>
-<li>String</li>
-<li>Object</li>
-</ul>
-<p>而symbol则是javascript中的第<strong>七</strong>种数据类型</p>
-</li>
-<li><p><code>Symbol</code> 是完全不一样的东西。一旦创建后就不可更改，不能对它们设置属性（如果在严格模式下尝试这样做，你将得到一个 <code>TypeError</code>）。它们可以作为属性名，这时它们和字符串的属性名没有什么区别。</p>
-</li>
-<li><p>每个 <code>Symbol</code> 都是独一无二的，不与其它 <code>Symbol</code> 重复（即便是使用相同的 <code>Symbol</code> 描述创建），创建一个 <code>Symbol</code> 就跟创建一个对象一样方便。</p>
-</li>
-<li><p><code>ES6</code> 中的 <code>Symbol</code>与传统语言（如 <code>Lisp</code> 和 <code>Ruby</code>）中的 <code>Symbol</code> 中的类似，但并不是完全照搬到 <code>JavaScript</code> 中。在 <code>Lisp</code> 中，所有标识符都是 <code>Symbol</code>；在 <code>JavaScript</code> 中，标识符和大多数属性仍然是字符串，<code>Symbol</code> 只是提供了一个额外的选择。</p>
-</li>
-<li><p>值得注意的是：与其它类型不同的是，<code>Symbol</code> 不能自动被转换为字符串，当尝试将一个 <code>Symbol</code> 强制转换为字符串时，将返回一个 <code>TypeError</code>。</p>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">var</span> sym = <span class="built_in">Symbol</span>(<span class="string">"&lt;3"</span>);</span><br><span class="line">&gt; <span class="string">"your symbol is "</span> + sym</span><br><span class="line"><span class="comment">// TypeError: can't convert symbol to string</span></span><br><span class="line">&gt; <span class="string">`your symbol is <span class="subst">$&#123;sym&#125;</span>`</span></span><br><span class="line"><span class="comment">// TypeError: can't convert symbol to string</span></span><br></pre></td></tr></table></figure>
-<p>应该避免这样的强制转换，应该使用 <code>String(sym)</code> 或 <code>sym.toString()</code> 来转换。</p>
-<p><strong>获取 </strong><code>Symbol</code><strong> 的三种方法</strong></p>
-<ul>
-<li><code>Symbol()</code> 每次调用时都返回一个唯一的 Symbol。</li>
-<li><code>Symbol.for(string)</code> 从 <code>Symbol</code>注册表中返回相应的 <code>Symbol</code>，与上个方法不同的是，<code>Symbol</code>注册表中的 <code>Symbol</code> 是共享的。也就是说，如果你调用 <code>Symbol.for(&quot;cat&quot;)</code> 三次，都将返回相同的 <code>Symbol</code>。当不同页面或同一页面不同模块需要共享 <code>Symbol</code> 时，注册表就非常有用。</li>
-<li><code>Symbol.iterator</code> 返回语言预定义的一些 <code>Symbol</code>，每个都有其特殊的用途。</li>
-</ul>
-<p>如果你仍不确定 <code>Symbol</code> 是否有用，那么接下来的内容将非常有趣，因为我将为你演示 <code>Symbol</code> 的实际应用。</p>
-<p><code>Symbol</code><strong> 在 </strong><code>ES6</code><strong> 规范中的应用</strong></p>
-<ul>
-<li>可以使用 <code>Symbol</code> 来避免代码冲突。</li>
-<li>在使用 <code>iterator</code> 时，我们解析<code>for (var item of myArray)</code> 内部是以调用 <code>myArray[Symbol.iterator]()</code> 开始的，这个方法可以使用 <code>myArray.iterator()</code> 来代替，但是使用 <code>Symbol</code> 的后向兼容性更好。</li>
-</ul>
-<p>在 <code>ES6</code> 中还有一些地方使用到了 <code>Symbol</code>。（这些特性还没有在 <code>FireFox</code> 中实现。）</p>
-<ul>
-<li>使 <code>instanceof</code> 可扩展。在 <code>ES6</code>中，<code>object instanceof constructor</code> 表达式被标准化为构造函数的一个方法：<code>constructor[Symbol.hasInstance](object)</code>，这意味着它是可扩展的。</li>
-<li>消除新特性和旧代码之间的冲突。</li>
-<li>支持新类型的字符串匹配。在 <code>ES5</code> 中，调用 <code>str.match(myObject)</code> 时，首先会尝试将 <code>myObject</code>转换为 <code>RegExp</code>对象。在 <code>ES6</code>中，首先将检查 <code>myObject</code>中是否有 <code>myObject[Symbol.match](str)</code> 方法，在所有正则表达式工作的地方都可以提供一个自定义的字符串解析方法。</li>
-</ul>
-<p>这些用途还比较窄，但仅仅通过我文章中的代码很难看到这些新特性产生的重大影响。JavaScript 的 Symbol 是 PHP 和 Python 中 __doubleUnderscores 的改进版本，标准组织将使用它来为语言添加新特性，而不会对已有代码产生影响。</p>
-<p><strong>案例</strong><br><em>一个布尔值引出的问题：</em><br>有时，把一些属于其他对象的数据暂存在另一个对象中是非常方便的。例如，假设你正在编写一个 <code>JS</code> 库，使用 <code>CSS</code> 中的 <code>transition</code> 来让一个 <code>DOM</code>元素在屏幕上飞奔，你已经知道不能同时将多个 <code>transition</code> 应用在同一个 <code>div</code>上，否则将使得动画非常不美观，你也确实有办法来解决这个问题，但是首先你需要知道该 <code>div</code>是否已经在移动中。</p>
-<p>怎么解决这个问题呢？</p>
-<p>其中一个方法是使用浏览器提供的 API 来探测元素是否处于动画状态，但杀鸡焉用牛刀，在将元素设置为移动时，你的库就知道了该元素正在移动。</p>
-<p>你真正需要的是一种机制来跟踪哪些元素正在移动，你可以将正在移动的元素保存在一个数组中，每次要为一个元素设置动画时，首先检查一下这个元素是否已经在这个列表中。</p>
-<p>啊哈，但是如果你的数组非常庞大，即便是这样的线性搜索也会产生性能问题。</p>
-<p>那么，你真正想做的就是直接在元素上设置一个标志：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (element.isMoving) &#123;</span><br><span class="line">  smoothAnimations(element);</span><br><span class="line">&#125;</span><br><span class="line">element.isMoving = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
-<p>这也有一些潜在的问题，不得不承认这样一个事实：还有其他代码也可能操作该 ODM 元素。</p>
-<ul>
-<li>在其他代码中，你创建的属性会被 for-in 或 Object.keys() 枚举出来；</li>
-<li>在其他一些库中也许已经使用了同样的方式（在元素上设置了相同的属性），那么这将和你的代码发生冲突，产生不可预计的结果；</li>
-<li>其他一些库可能在将来会使用同样的方式，这也会与你的代码发生冲突；</li>
-<li>标准委员会可能会为每个元素添加一个 .isMoving() 原生方法，那么你的代码就彻底不能工作了。</li>
-</ul>
-<p>当然，对于最后三个问题，你可以选择一个无意义的不会有人会使用到的字符串：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (element.__$jorendorff_animation_library$PLEASE_DO_NOT_USE_THIS_PROPERTY$isMoving__) &#123;</span><br><span class="line">  smoothAnimations(element);</span><br><span class="line">&#125;</span><br><span class="line">element.__$jorendorff_animation_library$PLEASE_DO_NOT_USE_THIS_PROPERTY$isMoving__ = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
-<p>这似乎太不靠谱了，看了让人眼睛痛。</p>
-<p>你还可以用加密算法来生成一个几乎唯一的字符串：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// get 1024 Unicode characters of gibberish</span></span><br><span class="line"><span class="keyword">var</span> isMoving = SecureRandom.generateName();</span><br><span class="line">...</span><br><span class="line"><span class="keyword">if</span> (element[isMoving]) &#123;</span><br><span class="line">  smoothAnimations(element);</span><br><span class="line">&#125;</span><br><span class="line">element[isMoving] = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
-<p><code>object[name]</code> 语法允许我们将任何字符串作为属性名，代码能正常工作，冲突几乎是不可能了，代码看起来也美观多了。<br>但是，这回导致糟糕的调试体验，每次使用 <code>console.log()</code> 打印出包含该属性的元素时，你回看到一个庞大的垃圾字符串，并且如果还不止一个这样的属性呢？每次刷新后属性名都发生了变化，怎么样使这些属性看起来更加直观呢？</p>
-<p>为什么这么难？我们只是为了保存一个小小的标志位。</p>
-<p><em>用 Symbol 来解决问题 </em></p>
-<p>Symbol 值可以由程序创建，并可以作为属性名，而且不用担心属性名冲突。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mySymbol = <span class="built_in">Symbol</span>();</span><br></pre></td></tr></table></figure>
-<p>调用 <code>Symbol()</code> 方法将创建一个新的 <code>Symbol</code> 类型的值，并且该值不与其它任何值相等。<br>与数字和字符串一样，<code>Symbol</code> 类型的值也可以作为对象的属性名，正是由于它不与任何其它值相等，对应的属性也不会发生冲突：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">obj[mySymbol] = <span class="string">"ok!"</span>;  <span class="comment">// guaranteed not to collide</span></span><br><span class="line"><span class="built_in">console</span>.log(obj[mySymbol]);  <span class="comment">// ok!</span></span><br></pre></td></tr></table></figure>
-<p>下面是使用 Symbol 来解决上面的问题：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// create a unique symbol</span></span><br><span class="line"><span class="keyword">var</span> isMoving = <span class="built_in">Symbol</span>(<span class="string">"isMoving"</span>);</span><br><span class="line">...</span><br><span class="line"><span class="keyword">if</span> (element[isMoving]) &#123;</span><br><span class="line">  smoothAnimations(element);</span><br><span class="line">&#125;</span><br><span class="line">element[isMoving] = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
-<p><em>上面代码需要注意几点：</em></p>
-<ul>
-<li>方法 <code>Symbol(&quot;isMoving&quot;)</code> 中的 <code>&quot;isMoving&quot;</code> 字符串被称为 <code>Symbol</code>的描述信息，这对调试非常有帮助。可以通过 <code>console.log(isMoving)</code> 打印出来，或通过 <code>isMoving.toString()</code> 将 <code>isMoving</code> 转换为字符串时，或在一些错误信息中显示出来。</li>
-<li><code>element[isMoving]</code> 访问的是 <code>symbol-keyed</code> 属性，除了属性名是 <code>Symbol</code> 类型的值之外，与其它属性都一样。</li>
-<li>和数组一样，<code>symbol-keyed</code> 属性不能通过 <code>.</code> 操作符来访问，必须使用方括号的方式。</li>
-<li>操作 <code>symbol-keyed</code> 属性也非常方便，通过上面代码我们已经知道如何获取和设置 <code>element[isMoving]</code> 的值，我们还可以这样使用：<code>if (isMoving in element)</code> 或 <code>delete element[isMoving]</code>。</li>
-<li>另一方面，只有在 <code>isMoving</code> 的作用域范围内才可以使用上述代码，这可以实现弱封装机制：在一个模块内创建一些<code>Symbol</code>，只有在该模块内部的对象才能使用，而不用担心与其它模块的代码发生冲突。</li>
-</ul>
-<p>由于 <code>Symbol</code> 的设计初衷是为了避免冲突，当遍历 <code>JavaScript</code>对象时，并不会枚举到以 <code>Symbol</code> 作为建的属性，比如，<code>for-in</code> 循环只会遍历到以字符串作为键的属性，<code>Object.keys(obj)</code> 和 <code>Object.getOwnPropertyNames(obj)</code> 也一样，但这并不意味着 <code>Symbol</code> 为键的属性是不可枚举的：使用 <code>Object.getOwnPropertySymbols(obj)</code> 这个新方法可以枚举出来，还有 <code>Reflect.ownKeys(obj)</code> 这个新方法可以返回对象中所有字符串和 <code>Symbol</code>键。</p>
-<p>库和框架的设计者将会发现很多 <code>Symbol</code> 的用途，<code>JavaScript</code>语言本身也对其有广泛的应用。</p>
-<p><strong>兼容性</strong><br>对于还没有原生支持 Symbol 的浏览器，你可以使用 polyfill，如 <a href="https://github.com/zloirock/core-js#ecmascript-6-symbols" target="_blank" rel="noopener">core.js</a>，但该 polyfill 实现并不完美，请阅读<a href="https://github.com/zloirock/core-js#caveats-when-using-symbol-polyfill" target="_blank" rel="noopener">注意事项</a>。</p>
-
+        <h4 id="UIView-的使用"><a href="#UIView-的使用" class="headerlink" title="UIView 的使用"></a>UIView 的使用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line">//    UIWindow *aWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] ;</span><br><span class="line">//    self.window = aWindow ;</span><br><span class="line">//    [aWindow release] ;</span><br><span class="line"></span><br><span class="line">//  效果等同上述代码</span><br><span class="line">//    当应用程序加载完成后，创建一个跟屏幕尺寸一样大的window对象</span><br><span class="line">    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// Override point for customization after application launch.</span><br><span class="line">//    修改window的背景颜色为指定颜色</span><br><span class="line">    self.window.backgroundColor = [UIColor purpleColor];</span><br><span class="line"></span><br><span class="line">//    makeKeyAndVisible方法可以让window对象成为主窗口对象，并且显示在屏幕上。</span><br><span class="line">    [self.window makeKeyAndVisible];</span><br><span class="line"></span><br><span class="line">    UIView *aView = [[UIView alloc] initWithFrame:CGRectMake(30, 30, 100, 100)] ;</span><br><span class="line">    [self.window addSubview:aView] ;</span><br><span class="line">    [aView release] ;</span><br><span class="line">    //UIView对象的背景颜色默认是透明的clearColor</span><br><span class="line">    aView.backgroundColor = [UIColor cyanColor] ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    UIView *yellowView = [[UIView alloc] initWithFrame:CGRectMake(25, 25, 100, 100)] ;</span><br><span class="line">    [aView addSubview:yellowView] ;</span><br><span class="line">    [yellowView release] ;</span><br><span class="line">    yellowView.backgroundColor = [UIColor yellowColor] ;</span><br><span class="line"></span><br><span class="line">    UIView *blueView = [[UIView alloc] initWithFrame:CGRectMake(25, 25, 100, 100)] ;</span><br><span class="line">    [yellowView addSubview:blueView] ;</span><br><span class="line">    [blueView release] ;</span><br><span class="line">    blueView.backgroundColor = [UIColor blueColor] ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    NSLog( @&quot;%@&quot;, NSStringFromCGRect(self.window.bounds) ) ;</span><br><span class="line">    // iPhone 6 Plus 的分辨率 1920 * 1080 （414 * 736）</span><br><span class="line">    //frame 中的大小其实是屏幕上物理像素点的个数，视图对象根据给定的物理像素点的个数以及起始位置、颜色信息来确定视图的范围和要显示的颜色。</span><br><span class="line"></span><br><span class="line">    UIView *anView = [[UIView alloc] initWithFrame:CGRectMake(50, 50, 300, 300)];</span><br><span class="line"></span><br><span class="line">    anView.backgroundColor = [UIColor redColor] ;</span><br><span class="line">    [self.window addSubview:anView] ;</span><br><span class="line">    [anView release] ;</span><br><span class="line">    //视图创建并添加在父视图上时，打印 center 属性的值；</span><br><span class="line">    NSLog( @&quot;%@&quot;, NSStringFromCGPoint(anView.center) ) ;</span><br><span class="line">    //通过修改视图的 center 属性来改变视图的起始点</span><br><span class="line">//  anView.center = CGPointMake(200, 200) ;</span><br><span class="line">    anView.center = self.window.center ;</span><br><span class="line">    //frame 属性是指该视图在其父视图产生的坐标系中的起始点和大小；</span><br><span class="line">//    anView.frame = CGRectMake(60, 80, 100, 120) ;</span><br><span class="line">    //影响视图的 center 属性的原因有，视图的起始点发生改变和视图的大小发生改变；</span><br><span class="line">    NSLog( @&quot;%@&quot;, NSStringFromCGPoint(anView.center) ) ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    UIView *bView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)] ;</span><br><span class="line">    bView.backgroundColor = [UIColor orangeColor] ;</span><br><span class="line">    bView.center = anView.center ;</span><br><span class="line">    [anView addSubview:bView] ;</span><br><span class="line">    [bView release] ;</span><br><span class="line">//   </span><br><span class="line">    anView.bounds = CGRectMake(20, -20, 300, 300) ;</span><br><span class="line"></span><br><span class="line">    NSLog( @&quot;%@&quot;, NSStringFromCGRect(anView.frame) ) ;</span><br><span class="line">    //与 frame 不同的是 bounds 描述的是一个视图在自身坐标系中的起始点和大小，起始点默认与坐标系原点重合，为 （0，0），而 frame 描述的是视图在其父视图中的起始点和大小。</span><br><span class="line">    NSLog( @&quot;%@&quot;, NSStringFromCGRect(bView.bounds) ) ;</span><br><span class="line">    //bounds 是可一个被修改的，修改 bounds 的起始点会导致当前视图产生的坐标系原点发生改变。</span><br><span class="line">    //视图显示的位置是依赖于自身的 frame 的，修改 bounds 的起始点不会影响到 frame 的起始点，所以看到的视图并没有发生位移。</span><br><span class="line">    //当我们把一个视图的 bounds 起始点改成（+，+）时，自身坐标系原点将向左上角移动对应大小。</span><br><span class="line">    //当我们把一个视图的 bounds 起始点改成（-，-）时，自身坐标系原点将向右下角移动对应大小。</span><br><span class="line">    //当我们把一个视图的 bounds 起始点改成（-, +）时，自身坐标系原点将向右移动对应大小。</span><br><span class="line">    //当我们把一个视图的 bounds 起始点改成（+, -）时，自身坐标系原点将向左移动对应大小。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    UIView *greenView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 120, 120)] ;</span><br><span class="line">    greenView.backgroundColor = [UIColor greenColor] ;</span><br><span class="line">    //一个视图的子视图是按照添加时间以下标为序的，我们可以通过下面的方法改变视图层级。</span><br><span class="line">//    [anView insertSubview:greenView atIndex:0] ;</span><br><span class="line">    //将一个子视图插入到已经存在的子视图的上方。</span><br><span class="line">//    [anView insertSubview:greenView aboveSubview:bView] ;</span><br><span class="line">    //将一个子视图插入到已经存在的子视图的下方。</span><br><span class="line">    [anView insertSubview:greenView belowSubview:bView] ;</span><br><span class="line">    [greenView release] ;</span><br><span class="line"></span><br><span class="line">    //管理视图层级</span><br><span class="line">    //将一个视图移动到视图层级的最上层。</span><br><span class="line">    [anView bringSubviewToFront:greenView] ;</span><br><span class="line">    //将一个视图移动到视图层级的最下层。</span><br><span class="line">    [anView sendSubviewToBack:greenView] ;</span><br><span class="line">    //一个子视图调用 removeFromSuperview 方法，把自己从父视图中移除。</span><br><span class="line">    [greenView removeFromSuperview] ;</span><br><span class="line"></span><br><span class="line">    //一旦一个视图被添加显示以后，它的 superview 属性就可以获取到它的父视图。</span><br><span class="line">    NSLog( @&quot;%@&quot;, [anView superview] ) ;</span><br><span class="line">    NSLog( @&quot;%@&quot;, [bView superview] ) ;</span><br><span class="line">    //视图是通过 subviews 数组来管理其子视图们的。</span><br><span class="line">    NSLog( @&quot;%@&quot;, [anView subviews] ) ;</span><br><span class="line"></span><br><span class="line">    // hidden 是一个视图的显隐属性，默认为NO ，表示不隐藏，如果一个视图的 hidden 属性设置为 YES，其子视图也将被隐藏。</span><br><span class="line">//    anView.hidden = YES ;</span><br><span class="line">    // alpha 是一个视图的不透明度，范围在 0~1，默认为1，表示完全不透明。</span><br><span class="line">    anView.alpha = 0.8 ;</span><br><span class="line"></span><br><span class="line">    anView.tag = 100 ;</span><br><span class="line"></span><br><span class="line">    UIView *getView = [self.window viewWithTag:100] ;</span><br><span class="line">    NSLog( @&quot;%@&quot;, getView ) ;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -483,7 +397,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/es6/" rel="tag"># es6</a>
+            <a href="/tags/ios/" rel="tag"># ios</a>
           
         </div>
       
@@ -496,8 +410,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/01/mo-ban-zi-fu-chuan/" rel="next" title="模板字符串">
-                <i class="fa fa-chevron-left"></i> 模板字符串
+              <a href="/2017/12/28/iOS中事件的产生和传递/" rel="next" title="iOS中事件的产生和传递">
+                <i class="fa fa-chevron-left"></i> iOS中事件的产生和传递
               </a>
             
           </div>
@@ -506,8 +420,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/01/class/" rel="prev" title="class详解">
-                class详解 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/30/for...of/" rel="prev" title="for-of详解">
+                for-of详解 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -662,7 +576,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#深入解析-ES6：Symbol"><span class="nav-number">1.</span> <span class="nav-text">深入解析 ES6：Symbol</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#UIView-的使用"><span class="nav-number">1.</span> <span class="nav-text">UIView 的使用</span></a></li></ol></div>
             
 
           </div>
