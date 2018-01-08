@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ios,UIView," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="`UITableView`堪称`UIKit`里面最复杂的一个控件了，同时也是最常用的控件，使用起来不算难，但是要用好并不容易。当使用的时候我们必须要考虑到后台数据的设计，`tableViewCell`的设计和重用以及`tableView`的效率等问题">
+<meta name="keywords" content="ios,UIView">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UITableView详解">
+<meta property="og:url" content="http://yoursite.com/2017/12/30/UITableView详解/index.html">
+<meta property="og:site_name" content="Rz">
+<meta property="og:description" content="`UITableView`堪称`UIKit`里面最复杂的一个控件了，同时也是最常用的控件，使用起来不算难，但是要用好并不容易。当使用的时候我们必须要考虑到后台数据的设计，`tableViewCell`的设计和重用以及`tableView`的效率等问题">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/assets/QQ20151103-2@2x.png">
+<meta property="og:image" content="http://yoursite.com/assets/QQ20151103-3@2x.png">
+<meta property="og:image" content="http://yoursite.com/assets/2012062819321126.png">
+<meta property="og:image" content="http://yoursite.com/assets/2012062819324942.png">
+<meta property="og:image" content="http://yoursite.com/assets/2012062819375133.png">
+<meta property="og:updated_time" content="2018-01-08T06:05:35.339Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UITableView详解">
+<meta name="twitter:description" content="`UITableView`堪称`UIKit`里面最复杂的一个控件了，同时也是最常用的控件，使用起来不算难，但是要用好并不容易。当使用的时候我们必须要考虑到后台数据的设计，`tableViewCell`的设计和重用以及`tableView`的效率等问题">
+<meta name="twitter:image" content="http://yoursite.com/assets/QQ20151103-2@2x.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/30/UITableView详解/"/>
+
+
+
+
+
+  <title>UITableView详解 | Rz</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Rz</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-ios" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/30/UITableView详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rz">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">UITableView详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-30T13:28:29+08:00">
+                2017-12-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ios/" itemprop="url" rel="index">
+                    <span itemprop="name">ios</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  `UITableView`堪称`UIKit`里面最复杂的一个控件了，同时也是最常用的控件，使用起来不算难，但是要用好并不容易。当使用的时候我们必须要考虑到后台数据的设计，`tableViewCell`的设计和重用以及`tableView`的效率等问题
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="UITableView详解"><a href="#UITableView详解" class="headerlink" title="UITableView详解"></a>UITableView详解</h3><h5 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h5><p><code>UITableView</code>堪称<code>UIKit</code>里面最复杂的一个控件了，同时也是最常用的控件，使用起来不算难，但是要用好并不容易。当使用的时候我们必须要考虑到后台数据的设计，<code>tableViewCell</code>的设计和重用以及<code>tableView</code>的效率等问题。</p>
+<p><code>UITableView</code>只能有一列数据(cell)，且只支持纵向滑动，当创建好的<code>tablView</code>第一次显示的时候，我们需要调用其<code>reloadData</code>方法，强制刷新一次，从而使<code>tableView</code>的数据更新到最新状态。</p>
+<p>UITableView使用时常遇到的问题大致如下：</p>
+<ul>
+<li>顶层设计<ul>
+<li>TableView的类型选择</li>
+<li>Section的设置，合适分组，如何分组等问题</li>
+<li>Cell的使用，是否自定义？是否使用xib？等等</li>
+<li>Cell填充问题，一般应遵循重用、解耦原则。</li>
+</ul>
+</li>
+<li>重用问题<ul>
+<li>UITableViewCell重用</li>
+<li>UITableViewHeaderFooterView重用</li>
+</ul>
+</li>
+<li>协议方法<ul>
+<li>Delegate与DataSource代理方法的含义、实现  </li>
+</ul>
+</li>
+<li>UI问题<ul>
+<li>分割线</li>
+<li>Cell自定义</li>
+<li>默认选中某个Cell</li>
+</ul>
+</li>
+</ul>
+<h4 id="NSIndexPath"><a href="#NSIndexPath" class="headerlink" title="NSIndexPath"></a><code>NSIndexPath</code></h4><p>提到UITableView，就必须的说一说NSIndexPath。UITableView声明了一个NSIndexPath的类别，主要用来标识当前cell的在tableView中的位置，该类别有section和row两个属性，前者标识当前cell处于第几个section中，后者代表在该section中的第几行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 源码来源于UIKit-&gt;UITableView.h</span><br><span class="line"></span><br><span class="line">// This category provides convenience methods to make it easier to use an NSIndexPath to represent a section and row</span><br><span class="line">@interface NSIndexPath (UITableView)</span><br><span class="line"></span><br><span class="line">+(instancetype)indexPathForRow:(NSInteger)row inSection:(NSInteger)section;</span><br><span class="line">@property (nonatomic, readonly) NSInteger section;</span><br><span class="line">@property (nonatomic, readonly) NSInteger row;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h4 id="UITableViewRowAction"><a href="#UITableViewRowAction" class="headerlink" title="UITableViewRowAction"></a><code>UITableViewRowAction</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// 源码来源于UIKit-&gt;UITableView.h</span><br><span class="line"></span><br><span class="line">NS_CLASS_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED </span><br><span class="line"></span><br><span class="line">@interface UITableViewRowAction : NSObject &lt;NSCopying&gt;</span><br><span class="line"></span><br><span class="line">+ (instancetype)rowActionWithStyle:(UITableViewRowActionStyle)style title:(nullable NSString *)title handler:(void (^)(UITableViewRowAction *action, NSIndexPath *indexPath))handler;</span><br><span class="line"></span><br><span class="line">@property (nonatomic, readonly) UITableViewRowActionStyle style;</span><br><span class="line">@property (nonatomic, copy, nullable) NSString *title;</span><br><span class="line">@property (nonatomic, copy, nullable) UIColor *backgroundColor; // default background color is dependent on style</span><br><span class="line">@property (nonatomic, copy, nullable) UIVisualEffect* backgroundEffect;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">#ifndef SDK_HIDE_TIDE</span><br><span class="line">NS_CLASS_AVAILABLE_IOS(9_0) </span><br><span class="line"></span><br><span class="line">@interface UITableViewFocusUpdateContext : UIFocusUpdateContext</span><br><span class="line"></span><br><span class="line">@property (nonatomic, strong, readonly, nullable) NSIndexPath *previouslyFocusedIndexPath;</span><br><span class="line">@property (nonatomic, strong, readonly, nullable) NSIndexPath *nextFocusedIndexPath;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+<h4 id="一些枚举值"><a href="#一些枚举值" class="headerlink" title="一些枚举值"></a>一些枚举值</h4><p><code>UITableViewCellAccessoryType</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSInteger, UITableViewCellAccessoryType) &#123;</span><br><span class="line">    UITableViewCellAccessoryNone,                   // 不显示任何图标</span><br><span class="line">    UITableViewCellAccessoryDisclosureIndicator,    // 跳转指示图标</span><br><span class="line">    UITableViewCellAccessoryDetailDisclosureButton, // 内容详情图标和跳转指示图标</span><br><span class="line">    UITableViewCellAccessoryCheckmark,              // 勾选图标</span><br><span class="line">    UITableViewCellAccessoryDetailButton NS_ENUM_AVAILABLE_IOS(7_0) // 内容详情图标</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>UITableViewCellAccessoryType</code>根据其<code>Index</code>对应的效果图见下图。<br><img src="/assets/QQ20151103-2@2x.png" alt=""></p>
+<p>用户还可以通过UITableViewCell的accessoryView（UIView）自定义一个UIView视图。<br><code>UITableViewCellStyle</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSInteger, UITableViewCellStyle) &#123;</span><br><span class="line">    UITableViewCellStyleDefault,    // 左侧显示textLabel（不显示detailTextLabel），imageView可选（显示在最左边）</span><br><span class="line">    UITableViewCellStyleValue1,     // 左侧显示textLabel、右侧显示detailTextLabel（默认蓝色），imageView可选（显示在最左边）</span><br><span class="line">    UITableViewCellStyleValue2,     // 左侧依次显示textLabel(默认蓝色)和detailTextLabel，imageView可选（显示在最左边）</span><br><span class="line">    UITableViewCellStyleSubtitle    // 左上方显示textLabel，左下方显示detailTextLabel（默认灰色）,imageView可选（显示在最左边）</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>UITableViewCellStyle</code>索引对应下图由上往下的次序的效果。<br><img src="/assets/QQ20151103-3@2x.png" alt=""></p>
+<p><strong><code>UITableViewCellEditingStyle</code></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSInteger, UITableViewCellEditingStyle) &#123;</span><br><span class="line">  UITableViewCellEditingStyleNone, // 无</span><br><span class="line">  UITableViewCellEditingStyleDelete, // “-”号效果</span><br><span class="line">  UITableViewCellEditingStyleInsert // “+”号效果</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h4 id="其它枚举"><a href="#其它枚举" class="headerlink" title="其它枚举"></a>其它枚举</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">// 源码来源于UIKit-&gt;UITableView.h</span><br><span class="line"></span><br><span class="line">typedef NS_ENUM(NSInteger, UITableViewStyle) &#123;</span><br><span class="line">    UITableViewStylePlain,          // regular table view</span><br><span class="line">    UITableViewStyleGrouped         // preferences style table view</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">typedef NS_ENUM(NSInteger, UITableViewScrollPosition) &#123;</span><br><span class="line">    UITableViewScrollPositionNone,</span><br><span class="line">    UITableViewScrollPositionTop,    </span><br><span class="line">    UITableViewScrollPositionMiddle,   </span><br><span class="line">    UITableViewScrollPositionBottom</span><br><span class="line">&#125;;                // scroll so row of interest is completely visible at top/center/bottom of view</span><br><span class="line"></span><br><span class="line">typedef NS_ENUM(NSInteger, UITableViewRowAnimation) &#123;</span><br><span class="line">    UITableViewRowAnimationFade,</span><br><span class="line">    UITableViewRowAnimationRight,           // slide in from right (or out to right)</span><br><span class="line">    UITableViewRowAnimationLeft,</span><br><span class="line">    UITableViewRowAnimationTop,</span><br><span class="line">    UITableViewRowAnimationBottom,</span><br><span class="line">    UITableViewRowAnimationNone,            // available in iOS 3.0</span><br><span class="line">    UITableViewRowAnimationMiddle,          // available in iOS 3.2.  attempts to keep cell centered in the space it will/did occupy</span><br><span class="line">    UITableViewRowAnimationAutomatic = 100  // available in iOS 5.0.  chooses an appropriate animation style for you</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// Including this constant string in the array of strings returned by sectionIndexTitlesForTableView: will cause a magnifying glass icon to be displayed at that location in the index.</span><br><span class="line">// This should generally only be used as the first title in the index.</span><br><span class="line">UIKIT_EXTERN NSString *const UITableViewIndexSearch NS_AVAILABLE_IOS(3_0) __TVOS_PROHIBITED;</span><br><span class="line"></span><br><span class="line">// Returning this value from tableView:heightForHeaderInSection: or tableView:heightForFooterInSection: results in a height that fits the value returned from</span><br><span class="line">// tableView:titleForHeaderInSection: or tableView:titleForFooterInSection: if the title is not nil.</span><br><span class="line">UIKIT_EXTERN const CGFloat UITableViewAutomaticDimension NS_AVAILABLE_IOS(5_0);</span><br><span class="line"></span><br><span class="line">typedef NS_ENUM(NSInteger, UITableViewRowActionStyle) &#123;</span><br><span class="line">    UITableViewRowActionStyleDefault = 0,</span><br><span class="line">    UITableViewRowActionStyleDestructive = UITableViewRowActionStyleDefault,</span><br><span class="line">    UITableViewRowActionStyleNormal</span><br><span class="line">&#125; NS_ENUM_AVAILABLE_IOS(8_0) __TVOS_PROHIBITED;</span><br></pre></td></tr></table></figure>
+<h4 id="DateSource——数据源"><a href="#DateSource——数据源" class="headerlink" title="DateSource——数据源"></a>DateSource——数据源</h4><p>主要为UITableView提供数据供UITableViewCell显示时调用。当指定UITableViewCell支持编辑操作(insert、delete、move、reordering等)时，需在操作时同时操作数据源（DataSource），否则将可能导致crash。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Configuring a Table View</span><br><span class="line">- tableView:cellForRowAtIndexPath:</span><br><span class="line"> Required</span><br><span class="line">- numberOfSectionsInTableView:</span><br><span class="line">- tableView:numberOfRowsInSection:</span><br><span class="line"> Required</span><br><span class="line">- sectionIndexTitlesForTableView:</span><br><span class="line">- tableView:sectionForSectionIndexTitle:atIndex:</span><br><span class="line">- tableView:titleForHeaderInSection:</span><br><span class="line">- tableView:titleForFooterInSection:</span><br><span class="line">Inserting or Deleting Table Rows</span><br><span class="line">- tableView:commitEditingStyle:forRowAtIndexPath:</span><br><span class="line">- tableView:canEditRowAtIndexPath:</span><br><span class="line">Reordering Table Rows</span><br><span class="line">- tableView:canMoveRowAtIndexPath:</span><br><span class="line">- tableView:moveRowAtIndexPath:toIndexPath:</span><br></pre></td></tr></table></figure>
+<h4 id="Delegate——代理"><a href="#Delegate——代理" class="headerlink" title="Delegate——代理"></a>Delegate——代理</h4><p>主要提供一些可选的方法，用来控制UITableViewCell的选择、指定section的头和尾的显示以及协助完成cell的删除和排序等功能。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">Configuring Rows for the Table View</span><br><span class="line">- tableView:heightForRowAtIndexPath:</span><br><span class="line">- tableView:estimatedHeightForRowAtIndexPath:</span><br><span class="line">- tableView:indentationLevelForRowAtIndexPath:</span><br><span class="line">- tableView:willDisplayCell:forRowAtIndexPath:</span><br><span class="line">Managing Accessory Views</span><br><span class="line">- tableView:editActionsForRowAtIndexPath:</span><br><span class="line">- tableView:accessoryTypeForRowWithIndexPath:</span><br><span class="line"> (iOS 3.0)</span><br><span class="line">- tableView:accessoryButtonTappedForRowWithIndexPath:</span><br><span class="line">Managing Selections</span><br><span class="line">- tableView:willSelectRowAtIndexPath:</span><br><span class="line">- tableView:didSelectRowAtIndexPath:</span><br><span class="line">- tableView:willDeselectRowAtIndexPath:</span><br><span class="line">- tableView:didDeselectRowAtIndexPath:</span><br><span class="line">Modifying the Header and Footer of Sections</span><br><span class="line">- tableView:viewForHeaderInSection:</span><br><span class="line">- tableView:viewForFooterInSection:</span><br><span class="line">- tableView:heightForHeaderInSection:</span><br><span class="line">- tableView:estimatedHeightForHeaderInSection:</span><br><span class="line">- tableView:heightForFooterInSection:</span><br><span class="line">- tableView:estimatedHeightForFooterInSection:</span><br><span class="line">- tableView:willDisplayHeaderView:forSection:</span><br><span class="line">- tableView:willDisplayFooterView:forSection:</span><br><span class="line">Editing Table Rows</span><br><span class="line">- tableView:willBeginEditingRowAtIndexPath:</span><br><span class="line">- tableView:didEndEditingRowAtIndexPath:</span><br><span class="line">- tableView:editingStyleForRowAtIndexPath:</span><br><span class="line">- tableView:titleForDeleteConfirmationButtonForRowAtIndexPath:</span><br><span class="line">- tableView:shouldIndentWhileEditingRowAtIndexPath:</span><br><span class="line">Reordering Table Rows</span><br><span class="line">- tableView:targetIndexPathForMoveFromRowAtIndexPath:toProposedIndexPath:</span><br><span class="line">Tracking the Removal of Views</span><br><span class="line">- tableView:didEndDisplayingCell:forRowAtIndexPath:</span><br><span class="line">- tableView:didEndDisplayingHeaderView:forSection:</span><br><span class="line">- tableView:didEndDisplayingFooterView:forSection:</span><br><span class="line">Copying and Pasting Row Content</span><br><span class="line">- tableView:shouldShowMenuForRowAtIndexPath:</span><br><span class="line">- tableView:canPerformAction:forRowAtIndexPath:withSender:</span><br><span class="line">- tableView:performAction:forRowAtIndexPath:withSender:</span><br><span class="line">Managing Table View Highlighting</span><br><span class="line">- tableView:shouldHighlightRowAtIndexPath:</span><br><span class="line">- tableView:didHighlightRowAtIndexPath:</span><br><span class="line">- tableView:didUnhighlightRowAtIndexPath:</span><br><span class="line">Managing Table View Focus</span><br><span class="line">- tableView:canFocusRowAtIndexPath:</span><br><span class="line">- tableView:shouldUpdateFocusInContext:</span><br><span class="line">- tableView:didUpdateFocusInContext:withAnimationCoordinator:</span><br><span class="line">- indexPathForPreferredFocusedViewInTableView:</span><br><span class="line"></span><br><span class="line">UIKIT_EXTERN NSString *const UITableViewSelectionDidChangeNotification;</span><br></pre></td></tr></table></figure>
+<h4 id="UITableViewCell"><a href="#UITableViewCell" class="headerlink" title="UITableViewCell"></a><code>UITableViewCell</code></h4><p><code>UITableViewCell</code>的所有<code>subView</code>都应该加载<code>contentView</code>上面，以免在编辑时出现UI错误。</p>
+<h4 id="Edit"><a href="#Edit" class="headerlink" title="Edit"></a><code>Edit</code></h4><p>通过从UITableViewCell中派生一个类，可以更深度的定制一个cell，可以指定cell在进入edit模式的时候如何相应等等。最简单的实现方式就是将所有要绘制的内容放到一个定制的subView中，并且重载该subView的drawRect方法直接把要显示的内容绘制出来(这样可以避免subView过多导致的性能瓶颈)，最后再将该subView添加到cell派生类中的contentView中即可。但是这样定制的cell需要注意在数据改变的时候，通过手动调用该subView的setNeedDisplay方法来刷新界面，这个例子可以在苹果的帮助文档中的TableViewSuite工程中找到，这儿就不举例了。</p>
+<p>观看这两种定制cell的方法，我们会发现subView都是添加在cell的contentView上面的，而不是直接加到cell上面，这样写也是有原因的。下面我们看一下cell在正常状态下和编辑状态下的构成图：</p>
+<blockquote>
+<p>用户可自定义Cell的editingAccessoryView属性，以实现编辑状态下的自定义效果。</p>
+</blockquote>
+<p><img src="/assets/2012062819321126.png" alt=""></p>
+<p>进入编辑状态下cell的构成图如下：<br><img src="/assets/2012062819324942.png" alt=""></p>
+<p>通过观察上面两幅图片我们可以看出来，当cell在进入编辑状态的时候，contentView会自动的缩放来给Editing control腾出位置。这也就是说如果我们把subView添加到contentView上，如果设置autoresizingMask为更具父view自动缩放的话，cell默认的机制会帮我们处理进入编辑状态的情况。而且在tableView是Grouped样式的时候，会为cell设置一个背景色，如果我们直接添加在cell上面的话，就需要自己考虑到这个背景色的显示问题，如果添加到contentView上，则可以通过view的叠加帮助我们完成该任务。综上，subView最好还是添加到cell的contentView中。</p>
+<h4 id="ReOrdering"><a href="#ReOrdering" class="headerlink" title="ReOrdering"></a><code>ReOrdering</code></h4><p>为了使<code>UITableVeiew</code>进入<code>edit</code>模式以后，如果该<code>cell</code>支持<code>reordering</code>的话，<code>reordering</code>控件就会临时的把<code>accessaryView</code>覆盖掉。为了显示<code>reordering</code>控件，我们必须将<code>cell</code>的<code>showsReorderControl</code>属性设置成<code>YES</code>，同时实现<code>dataSource</code>中的<code>tableView:moveRowAtIndexPath:toIndexPath:</code>方法。我们还可以同时通过实现<code>dataSource</code>中的 <code>tableView:canMoveRowAtIndexPath:</code>返回<code>NO</code>，来禁用某一些<code>cell</code>的<code>reordering</code>功能。</p>
+<p>下面看苹果官方的一个reordering流程图：<br><img src="/assets/2012062819375133.png" alt=""></p>
+<p>上图中当<code>tableView</code>进入到<code>edit</code>模式的时候，<code>tableView</code>会去对当前可见的<code>cell</code>逐个调用<code>dataSource</code>的<code>tableView:canMoveRowAtIndexPath:</code>方法(此处官方给出的流程图有点儿问题)，决定当前<code>cell</code>是否显示<code>reoedering</code>控件，当开始进入拖动<code>cell</code>进行拖动的时候，每滑动过一个<code>cell</code>的时候，会去掉用<code>delegate</code>的<code>tableView:targetIndexPathForMoveFromRowAtIndexPath:toProposedIndexPath:</code>方法，去判断当前划过的<code>cell</code>位置是否可以被替换，如果不行则给出建议的位置。当用户放手时本次<code>reordering</code>操作结束，调用<code>dataSource</code>中的<code>tableView:moveRowAtIndexPath:toIndexPath:</code>方法更新<code>tableView</code>对应的数据。</p>
+<p>此处给个我写demo中的更新数据的小例子：</p>
+<p><code>EditTableViewController.h</code> 文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line"></span><br><span class="line">@interface EditTableViewController : UITableViewController</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p><code>EditTableViewController.m</code> 文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;EditTableViewController.h&quot;</span><br><span class="line"></span><br><span class="line">@interface EditTableViewController ()</span><br><span class="line">@property (nonatomic, strong) NSMutableArray *dataSource;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation EditTableViewController</span><br><span class="line"></span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    // Uncomment the following line to preserve selection between presentations.</span><br><span class="line">    // self.clearsSelectionOnViewWillAppear = NO;</span><br><span class="line">    </span><br><span class="line">    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.</span><br><span class="line">     self.navigationItem.rightBarButtonItem = self.editButtonItem;</span><br><span class="line">    self.title = @&quot;编辑TableView&quot;;</span><br><span class="line">    [self prepareItems];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)didReceiveMemoryWarning &#123;</span><br><span class="line">    [super didReceiveMemoryWarning];</span><br><span class="line">    // Dispose of any resources that can be recreated.</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - Private Functions</span><br><span class="line">- (void)prepareItems&#123;</span><br><span class="line">    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@&quot;关闭&quot; style:UIBarButtonItemStylePlain target:self action:@selector(dismissSelf)];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)dismissSelf&#123;</span><br><span class="line">    [self.navigationController dismissViewControllerAnimated:YES completion:nil];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (id)deleteObjectWithNSIndexPath:(NSIndexPath *)indexPath&#123;</span><br><span class="line">    NSMutableArray *array = self.dataSource[indexPath.section];</span><br><span class="line">    id obj = [array objectAtIndex:indexPath.row];</span><br><span class="line">    [array removeObjectAtIndex:indexPath.row];</span><br><span class="line">    return obj;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)insertObject:(NSString *)object inDataSourceAtNSIndexPath:(NSIndexPath *)indexPath&#123;</span><br><span class="line">    NSMutableArray *array = self.dataSource[indexPath.section];</span><br><span class="line">    [array insertObject:object atIndex:indexPath.row];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - Table view data source</span><br><span class="line"></span><br><span class="line">- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView &#123;</span><br><span class="line">    return self.dataSource.count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section &#123;</span><br><span class="line">    return ((NSMutableArray*)self.dataSource[section]).count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@&quot;zxw&quot;];</span><br><span class="line">    if (!cell) &#123;</span><br><span class="line">        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@&quot;zxw&quot;];</span><br><span class="line">    &#125;</span><br><span class="line">    if (indexPath.section &lt; self.dataSource.count) &#123;</span><br><span class="line">        NSArray *array = self.dataSource[indexPath.section];</span><br><span class="line">        if (indexPath.row &lt; array.count) &#123;</span><br><span class="line">            cell.textLabel.text = self.dataSource[indexPath.section][indexPath.row];</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            NSLog(@&quot;row越界%ld&quot;,(long)indexPath.row);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        NSLog(@&quot;section越界:%ld&quot;,(long)indexPath.section);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return cell;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section&#123;</span><br><span class="line">    return 40.0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section&#123;</span><br><span class="line">    return 35.0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section&#123;</span><br><span class="line">    return @&quot;开始&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section&#123;</span><br><span class="line">    return @&quot;结束&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 某个Cell是否可以编辑</span><br><span class="line">- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 返回Cell的编辑状态</span><br><span class="line">- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath&#123;</span><br><span class="line">    return indexPath.row % 3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Override to support editing the table view.</span><br><span class="line">- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    if (editingStyle == UITableViewCellEditingStyleDelete) &#123;</span><br><span class="line">        // 1. 删除数据</span><br><span class="line">        // 2. 删除Cell</span><br><span class="line">        [self deleteObjectWithNSIndexPath:indexPath];</span><br><span class="line">        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];</span><br><span class="line">    &#125; else if (editingStyle == UITableViewCellEditingStyleInsert) &#123;</span><br><span class="line">        // 1. 插入数据</span><br><span class="line">        // 2. 插入Cell</span><br><span class="line">        [self insertObject:@&quot;插入的Cell&quot; inDataSourceAtNSIndexPath:indexPath];</span><br><span class="line">        [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Override to support rearranging the table view.</span><br><span class="line">// 移动Cell时调用该方法</span><br><span class="line">- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath &#123;</span><br><span class="line">    /**</span><br><span class="line">     if(section不变)&#123;</span><br><span class="line">        if(row发生变化)&#123;</span><br><span class="line">            直接交换元素</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;else&#123;</span><br><span class="line">        // 1 取出fromIndexPath位置的数据</span><br><span class="line">        // 2 删除fromeIndexPath的数据</span><br><span class="line">        // 3 将存起来的数据插入到toIndexPath的位置</span><br><span class="line">     &#125;</span><br><span class="line">     */</span><br><span class="line">    if (fromIndexPath.section == toIndexPath.section) &#123;</span><br><span class="line">        if (fromIndexPath.row != toIndexPath.row) &#123;</span><br><span class="line">            NSMutableArray *array = self.dataSource[fromIndexPath.section];</span><br><span class="line">            [array exchangeObjectAtIndex:fromIndexPath.row withObjectAtIndex:toIndexPath.row];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        NSString *str = [self deleteObjectWithNSIndexPath:fromIndexPath];</span><br><span class="line">        [self insertObject:str inDataSourceAtNSIndexPath:toIndexPath];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// Override to support conditional rearranging of the table view.</span><br><span class="line">// 某个Cell是否可以移动</span><br><span class="line">- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    // Return NO if you do not want the item to be re-orderable.</span><br><span class="line">    return indexPath.row % 2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">#pragma mark - Navigation</span><br><span class="line"></span><br><span class="line">// In a storyboard-based application, you will often want to do a little preparation before navigation</span><br><span class="line">- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender &#123;</span><br><span class="line">    // Get the new view controller using [segue destinationViewController].</span><br><span class="line">    // Pass the selected object to the new view controller.</span><br><span class="line">&#125;</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">#pragma mark - Getter</span><br><span class="line">- (NSMutableArray *)dataSource&#123;</span><br><span class="line">    if (!_dataSource) &#123;</span><br><span class="line">        _dataSource = @[].mutableCopy;</span><br><span class="line">        for (NSInteger i = 0; i &lt; 5; i++) &#123;</span><br><span class="line">            NSMutableArray *array = @[].mutableCopy;</span><br><span class="line">            for (NSInteger j = 0; j &lt; 5; j++) &#123;</span><br><span class="line">                [array addObject:[NSString stringWithFormat:@&quot;第%ld组，Row:%ld&quot;,i ,(long)j]];</span><br><span class="line">            &#125;</span><br><span class="line">            [_dataSource addObject:array];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return _dataSource;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面代码中首先拿到源<code>cell</code>所处的<code>section</code>，然后从该<code>section</code>对应的数据中移除，然后拿到目标<code>section</code>的数据，然后将源<code>cell</code>的数据添加到目标<code>section</code>中，并更新回数据模型，如果我们没有正确更新数据模型的话，显示的内容将会出现异常。</p>
+<h4 id="UITableViewCell-h"><a href="#UITableViewCell-h" class="headerlink" title="UITableViewCell.h"></a><code>UITableViewCell.h</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line">// 源码来源于UIKit-&gt;UITableViewCell.h</span><br><span class="line"></span><br><span class="line">S_ASSUME_NONNULL_BEGIN</span><br><span class="line"></span><br><span class="line">@class UIImage, UIColor, UILabel, UIImageView, UIButton, UITextField, UITableView, UILongPressGestureRecognizer;</span><br><span class="line"></span><br><span class="line">typedef NS_ENUM(NSInteger, UITableViewCellStyle) &#123;</span><br><span class="line">    UITableViewCellStyleDefault,    // Simple cell with text label and optional image view (behavior of UITableViewCell in iPhoneOS 2.x)</span><br><span class="line">    UITableViewCellStyleValue1,     // Left aligned label on left and right aligned label on right with blue text (Used in Settings)</span><br><span class="line">    UITableViewCellStyleValue2,     // Right aligned label on left with blue text and left aligned label on right (Used in Phone/Contacts)</span><br><span class="line">    UITableViewCellStyleSubtitle    // Left aligned label on top and left aligned label on bottom with gray text (Used in iPod).</span><br><span class="line">&#125;;             // available in iPhone OS 3.0</span><br><span class="line"></span><br><span class="line">typedef NS_ENUM(NSInteger, UITableViewCellSeparatorStyle) &#123;</span><br><span class="line">    UITableViewCellSeparatorStyleNone,</span><br><span class="line">    UITableViewCellSeparatorStyleSingleLine,</span><br><span class="line">    UITableViewCellSeparatorStyleSingleLineEtched   // This separator style is only supported for grouped style table views currently</span><br><span class="line">&#125; __TVOS_PROHIBITED;</span><br><span class="line"></span><br><span class="line">typedef NS_ENUM(NSInteger, UITableViewCellSelectionStyle) &#123;</span><br><span class="line">    UITableViewCellSelectionStyleNone,</span><br><span class="line">    UITableViewCellSelectionStyleBlue,</span><br><span class="line">    UITableViewCellSelectionStyleGray,</span><br><span class="line">    UITableViewCellSelectionStyleDefault NS_ENUM_AVAILABLE_IOS(7_0)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">#ifndef SDK_HIDE_TIDE</span><br><span class="line">typedef NS_ENUM(NSInteger, UITableViewCellFocusStyle) &#123;</span><br><span class="line">    UITableViewCellFocusStyleDefault,</span><br><span class="line">    UITableViewCellFocusStyleCustom</span><br><span class="line">&#125; NS_ENUM_AVAILABLE_IOS(9_0);</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">typedef NS_ENUM(NSInteger, UITableViewCellEditingStyle) &#123;</span><br><span class="line">    UITableViewCellEditingStyleNone,</span><br><span class="line">    UITableViewCellEditingStyleDelete,</span><br><span class="line">    UITableViewCellEditingStyleInsert</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">typedef NS_ENUM(NSInteger, UITableViewCellAccessoryType) &#123;</span><br><span class="line">    UITableViewCellAccessoryNone,                                                      // don&apos;t show any accessory view</span><br><span class="line">    UITableViewCellAccessoryDisclosureIndicator,                                       // regular chevron. doesn&apos;t track</span><br><span class="line">    UITableViewCellAccessoryDetailDisclosureButton __TVOS_PROHIBITED,                 // info button w/ chevron. tracks</span><br><span class="line">    UITableViewCellAccessoryCheckmark,                                                 // checkmark. doesn&apos;t track</span><br><span class="line">    UITableViewCellAccessoryDetailButton NS_ENUM_AVAILABLE_IOS(7_0)  __TVOS_PROHIBITED // info button. tracks</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">typedef NS_OPTIONS(NSUInteger, UITableViewCellStateMask) &#123;</span><br><span class="line">    UITableViewCellStateDefaultMask                     = 0,</span><br><span class="line">    UITableViewCellStateShowingEditControlMask          = 1 &lt;&lt; 0,</span><br><span class="line">    UITableViewCellStateShowingDeleteConfirmationMask   = 1 &lt;&lt; 1</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">#define UITableViewCellStateEditingMask UITableViewCellStateShowingEditControlMask</span><br><span class="line"></span><br><span class="line">NS_CLASS_AVAILABLE_IOS(2_0) @interface UITableViewCell : UIView &lt;NSCoding, UIGestureRecognizerDelegate&gt;</span><br><span class="line"></span><br><span class="line">// Designated initializer.  If the cell can be reused, you must pass in a reuse identifier.  You should use the same reuse identifier for all cells of the same form.  </span><br><span class="line">- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier NS_AVAILABLE_IOS(3_0) NS_DESIGNATED_INITIALIZER;</span><br><span class="line">- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;</span><br><span class="line"></span><br><span class="line">// Content.  These properties provide direct access to the internal label and image views used by the table view cell.  These should be used instead of the content properties below.</span><br><span class="line">@property (nonatomic, readonly, strong, nullable) UIImageView *imageView NS_AVAILABLE_IOS(3_0);   // default is nil.  image view will be created if necessary.</span><br><span class="line"></span><br><span class="line">@property (nonatomic, readonly, strong, nullable) UILabel *textLabel NS_AVAILABLE_IOS(3_0);   // default is nil.  label will be created if necessary.</span><br><span class="line">@property (nonatomic, readonly, strong, nullable) UILabel *detailTextLabel NS_AVAILABLE_IOS(3_0); // default is nil.  label will be created if necessary (and the current style supports a detail label).</span><br><span class="line"></span><br><span class="line">// If you want to customize cells by simply adding additional views, you should add them to the content view so they will be positioned appropriately as the cell transitions into and out of editing mode.</span><br><span class="line">@property (nonatomic, readonly, strong) UIView *contentView;</span><br><span class="line"></span><br><span class="line">// Default is nil for cells in UITableViewStylePlain, and non-nil for UITableViewStyleGrouped. The &apos;backgroundView&apos; will be added as a subview behind all other views.</span><br><span class="line">@property (nonatomic, strong, nullable) UIView *backgroundView;</span><br><span class="line"></span><br><span class="line">// Default is nil for cells in UITableViewStylePlain, and non-nil for UITableViewStyleGrouped. The &apos;selectedBackgroundView&apos; will be added as a subview directly above the backgroundView if not nil, or behind all other views. It is added as a subview only when the cell is selected. Calling -setSelected:animated: will cause the &apos;selectedBackgroundView&apos; to animate in and out with an alpha fade.</span><br><span class="line">@property (nonatomic, strong, nullable) UIView *selectedBackgroundView;</span><br><span class="line"></span><br><span class="line">// If not nil, takes the place of the selectedBackgroundView when using multiple selection.</span><br><span class="line">@property (nonatomic, strong, nullable) UIView *multipleSelectionBackgroundView NS_AVAILABLE_IOS(5_0);</span><br><span class="line"></span><br><span class="line">@property (nonatomic, readonly, copy, nullable) NSString *reuseIdentifier;</span><br><span class="line">- (void)prepareForReuse;                                                        // if the cell is reusable (has a reuse identifier), this is called just before the cell is returned from the table view method dequeueReusableCellWithIdentifier:.  If you override, you MUST call super.</span><br><span class="line"></span><br><span class="line">@property (nonatomic) UITableViewCellSelectionStyle   selectionStyle;             // default is UITableViewCellSelectionStyleBlue.</span><br><span class="line">@property (nonatomic, getter=isSelected) BOOL         selected;                   // set selected state (title, image, background). default is NO. animated is NO</span><br><span class="line">@property (nonatomic, getter=isHighlighted) BOOL      highlighted;                // set highlighted state (title, image, background). default is NO. animated is NO</span><br><span class="line">- (void)setSelected:(BOOL)selected animated:(BOOL)animated;                     // animate between regular and selected state</span><br><span class="line">- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated;               // animate between regular and highlighted state</span><br><span class="line"></span><br><span class="line">@property (nonatomic, readonly) UITableViewCellEditingStyle editingStyle;         // default is UITableViewCellEditingStyleNone. This is set by UITableView using the delegate&apos;s value for cells who customize their appearance accordingly.</span><br><span class="line">@property (nonatomic) BOOL                            showsReorderControl;        // default is NO</span><br><span class="line">@property (nonatomic) BOOL                            shouldIndentWhileEditing;   // default is YES.  This is unrelated to the indentation level below.</span><br><span class="line"></span><br><span class="line">@property (nonatomic) UITableViewCellAccessoryType    accessoryType;              // default is UITableViewCellAccessoryNone. use to set standard type</span><br><span class="line">@property (nonatomic, strong, nullable) UIView       *accessoryView;              // if set, use custom view. ignore accessoryType. tracks if enabled can calls accessory action</span><br><span class="line">@property (nonatomic) UITableViewCellAccessoryType    editingAccessoryType;       // default is UITableViewCellAccessoryNone. use to set standard type</span><br><span class="line">@property (nonatomic, strong, nullable) UIView       *editingAccessoryView;       // if set, use custom view. ignore editingAccessoryType. tracks if enabled can calls accessory action</span><br><span class="line"></span><br><span class="line">@property (nonatomic) NSInteger                       indentationLevel;           // adjust content indent. default is 0</span><br><span class="line">@property (nonatomic) CGFloat                         indentationWidth;           // width for each level. default is 10.0</span><br><span class="line">@property (nonatomic) UIEdgeInsets                    separatorInset NS_AVAILABLE_IOS(7_0) UI_APPEARANCE_SELECTOR __TVOS_PROHIBITED; // allows customization of the separator frame</span><br><span class="line"></span><br><span class="line">@property (nonatomic, getter=isEditing) BOOL          editing;                    // show appropriate edit controls (+/- &amp; reorder). By default -setEditing: calls setEditing:animated: with NO for animated.</span><br><span class="line">- (void)setEditing:(BOOL)editing animated:(BOOL)animated;</span><br><span class="line"></span><br><span class="line">@property(nonatomic, readonly) BOOL                   showingDeleteConfirmation;  // currently showing &quot;Delete&quot; button</span><br><span class="line"></span><br><span class="line">#ifndef SDK_HIDE_TIDE</span><br><span class="line">@property (nonatomic) UITableViewCellFocusStyle       focusStyle NS_AVAILABLE_IOS(9_0) UI_APPEARANCE_SELECTOR;</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">// These methods can be used by subclasses to animate additional changes to the cell when the cell is changing state</span><br><span class="line">// Note that when the cell is swiped, the cell will be transitioned into the UITableViewCellStateShowingDeleteConfirmationMask state,</span><br><span class="line">// but the UITableViewCellStateShowingEditControlMask will not be set.</span><br><span class="line">- (void)willTransitionToState:(UITableViewCellStateMask)state NS_AVAILABLE_IOS(3_0);</span><br><span class="line">- (void)didTransitionToState:(UITableViewCellStateMask)state NS_AVAILABLE_IOS(3_0);</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@interface UITableViewCell (UIDeprecated)</span><br><span class="line"></span><br><span class="line">// Frame is ignored.  The size will be specified by the table view width and row height.</span><br><span class="line">- (id)initWithFrame:(CGRect)frame reuseIdentifier:(nullable NSString *)reuseIdentifier NS_DEPRECATED_IOS(2_0, 3_0) __TVOS_PROHIBITED;</span><br><span class="line"></span><br><span class="line">// Content properties.  These properties were deprecated in iPhone OS 3.0.  The textLabel and imageView properties above should be used instead.</span><br><span class="line">// For selected attributes, set the highlighted attributes on the textLabel and imageView.</span><br><span class="line">@property (nonatomic, copy, nullable)   NSString *text NS_DEPRECATED_IOS(2_0, 3_0) __TVOS_PROHIBITED;                        // default is nil</span><br><span class="line">@property (nonatomic, strong, nullable) UIFont   *font NS_DEPRECATED_IOS(2_0, 3_0) __TVOS_PROHIBITED;                        // default is nil (Use default font)</span><br><span class="line">@property (nonatomic) NSTextAlignment   textAlignment NS_DEPRECATED_IOS(2_0, 3_0) __TVOS_PROHIBITED;               // default is UITextAlignmentLeft</span><br><span class="line">@property (nonatomic) NSLineBreakMode   lineBreakMode NS_DEPRECATED_IOS(2_0, 3_0) __TVOS_PROHIBITED;               // default is UILineBreakModeTailTruncation</span><br><span class="line">@property (nonatomic, strong, nullable) UIColor  *textColor NS_DEPRECATED_IOS(2_0, 3_0) __TVOS_PROHIBITED;                   // default is nil (text draws black)</span><br><span class="line">@property (nonatomic, strong, nullable) UIColor  *selectedTextColor NS_DEPRECATED_IOS(2_0, 3_0) __TVOS_PROHIBITED;           // default is nil (text draws white)</span><br><span class="line"></span><br><span class="line">@property (nonatomic, strong, nullable) UIImage  *image NS_DEPRECATED_IOS(2_0, 3_0) __TVOS_PROHIBITED;                       // default is nil. appears on left next to title.</span><br><span class="line">@property (nonatomic, strong, nullable) UIImage  *selectedImage NS_DEPRECATED_IOS(2_0, 3_0) __TVOS_PROHIBITED;               // default is nil</span><br><span class="line"></span><br><span class="line">// Use the new editingAccessoryType and editingAccessoryView instead</span><br><span class="line">@property (nonatomic) BOOL              hidesAccessoryWhenEditing NS_DEPRECATED_IOS(2_0, 3_0) __TVOS_PROHIBITED;   // default is YES</span><br><span class="line"></span><br><span class="line">// Use the table view data source method -tableView:commitEditingStyle:forRowAtIndexPath: or the table view delegate method -tableView:accessoryButtonTappedForRowWithIndexPath: instead</span><br><span class="line">@property (nonatomic, assign, nullable) id        target NS_DEPRECATED_IOS(2_0, 3_0) __TVOS_PROHIBITED;                      // target for insert/delete/accessory clicks. default is nil (i.e. go up responder chain). weak reference</span><br><span class="line">@property (nonatomic, nullable) SEL               editAction NS_DEPRECATED_IOS(2_0, 3_0) __TVOS_PROHIBITED;                  // action to call on insert/delete call. set by UITableView</span><br><span class="line">@property (nonatomic, nullable) SEL               accessoryAction NS_DEPRECATED_IOS(2_0, 3_0) __TVOS_PROHIBITED;             // action to call on accessory view clicked. set by UITableView</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_END</span><br></pre></td></tr></table></figure>
+<h4 id="UITableViewHeaderFooterView"><a href="#UITableViewHeaderFooterView" class="headerlink" title="UITableViewHeaderFooterView"></a><code>UITableViewHeaderFooterView</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 源码来源于UIKit-&gt;UITableViewHeaderFooterView.h</span><br><span class="line"></span><br><span class="line">NS_CLASS_AVAILABLE_IOS(6_0) @interface UITableViewHeaderFooterView : UIView</span><br><span class="line"></span><br><span class="line">- (instancetype)initWithReuseIdentifier:(nullable NSString *)reuseIdentifier NS_DESIGNATED_INITIALIZER;</span><br><span class="line">- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;</span><br><span class="line"></span><br><span class="line">@property (nonatomic, strong, null_resettable) UIColor *tintColor;</span><br><span class="line"></span><br><span class="line">@property (nonatomic, readonly, strong, nullable) UILabel *textLabel;</span><br><span class="line">@property (nonatomic, readonly, strong, nullable) UILabel *detailTextLabel; // only supported for headers in grouped style</span><br><span class="line"></span><br><span class="line">@property (nonatomic, readonly, strong) UIView *contentView;</span><br><span class="line">@property (nonatomic, strong, nullable) UIView *backgroundView;</span><br><span class="line"></span><br><span class="line">@property (nonatomic, readonly, copy, nullable) NSString *reuseIdentifier;</span><br><span class="line"></span><br><span class="line">- (void)prepareForReuse;  // if the view is reusable (has a reuse identifier), this is called just before the view is returned from the table view method dequeueReusableHeaderFooterViewWithIdentifier:.  If you override, you MUST call super.</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h4 id="UITableViewController"><a href="#UITableViewController" class="headerlink" title="UITableViewController"></a><code>UITableViewController</code></h4><p><code>UITableViewController</code>是系统提供的一个便利类，主要是为了方便我们使用UITableView，该类生成的时候就将自身设置成了其包含的<code>tableView</code>的<code>dataSource</code>和<code>delegate</code>，并创建了很多代理函数的框架，为我们大大的节省了时间，我们可以通过其<code>tableView</code>属性获取该<code>controller</code>内部维护的<code>tableView</code>对象。默认情况下使用<code>UITableViewController</code>创建的<code>tableView</code>是充满全屏的，如果需要用到<code>tableView</code>是不充满全屏的话，我们应该使用<code>UIViewController</code>自己创建和维护<code>tableView</code>。</p>
+<p><code>UITableViewController</code>提供一个初始化函数<code>initWithStyle:</code>，根据需要我们可以创建<code>Plain</code>或者<code>Grouped</code>类型的<code>tableView</code>，当我们使用其从<code>UIViewController</code>继承来的<code>init</code>初始化函数的时候，默认将会我们创建一个<code>Plain</code>类型的<code>tableView</code>。</p>
+<p><code>UITableViewController</code>默认的会在<code>viewWillAppear</code>的时候，清空所有选中<code>cell</code>，我们可以通过设置<code>self.clearsSelectionOnViewWillAppear = NO</code>，来禁用该功能，并在<code>viewDidAppear</code>中调用<code>UIScrollView</code>的<code>flashScrollIndicators</code>方法让滚动条闪动一次，从而提示用户该控件是可以滑动的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 源码来源于UIKit-&gt;UITableViewController.h</span><br><span class="line"></span><br><span class="line">NS_CLASS_AVAILABLE_IOS(2_0) @interface UITableViewController : UIViewController &lt;UITableViewDelegate, UITableViewDataSource&gt;</span><br><span class="line"></span><br><span class="line">- (instancetype)initWithStyle:(UITableViewStyle)style NS_DESIGNATED_INITIALIZER;</span><br><span class="line">- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil NS_DESIGNATED_INITIALIZER;</span><br><span class="line">- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;</span><br><span class="line"></span><br><span class="line">@property (nonatomic, strong, null_resettable) UITableView *tableView;</span><br><span class="line">@property (nonatomic) BOOL clearsSelectionOnViewWillAppear NS_AVAILABLE_IOS(3_2); // defaults to YES. If YES, any selection is cleared in viewWillAppear:</span><br><span class="line"></span><br><span class="line">@property (nonatomic, strong, nullable) UIRefreshControl *refreshControl NS_AVAILABLE_IOS(6_0) __TVOS_PROHIBITED;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h3 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h3><p>左划删除<br>实现两个方法即可实现左划删除。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    if (editingStyle == UITableViewCellEditingStyleDelete) &#123;</span><br><span class="line">        // 1. 删除数据</span><br><span class="line">        // 2. 删除Cell</span><br><span class="line">        [self deleteObjectWithNSIndexPath:indexPath];</span><br><span class="line">        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath&#123;</span><br><span class="line">    return @&quot;取消关注&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>左划删除与多选编辑是冲突的。若实现下来两个方法，则将是多选编辑，或者说不能实现左划删除。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 某个Cell是否可以编辑</span><br><span class="line">- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 返回Cell的编辑状态</span><br><span class="line">- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath&#123;</span><br><span class="line">    return indexPath.row % 3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>关于Cell编辑那些事儿<br>开始编辑前、编辑完成后、编辑时Cell是否缩进、滑动删除、滑动多选项、每个Cell的编辑样式都有代理方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">- tableView:willBeginEditingRowAtIndexPath: // 将要开始编辑</span><br><span class="line">- tableView:didEndEditingRowAtIndexPath: // 已经结束编辑</span><br><span class="line">- tableView:editingStyleForRowAtIndexPath: // 返回指定Cell的编辑类型</span><br><span class="line">- tableView:titleForDeleteConfirmationButtonForRowAtIndexPath: // 左划删除的按钮文本，如“删除”</span><br><span class="line">- tableView:shouldIndentWhileEditingRowAtIndexPath: // 编辑时是否缩进</span><br><span class="line"></span><br><span class="line">// 8.0以后的方法，可以自定义多个左划操作，包括文本与事件的Block</span><br><span class="line">- (nullable NSArray&lt;UITableViewRowAction *&gt; *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(8_0);</span><br><span class="line">iOS8实现滑动编辑功能。</span><br><span class="line"></span><br><span class="line">- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath</span><br><span class="line">&#123;    return YES;</span><br><span class="line">&#125;</span><br><span class="line">- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath</span><br><span class="line">&#123;    return UITableViewCellEditingStyleDelete;</span><br><span class="line">&#125;</span><br><span class="line">-(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath&#123;</span><br><span class="line">    UITableViewRowAction *layTopRowAction1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@&quot;删除&quot; handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) &#123;</span><br><span class="line">        NSLog(@&quot;点击了删除&quot;);</span><br><span class="line">        [tableView setEditing:NO animated:YES];</span><br><span class="line">    &#125;];</span><br><span class="line">     layTopRowAction1.backgroundColor = [UIColor redColor];</span><br><span class="line">    UITableViewRowAction *layTopRowAction2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@&quot;置顶&quot; handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) &#123;</span><br><span class="line">        NSLog(@&quot;点击了置顶&quot;);</span><br><span class="line">        [tableView setEditing:NO animated:YES];</span><br><span class="line">    &#125;];</span><br><span class="line">            layTopRowAction2.backgroundColor = [UIColor greenColor];</span><br><span class="line">    UITableViewRowAction *layTopRowAction3 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@&quot;更多&quot; handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) &#123;</span><br><span class="line">        NSLog(@&quot;点击了更多&quot;);</span><br><span class="line">        [tableView setEditing:NO animated:YES];</span><br><span class="line">      </span><br><span class="line">    &#125;];</span><br><span class="line">    layTopRowAction3.backgroundColor = [UIColor blueColor];</span><br><span class="line">    NSArray *arr = @[layTopRowAction1,layTopRowAction2,layTopRowAction3];</span><br><span class="line">    return arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Cell的ReOrdering——移动<br>在reordering操作时，需要做三件事。</p>
+<p> 1.是否可以移动 &gt; 2. 移动是否合法 &gt; 3. 移动操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">// 某个Cell是否可以移动</span><br><span class="line">- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    // Return NO if you do not want the item to be re-orderable.</span><br><span class="line">    return indexPath.row % 2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 限制移动是否合法</span><br><span class="line">- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath&#123;</span><br><span class="line">    // 如果是第一个Section或者跨Section移动是非法的，不予移动</span><br><span class="line">    if (proposedDestinationIndexPath.section == 0 || proposedDestinationIndexPath.section != sourceIndexPath.section) &#123;</span><br><span class="line">        return sourceIndexPath;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        return proposedDestinationIndexPath;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 移动Cell时调用该方法</span><br><span class="line">- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath &#123;</span><br><span class="line">    /**</span><br><span class="line">     if(section不变)&#123;</span><br><span class="line">        if(row发生变化)&#123;</span><br><span class="line">            直接交换元素</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;else&#123;</span><br><span class="line">        // 1 取出fromIndexPath位置的数据</span><br><span class="line">        // 2 删除fromeIndexPath的数据</span><br><span class="line">        // 3 将存起来的数据插入到toIndexPath的位置</span><br><span class="line">     &#125;</span><br><span class="line">     */</span><br><span class="line">    if (fromIndexPath.section == toIndexPath.section) &#123;</span><br><span class="line">        if (fromIndexPath.row != toIndexPath.row) &#123;</span><br><span class="line">            NSMutableArray *array = self.dataSource[fromIndexPath.section];</span><br><span class="line">            [array exchangeObjectAtIndex:fromIndexPath.row withObjectAtIndex:toIndexPath.row];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        NSString *str = [self deleteObjectWithNSIndexPath:fromIndexPath];</span><br><span class="line">        [self insertObject:str inDataSourceAtNSIndexPath:toIndexPath];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="选择与编辑时的几个属性"><a href="#选择与编辑时的几个属性" class="headerlink" title="选择与编辑时的几个属性"></a>选择与编辑时的几个属性</h4><p>一般在做支付方式选择时，可以选择不可多选。即<code>（allowsSelection = YES; self.tableView.allowsMultipleSelection = NO）</code>,<code>UITableView</code>默认就是不可多选的。</p>
+<p>若是编辑某个列表页时，要求可以多选、删除操作时，需要设置<code>self.tableView.allowsMultipleSelectionDuringEditing = YES</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">self.tableView.allowsSelection = YES; // 默认YES，当Cell在非编辑状态时，是否可以被选择</span><br><span class="line">self.tableView.allowsSelectionDuringEditing = YES; // 默认NO,当Cell在编辑状态时，是否可以被选择</span><br><span class="line">self.tableView.allowsMultipleSelection = YES; // 默认NO,当Cell在非编辑状态时，是否可以多选</span><br><span class="line">self.tableView.allowsMultipleSelectionDuringEditing = YES; // 默认NO,当Cell在编辑状态时，是否可以多选</span><br><span class="line"></span><br><span class="line">@property (nonatomic) BOOL allowsSelection NS_AVAILABLE_IOS(3_0);  // default is YES. Controls whether rows can be selected when not in editing mode</span><br><span class="line">@property (nonatomic) BOOL allowsSelectionDuringEditing;                                 // default is NO. Controls whether rows can be selected when in editing mode</span><br><span class="line">@property (nonatomic) BOOL allowsMultipleSelection NS_AVAILABLE_IOS(5_0);                // default is NO. Controls whether multiple rows can be selected simultaneously</span><br><span class="line">@property (nonatomic) BOOL allowsMultipleSelectionDuringEditing NS_AVAILABLE_IOS(5_0);   // default is NO. Controls whether multiple rows can be selected simultaneously in editing mode</span><br></pre></td></tr></table></figure>
+<h4 id="多选"><a href="#多选" class="headerlink" title="多选"></a>多选</h4><p>设置<code>UITableView</code>的<code>allowsMultipleSelectionDuringEditing</code>为<code>YES</code>即可在编辑时支持多选。</p>
+<p>批量操作 （插入、删除、更新）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">// 记得在操作时对数据源进行相应操作</span><br><span class="line">[self.tableView beginUpdates];</span><br><span class="line">    </span><br><span class="line">NSIndexSet *sigleSet = [NSIndexSet indexSetWithIndex:0];</span><br><span class="line">NSIndexSet *mutipSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 2)];</span><br><span class="line">    </span><br><span class="line">[self.tableView insertSections:sigleSet withRowAnimation:UITableViewRowAnimationTop];</span><br><span class="line">[self.tableView deleteSections:mutipSet withRowAnimation:UITableViewRowAnimationFade];</span><br><span class="line">[self.tableView reloadSections:sigleSet withRowAnimation:UITableViewRowAnimationNone];</span><br><span class="line">[self.tableView moveSection:0 toSection:1];</span><br><span class="line">    </span><br><span class="line">NSArray *indexPaths = [NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:1],</span><br><span class="line">                                                [NSIndexPath indexPathForRow:0 inSection:2],</span><br><span class="line">                                                [NSIndexPath indexPathForRow:0 inSection:3],nil];</span><br><span class="line">[self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];</span><br><span class="line">[self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationBottom];</span><br><span class="line">[self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];</span><br><span class="line">[self.tableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] toIndexPath:[NSIndexPath indexPathForRow:2 inSection:2]];</span><br><span class="line">    </span><br><span class="line">[self.tableView endUpdates];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 下方为系统UITableView.h的方法</span><br><span class="line">// Row insertion/deletion/reloading.</span><br><span class="line"></span><br><span class="line">- (void)beginUpdates;   // allow multiple insert/delete of rows and sections to be animated simultaneously. Nestable</span><br><span class="line">- (void)endUpdates;     // only call insert/delete/reload calls or change the editing state inside an update block.  otherwise things like row count, etc. may be invalid.</span><br><span class="line"></span><br><span class="line">- (void)insertSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)animation;</span><br><span class="line">- (void)deleteSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)animation;</span><br><span class="line">- (void)reloadSections:(NSIndexSet *)sections withRowAnimation:(UITableViewRowAnimation)animation NS_AVAILABLE_IOS(3_0);</span><br><span class="line">- (void)moveSection:(NSInteger)section toSection:(NSInteger)newSection NS_AVAILABLE_IOS(5_0);</span><br><span class="line"></span><br><span class="line">- (void)insertRowsAtIndexPaths:(NSArray&lt;NSIndexPath *&gt; *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation;</span><br><span class="line">- (void)deleteRowsAtIndexPaths:(NSArray&lt;NSIndexPath *&gt; *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation;</span><br><span class="line">- (void)reloadRowsAtIndexPaths:(NSArray&lt;NSIndexPath *&gt; *)indexPaths withRowAnimation:(UITableViewRowAnimation)animation NS_AVAILABLE_IOS(3_0);</span><br><span class="line">- (void)moveRowAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)newIndexPath NS_AVAILABLE_IOS(5_0);</span><br></pre></td></tr></table></figure>
+<p>自定义<code>HeaderVeiw</code>、<code>FooterView</code></p>
+<p>实现如下代理方法即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Section header &amp; footer information. Views are preferred over title should you decide to provide both</span><br><span class="line"></span><br><span class="line">- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section;   // custom view for header. will be adjusted to default or specified header height</span><br><span class="line">- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section;   // custom view for footer. will be adjusted to default or specified footer height</span><br></pre></td></tr></table></figure>
+<p>估算<code>Cell</code>、<code>HeaderVeiw</code>、<code>FooterView</code>的高度<br><code>UITableView</code>在显示前需要知道每个<code>Cell</code>的高度，用以计算整个<code>TableView</code>的总高度，而后才开始渲染视图并显示在屏幕上。</p>
+<p>若实现<code>-tableView:estimatedHeightXXX</code> 协议方法，<code>TableView</code>在计算总高度时将调用<code>-tableView estimatedHeightForRowAtIndexPath:</code>，先显示<code>TableView</code>，当滑动到某个<code>Cell</code>时，会调用<code>-tableView:heightForRowAtIndexPath:</code>获得<code>Cell</code>的真正高度。可以大大提供<code>TableView</code>第一加载时的效率。<br>若未实现，<code>TableView</code>在计算总高度时将调用<code>-tableView:heightForRowAtIndexPath:</code>获取高度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Use the estimatedHeight methods to quickly calcuate guessed values which will allow for fast load times of the table.</span><br><span class="line">// If these methods are implemented, the above -tableView:heightForXXX calls will be deferred until views are ready to be displayed, so more expensive logic can be placed there.</span><br><span class="line">- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(7_0);</span><br><span class="line">- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section NS_AVAILABLE_IOS(7_0);</span><br><span class="line">- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForFooterInSection:(NSInteger)section NS_AVAILABLE_IOS(7_0);</span><br></pre></td></tr></table></figure>
+<p>监控<code>Cell</code>、<code>HeaderView</code>、<code>FooterView</code>的显示与消失<br>当某个<code>Cell</code>、<code>HeaderView</code>、<code>FooterView</code>出现和消失时，都会调用下面的协议方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// Display customization</span><br><span class="line"></span><br><span class="line">- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;</span><br><span class="line">- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section NS_AVAILABLE_IOS(6_0);</span><br><span class="line">- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section NS_AVAILABLE_IOS(6_0);</span><br><span class="line">- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath*)indexPath NS_AVAILABLE_IOS(6_0);</span><br><span class="line">- (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section NS_AVAILABLE_IOS(6_0);</span><br><span class="line">- (void)tableView:(UITableView *)tableView didEndDisplayingFooterView:(UIView *)view forSection:(NSInteger)section NS_AVAILABLE_IOS(6_0);</span><br></pre></td></tr></table></figure>
+<h4 id="UITableViewCell分割线顶到左侧"><a href="#UITableViewCell分割线顶到左侧" class="headerlink" title="UITableViewCell分割线顶到左侧"></a>UITableViewCell分割线顶到左侧</h4><p>在实现UI效果时，常常会遇到分割线需要顶到左侧的情况，按照一般的思路无法实现该效果，现提供一种解决方案如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath&#123;</span><br><span class="line">    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) &#123;</span><br><span class="line">        [cell setSeparatorInset:UIEdgeInsetsZero];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) &#123;</span><br><span class="line">        [cell setLayoutMargins:UIEdgeInsetsZero];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (UITableView *)tableView&#123;</span><br><span class="line">    if (!_tableView) &#123;</span><br><span class="line">        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];</span><br><span class="line">        _tableView.delegate = self;</span><br><span class="line">        _tableView.dataSource = self;</span><br><span class="line">        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@&quot;identifier&quot;];</span><br><span class="line">        _tableView.rowHeight = 44.0;</span><br><span class="line">        </span><br><span class="line">        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;</span><br><span class="line">        if ([_tableView respondsToSelector:@selector(setSeparatorInset:)]) &#123;</span><br><span class="line">            [_tableView setSeparatorInset:UIEdgeInsetsZero];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if ([_tableView respondsToSelector:@selector(setLayoutMargins:)]) &#123;</span><br><span class="line">            [_tableView setLayoutMargins:UIEdgeInsetsZero];</span><br><span class="line">        &#125;</span><br><span class="line">        _tableView.separatorColor = [NWUtility colorWithHex:0xDCDCDC];</span><br><span class="line">    &#125;</span><br><span class="line">    return _tableView;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面的写法无法完整实现靠左的效果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">_tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;</span><br><span class="line">_tableView.separatorInset = UIEdgeInsetsMake(0, 20, 0, 20);</span><br></pre></td></tr></table></figure>
+<h4 id="索引——IndexList"><a href="#索引——IndexList" class="headerlink" title="索引——IndexList"></a>索引——<code>IndexList</code></h4><p>开发过程中，经常遇到List页面要求索引功能。在此简单介绍一下实现逻辑。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 返回index索引现实需要的数组（NSArray &lt;NSString *&gt; *）</span><br><span class="line">- (NSArray&lt;NSString *&gt; *)sectionIndexTitlesForTableView:(UITableView *)tableView&#123;</span><br><span class="line">    return @[@&quot;热&quot;,@&quot;A&quot;,@&quot;B&quot;,@&quot;C&quot;,@&quot;D&quot;,@&quot;E&quot;,@&quot;F&quot;,@&quot;G&quot;,@&quot;H&quot;,@&quot;J&quot;,@&quot;K&quot;,@&quot;L&quot;,@&quot;M&quot;,@&quot;N&quot;,@&quot;O&quot;,@&quot;P&quot;,@&quot;Q&quot;,@&quot;R&quot;,@&quot;S&quot;,@&quot;T&quot;,@&quot;U&quot;,@&quot;V&quot;,@&quot;W&quot;,@&quot;X&quot;,@&quot;Y&quot;,@&quot;Z&quot;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 根据点击index索引返回UITableView的Section</span><br><span class="line">- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index&#123;</span><br><span class="line">    return index &lt; self.dataSource.count ? index : 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="复用问题"><a href="#复用问题" class="headerlink" title="复用问题"></a>复用问题</h4><p><code>Cell</code>、<code>HeaderView</code>、<code>FooterView</code>都存在复用问题。复用时，系统会根据其重用标识<code>（ReuseIdentifier）</code>去重用队列中取出已创建好的视图，直接使用，若重用队列中无该标识的<code>Cell</code>、<code>HeaderView</code>、<code>FooterView</code>时，系统会根据需要自行创建，这样可以节省时间、内存，提高性能。</p>
+<p>在重用Cell时，系统会自动调用Cell的一个方法，让Cell在重用前进行自我清理工作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (void)prepareForReuse;</span><br></pre></td></tr></table></figure>
+<h4 id="accessaryView与accessaryType"><a href="#accessaryView与accessaryType" class="headerlink" title="accessaryView与accessaryType"></a><code>accessaryView</code>与<code>accessaryType</code></h4><p>当<code>cell</code>的<code>accessaryView</code>时，根据其<code>accessaryType</code>的不同调用的方法不同。</p>
+<blockquote>
+<p><code>UITableViewCellAccessoryDisclosureIndicator/UITableViewCellAccessoryCheckmark [&gt; / √]</code>的时候，调用<code>delegate</code>的<code>tableView:didSelectRowAtIndexPath:</code>方法。<br><code>UITableViewCellAccessoryDetailDisclosureButton/UITableViewCellAccessoryDetailButton [!&gt; / !]</code> 的时候，点击<code>accessaryView</code>将会调用<code>delegate</code>的 <code>tableView:accessoryButtonTappedForRowWithIndexPath:</code>方法。</p>
+</blockquote>
+<h4 id="accessaryType的定制"><a href="#accessaryType的定制" class="headerlink" title="accessaryType的定制"></a><code>accessaryType</code>的定制</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath;</span><br></pre></td></tr></table></figure>
+<h4 id="关于菜单——Cell"><a href="#关于菜单——Cell" class="headerlink" title="关于菜单——Cell"></a>关于菜单——Cell</h4><p>长按Cell显示菜单，如复制、粘贴等。<br>该菜单调用 <code>tableView:canPerformAction:forRowAtIndexPath:withSender</code> 以确认是否该显示系统菜单选项并调用 <code>tableView:performAction:forRowAtIndexPath:withSender:</code>当用户选择某个选项时.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">- (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender &#123;</span><br><span class="line">    if (action == @selector(copy:)) &#123;</span><br><span class="line">        return YES;     </span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    return NO;  </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">- (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender &#123;</span><br><span class="line">    if (action == @selector(copy:)) &#123;</span><br><span class="line">        [UIPasteboard generalPasteboard].string = [data objectAtIndex:indexPath.row];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="行缩进"><a href="#行缩进" class="headerlink" title="行缩进"></a>行缩进</h4><p>缩进是指<code>ContentView</code>距离<code>Cell</code>左侧的距离。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//行缩进</span><br><span class="line">-(NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath&#123; NSUInteger row = [indexPath row]; </span><br><span class="line">    return row * 5;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="关于选择"><a href="#关于选择" class="headerlink" title="关于选择"></a>关于选择</h4><p><code>Cell</code>的高亮管理，即将高亮、已经高亮、已经不高亮分别代理不同的代理方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//Managing Table View Highlighting</span><br><span class="line">- tableView:shouldHighlightRowAtIndexPath:</span><br><span class="line">- tableView:didHighlightRowAtIndexPath:</span><br><span class="line">- tableView:didUnhighlightRowAtIndexPath:</span><br></pre></td></tr></table></figure>
+<p>Cell的选择与取消选择，分别在将要开始和已经完成时有相应的代理方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Managing Selections</span><br><span class="line">- tableView:willSelectRowAtIndexPath:</span><br><span class="line">- tableView:didSelectRowAtIndexPath:</span><br><span class="line">- tableView:willDeselectRowAtIndexPath:</span><br><span class="line">- tableView:didDeselectRowAtIndexPath:</span><br></pre></td></tr></table></figure>
+<p>默认选中某个<code>Cell</code>，点击别处时正常执行代理<br>需求：用户停留在买单页面（比如点评闪惠或买单），该页面默认使用一张“优惠券”，要求点击该“优惠券”进入优惠券列表页面，同时选中该优惠价（可根据id识别），点击其它<code>Cell</code>时正常执行相应<code>tableView:didSelectRowAtIndexPath:</code>于<code>tableView:didDeselectRowAtIndexPath:</code>代理方法。</p>
+<p>此时可以在数据加载完成后，计算出默认应该选中<code>Cell</code>的<code>indexPath</code>，然会<code>tableView</code>调用 <code>selectRowAtIndexPath:animated:scrollPosition:</code>方法即可。</p>
+<h4 id="selectRowAtIndexPath-animated-scrollPosition-特点："><a href="#selectRowAtIndexPath-animated-scrollPosition-特点：" class="headerlink" title="selectRowAtIndexPath:animated:scrollPosition:特点："></a><code>selectRowAtIndexPath:animated:scrollPosition:</code>特点：</h4><p>不调用选中与不选中的代理方法；调用<code>cell</code>的<code>setSelected</code>方法，将<code>Cell</code>设置为选中状态，此时查看<code>tableView</code>的<code>indexPathForSelectedRow</code>属性可得到当前选中的<code>indexPath</code>即为指定<code>Cell</code>的<code>indexPath</code>。</p>
+<h4 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h4><p>a、重用cell</p>
+<p>我们都知道申请内存是需要时间，特别是在一段时间内频繁的申请内存将会造成很大的开销，而且上tebleView中cell大部分情况下布局都是一样的，这个时候我们可以通过回收重用机制来提高性能。</p>
+<p>b、避免content的重新布局</p>
+<p>尽量避免在重用cell时候，对cell的重新布局，一般情况在在创建cell的时候就将cell布局好。</p>
+<p>c、使用不透明的subView</p>
+<p>在定制cell的时候，将要添加的subView设置成不透明的会大大减少多个view层叠加时渲染所需要的时间。</p>
+<p>d、如果方便，直接重载subView的drawRect方法</p>
+<p>如果定制cell的过程中需要多个小的元素的话，最好直接对要显示的多个项目进行绘制，而不是采用添加多个subView。</p>
+<p>e、tableView的delegate的方法如非必要，尽量不要实现</p>
+<p>tableView的delegate中的很多函数提供了对cell属性的进一步控制，比如每个cell的高度，cell是否可以编辑，支持的edit风格等，如非必要最好不要实现这些方法因为快速的调用这些方法也会影响性能。</p>
+<p>(以上5点建议，前三点来自苹果官方文档，后两点我自己加的，有什么不对的地方，欢迎指正)</p>
+<p><a href="http://www.devzhang.com/14464613593730.html" target="_blank" rel="noopener">http://www.devzhang.com/14464613593730.html</a><br><a href="https://www.jianshu.com/p/aa9721e4484d" target="_blank" rel="noopener">https://www.jianshu.com/p/aa9721e4484d</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ios/" rel="tag"># ios</a>
+          
+            <a href="/tags/UIView/" rel="tag"># UIView</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/28/UI基础控件之UIView详解/" rel="next" title="UI基础控件之UIView详解">
+                <i class="fa fa-chevron-left"></i> UI基础控件之UIView详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/30/for...of/" rel="prev" title="for-of详解">
+                for-of详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Rz</p>
+              <p class="site-description motion-element" itemprop="description">description</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Rzzy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/243566431" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:243566431@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#UITableView详解"><span class="nav-number">1.</span> <span class="nav-text">UITableView详解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概述"><span class="nav-number">1.0.1.</span> <span class="nav-text">概述</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NSIndexPath"><span class="nav-number">1.1.</span> <span class="nav-text">NSIndexPath</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UITableViewRowAction"><span class="nav-number">1.2.</span> <span class="nav-text">UITableViewRowAction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一些枚举值"><span class="nav-number">1.3.</span> <span class="nav-text">一些枚举值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其它枚举"><span class="nav-number">1.4.</span> <span class="nav-text">其它枚举</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DateSource——数据源"><span class="nav-number">1.5.</span> <span class="nav-text">DateSource——数据源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Delegate——代理"><span class="nav-number">1.6.</span> <span class="nav-text">Delegate——代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UITableViewCell"><span class="nav-number">1.7.</span> <span class="nav-text">UITableViewCell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Edit"><span class="nav-number">1.8.</span> <span class="nav-text">Edit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ReOrdering"><span class="nav-number">1.9.</span> <span class="nav-text">ReOrdering</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UITableViewCell-h"><span class="nav-number">1.10.</span> <span class="nav-text">UITableViewCell.h</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UITableViewHeaderFooterView"><span class="nav-number">1.11.</span> <span class="nav-text">UITableViewHeaderFooterView</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UITableViewController"><span class="nav-number">1.12.</span> <span class="nav-text">UITableViewController</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用操作"><span class="nav-number">2.</span> <span class="nav-text">常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#选择与编辑时的几个属性"><span class="nav-number">2.1.</span> <span class="nav-text">选择与编辑时的几个属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多选"><span class="nav-number">2.2.</span> <span class="nav-text">多选</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UITableViewCell分割线顶到左侧"><span class="nav-number">2.3.</span> <span class="nav-text">UITableViewCell分割线顶到左侧</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#索引——IndexList"><span class="nav-number">2.4.</span> <span class="nav-text">索引——IndexList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复用问题"><span class="nav-number">2.5.</span> <span class="nav-text">复用问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#accessaryView与accessaryType"><span class="nav-number">2.6.</span> <span class="nav-text">accessaryView与accessaryType</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#accessaryType的定制"><span class="nav-number">2.7.</span> <span class="nav-text">accessaryType的定制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于菜单——Cell"><span class="nav-number">2.8.</span> <span class="nav-text">关于菜单——Cell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#行缩进"><span class="nav-number">2.9.</span> <span class="nav-text">行缩进</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于选择"><span class="nav-number">2.10.</span> <span class="nav-text">关于选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#selectRowAtIndexPath-animated-scrollPosition-特点："><span class="nav-number">2.11.</span> <span class="nav-text">selectRowAtIndexPath:animated:scrollPosition:特点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#性能优化"><span class="nav-number">2.12.</span> <span class="nav-text">性能优化</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rz</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
