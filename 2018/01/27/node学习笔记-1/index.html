@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="ios," />
+  <meta name="keywords" content="Node," />
 
 
 
@@ -79,18 +79,23 @@
 
 
 
-<meta name="description" content="主要讲述UIView的使用">
-<meta name="keywords" content="ios">
+<meta name="description" content="xxxx">
+<meta name="keywords" content="Node">
 <meta property="og:type" content="article">
-<meta property="og:title" content="UIView">
-<meta property="og:url" content="http://yoursite.com/2017/12/28/UIView/index.html">
+<meta property="og:title" content="Node学习笔记（module-1）">
+<meta property="og:url" content="http://yoursite.com/2018/01/27/node学习笔记-1/index.html">
 <meta property="og:site_name" content="Rz">
-<meta property="og:description" content="主要讲述UIView的使用">
+<meta property="og:description" content="xxxx">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-08T05:50:36.750Z">
+<meta property="og:image" content="https://i.loli.net/2018/01/27/5a6b7237290a0.png">
+<meta property="og:image" content="https://i.loli.net/2018/01/27/5a6b736801b18.png">
+<meta property="og:image" content="https://i.loli.net/2018/01/27/5a6b769921be3.png">
+<meta property="og:image" content="https://i.loli.net/2018/01/27/5a6b7749b2f94.png">
+<meta property="og:updated_time" content="2018-01-26T18:48:35.824Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="UIView">
-<meta name="twitter:description" content="主要讲述UIView的使用">
+<meta name="twitter:title" content="Node学习笔记（module-1）">
+<meta name="twitter:description" content="xxxx">
+<meta name="twitter:image" content="https://i.loli.net/2018/01/27/5a6b7237290a0.png">
 
 
 
@@ -120,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/28/UIView/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/27/node学习笔记-1/"/>
 
 
 
 
 
-  <title>UIView | Rz</title>
+  <title>Node学习笔记（module-1） | Rz</title>
   
 
 
@@ -282,12 +287,12 @@
   
   
 
-  <article class="post post-type-ios" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-JavaScript" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/28/UIView/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/27/node学习笔记-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rz">
@@ -304,7 +309,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">UIView</h1>
+          <h1 class="post-title" itemprop="name headline">Node学习笔记（module-1）</h1>
         
 
         <div class="post-meta">
@@ -316,8 +321,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-28T17:29:23+08:00">
-                2017-12-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-27T02:07:50+08:00">
+                2018-01-27
               </time>
             
 
@@ -339,8 +344,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ios/" itemprop="url" rel="index">
-                    <span itemprop="name">ios</span>
+                  <a href="/categories/Node/" itemprop="url" rel="index">
+                    <span itemprop="name">Node</span>
                   </a>
                 </span>
 
@@ -363,7 +368,7 @@
 
           
               <div class="post-description">
-                  主要讲述UIView的使用
+                  xxxx
               </div>
           
 
@@ -380,7 +385,49 @@
       
 
       
-        <h4 id="UIView-的使用"><a href="#UIView-的使用" class="headerlink" title="UIView 的使用"></a>UIView 的使用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line">//    UIWindow *aWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] ;</span><br><span class="line">//    self.window = aWindow ;</span><br><span class="line">//    [aWindow release] ;</span><br><span class="line"></span><br><span class="line">//  效果等同上述代码</span><br><span class="line">//    当应用程序加载完成后，创建一个跟屏幕尺寸一样大的window对象</span><br><span class="line">    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// Override point for customization after application launch.</span><br><span class="line">//    修改window的背景颜色为指定颜色</span><br><span class="line">    self.window.backgroundColor = [UIColor purpleColor];</span><br><span class="line"></span><br><span class="line">//    makeKeyAndVisible方法可以让window对象成为主窗口对象，并且显示在屏幕上。</span><br><span class="line">    [self.window makeKeyAndVisible];</span><br><span class="line"></span><br><span class="line">    UIView *aView = [[UIView alloc] initWithFrame:CGRectMake(30, 30, 100, 100)] ;</span><br><span class="line">    [self.window addSubview:aView] ;</span><br><span class="line">    [aView release] ;</span><br><span class="line">    //UIView对象的背景颜色默认是透明的clearColor</span><br><span class="line">    aView.backgroundColor = [UIColor cyanColor] ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    UIView *yellowView = [[UIView alloc] initWithFrame:CGRectMake(25, 25, 100, 100)] ;</span><br><span class="line">    [aView addSubview:yellowView] ;</span><br><span class="line">    [yellowView release] ;</span><br><span class="line">    yellowView.backgroundColor = [UIColor yellowColor] ;</span><br><span class="line"></span><br><span class="line">    UIView *blueView = [[UIView alloc] initWithFrame:CGRectMake(25, 25, 100, 100)] ;</span><br><span class="line">    [yellowView addSubview:blueView] ;</span><br><span class="line">    [blueView release] ;</span><br><span class="line">    blueView.backgroundColor = [UIColor blueColor] ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    NSLog( @&quot;%@&quot;, NSStringFromCGRect(self.window.bounds) ) ;</span><br><span class="line">    // iPhone 6 Plus 的分辨率 1920 * 1080 （414 * 736）</span><br><span class="line">    //frame 中的大小其实是屏幕上物理像素点的个数，视图对象根据给定的物理像素点的个数以及起始位置、颜色信息来确定视图的范围和要显示的颜色。</span><br><span class="line"></span><br><span class="line">    UIView *anView = [[UIView alloc] initWithFrame:CGRectMake(50, 50, 300, 300)];</span><br><span class="line"></span><br><span class="line">    anView.backgroundColor = [UIColor redColor] ;</span><br><span class="line">    [self.window addSubview:anView] ;</span><br><span class="line">    [anView release] ;</span><br><span class="line">    //视图创建并添加在父视图上时，打印 center 属性的值；</span><br><span class="line">    NSLog( @&quot;%@&quot;, NSStringFromCGPoint(anView.center) ) ;</span><br><span class="line">    //通过修改视图的 center 属性来改变视图的起始点</span><br><span class="line">//  anView.center = CGPointMake(200, 200) ;</span><br><span class="line">    anView.center = self.window.center ;</span><br><span class="line">    //frame 属性是指该视图在其父视图产生的坐标系中的起始点和大小；</span><br><span class="line">//    anView.frame = CGRectMake(60, 80, 100, 120) ;</span><br><span class="line">    //影响视图的 center 属性的原因有，视图的起始点发生改变和视图的大小发生改变；</span><br><span class="line">    NSLog( @&quot;%@&quot;, NSStringFromCGPoint(anView.center) ) ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    UIView *bView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)] ;</span><br><span class="line">    bView.backgroundColor = [UIColor orangeColor] ;</span><br><span class="line">    bView.center = anView.center ;</span><br><span class="line">    [anView addSubview:bView] ;</span><br><span class="line">    [bView release] ;</span><br><span class="line">//   </span><br><span class="line">    anView.bounds = CGRectMake(20, -20, 300, 300) ;</span><br><span class="line"></span><br><span class="line">    NSLog( @&quot;%@&quot;, NSStringFromCGRect(anView.frame) ) ;</span><br><span class="line">    //与 frame 不同的是 bounds 描述的是一个视图在自身坐标系中的起始点和大小，起始点默认与坐标系原点重合，为 （0，0），而 frame 描述的是视图在其父视图中的起始点和大小。</span><br><span class="line">    NSLog( @&quot;%@&quot;, NSStringFromCGRect(bView.bounds) ) ;</span><br><span class="line">    //bounds 是可一个被修改的，修改 bounds 的起始点会导致当前视图产生的坐标系原点发生改变。</span><br><span class="line">    //视图显示的位置是依赖于自身的 frame 的，修改 bounds 的起始点不会影响到 frame 的起始点，所以看到的视图并没有发生位移。</span><br><span class="line">    //当我们把一个视图的 bounds 起始点改成（+，+）时，自身坐标系原点将向左上角移动对应大小。</span><br><span class="line">    //当我们把一个视图的 bounds 起始点改成（-，-）时，自身坐标系原点将向右下角移动对应大小。</span><br><span class="line">    //当我们把一个视图的 bounds 起始点改成（-, +）时，自身坐标系原点将向右移动对应大小。</span><br><span class="line">    //当我们把一个视图的 bounds 起始点改成（+, -）时，自身坐标系原点将向左移动对应大小。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    UIView *greenView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 120, 120)] ;</span><br><span class="line">    greenView.backgroundColor = [UIColor greenColor] ;</span><br><span class="line">    //一个视图的子视图是按照添加时间以下标为序的，我们可以通过下面的方法改变视图层级。</span><br><span class="line">//    [anView insertSubview:greenView atIndex:0] ;</span><br><span class="line">    //将一个子视图插入到已经存在的子视图的上方。</span><br><span class="line">//    [anView insertSubview:greenView aboveSubview:bView] ;</span><br><span class="line">    //将一个子视图插入到已经存在的子视图的下方。</span><br><span class="line">    [anView insertSubview:greenView belowSubview:bView] ;</span><br><span class="line">    [greenView release] ;</span><br><span class="line"></span><br><span class="line">    //管理视图层级</span><br><span class="line">    //将一个视图移动到视图层级的最上层。</span><br><span class="line">    [anView bringSubviewToFront:greenView] ;</span><br><span class="line">    //将一个视图移动到视图层级的最下层。</span><br><span class="line">    [anView sendSubviewToBack:greenView] ;</span><br><span class="line">    //一个子视图调用 removeFromSuperview 方法，把自己从父视图中移除。</span><br><span class="line">    [greenView removeFromSuperview] ;</span><br><span class="line"></span><br><span class="line">    //一旦一个视图被添加显示以后，它的 superview 属性就可以获取到它的父视图。</span><br><span class="line">    NSLog( @&quot;%@&quot;, [anView superview] ) ;</span><br><span class="line">    NSLog( @&quot;%@&quot;, [bView superview] ) ;</span><br><span class="line">    //视图是通过 subviews 数组来管理其子视图们的。</span><br><span class="line">    NSLog( @&quot;%@&quot;, [anView subviews] ) ;</span><br><span class="line"></span><br><span class="line">    // hidden 是一个视图的显隐属性，默认为NO ，表示不隐藏，如果一个视图的 hidden 属性设置为 YES，其子视图也将被隐藏。</span><br><span class="line">//    anView.hidden = YES ;</span><br><span class="line">    // alpha 是一个视图的不透明度，范围在 0~1，默认为1，表示完全不透明。</span><br><span class="line">    anView.alpha = 0.8 ;</span><br><span class="line"></span><br><span class="line">    anView.tag = 100 ;</span><br><span class="line"></span><br><span class="line">    UIView *getView = [self.window viewWithTag:100] ;</span><br><span class="line">    NSLog( @&quot;%@&quot;, getView ) ;</span><br></pre></td></tr></table></figure>
+        <h4 id="Node-js简介"><a href="#Node-js简介" class="headerlink" title="Node.js简介"></a>Node.js简介</h4><h5 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h5><p>Node.js是一个让JavaScript运行在服务器端的开发平台，它让JavaScript的触角伸到了服务器端，可以与PHP、JSP、Python、Ruby平起平坐。<br>但Node似乎有点不同：</p>
+<ul>
+<li>Node.js不是一种独立的语言，与PHP、JSP、Python、Perl、Ruby的“既是语言，也是平台”不同，Node.js的使用JavaScript进行编程，运行在JavaScript引擎上（V8）。</li>
+<li>与PHP、JSP等相比（PHP、JSP、.net都需要运行在服务器程序上，Apache、Naginx、Tomcat、IIS。<br>），Node.js跳过了Apache、Naginx、IIS等HTTP服务器，它自己不用建设在任何服务器软件之上。Node.js的许多设计理念与经典架构（LAMP = Linux + Apache + MySQL + PHP）有着很大的不同，可以提供强大的伸缩能力。一会儿我们就将看到，Node.js没有web容器。</li>
+</ul>
+<p>Node.js自身哲学，是花最小的硬件成本，追求更高的并发，更高的处理性能。</p>
+<h5 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h5><p>所谓的特点，就是Node.js是如何解决服务器高性能瓶颈问题的。</p>
+<h6 id="单线程"><a href="#单线程" class="headerlink" title="单线程"></a>单线程</h6><p>在Java、PHP或者.net等服务器端语言中，会为每一个客户端连接创建一个新的线程。而每个线程需要耗费大约2MB内存。也就是说，理论上，一个8GB内存的服务器可以同时连接的最大用户数为4000个左右。要让Web应用程序支持更多的用户，就需要增加服务器的数量，而Web应用程序的硬件成本当然就上升了。<br>Node.js不为每个客户连接创建一个新的线程，而仅仅使用一个线程。当有用户连接了，就触发一个内部事件，通过非阻塞I/O、事件驱动机制，让Node.js程序宏观上也是并行的。使用Node.js，一个8GB内存的服务器，可以同时处理超过4万用户的连接。<br>另外，单线程的带来的好处，还有操作系统完全不再有线程创建、销毁的时间开销。<br>坏处，就是一个用户造成了线程的崩溃，整个服务都崩溃了，其他人也崩溃了。<br><img src="https://i.loli.net/2018/01/27/5a6b7237290a0.png" alt="多线程、单线程的一个对比"></p>
+<p>也就是说，单线程也能造成宏观上的“并发”。</p>
+<h6 id="非阻塞I-O-non-blocking-I-O"><a href="#非阻塞I-O-non-blocking-I-O" class="headerlink" title="非阻塞I/O   non-blocking I/O"></a>非阻塞I/O   non-blocking I/O</h6><p>例如，当在访问数据库取得数据的时候，需要一段时间。在传统的单线程处理机制中，在执行了访问数据库代码之后，整个线程都将暂停下来，等待数据库返回结果，才能执行后面的代码。也就是说，I/O阻塞了代码的执行，极大地降低了程序的执行效率。<br>由于Node.js中采用了非阻塞型I/O机制，因此在执行了访问数据库的代码之后，将立即转而执行其后面的代码，把数据库返回结果的处理代码放在回调函数中，从而提高了程序的执行效率。<br>当某个I/O执行完毕时，将以事件的形式通知执行I/O操作的线程，线程执行这个事件的回调函数。为了处理异步I/O，线程必须有事件循环，不断的检查有没有未处理的事件，依次予以处理。<br>阻塞模式下，一个线程只能处理一项任务，要想提高吞吐量必须通过多线程。而非阻塞模式下，一个线程永远在执行计算操作，这个线程的CPU核心利用率永远是100%。所以，这是一种特别有哲理的解决方案：与其人多，但是好多人闲着；还不如一个人玩命，往死里干活儿。</p>
+<h6 id="事件驱动event-driven"><a href="#事件驱动event-driven" class="headerlink" title="事件驱动event-driven"></a>事件驱动event-driven</h6><p>在Node中，客户端请求建立连接，提交数据等行为，会触发相应的事件。在Node中，在一个时刻，只能执行一个事件回调函数，但是在执行一个事件回调函数的中途，可以转而处理其他事件（比如，又有新用户连接了），然后返回继续执行原事件的回调函数，这种处理机制，称为“事件环”机制。<br>Node.js底层是C++（V8也是C++写的）。底层代码中，近半数都用于事件队列、回调函数队列的构建。用事件驱动来完成服务器的任务调度，这是鬼才才能想到的。针尖上的舞蹈，用一个线程，担负起了处理非常多的任务的使命。</p>
+<p><img src="https://i.loli.net/2018/01/27/5a6b736801b18.png" alt="事件驱动示例"></p>
+<p><em>单线程，</em>：单线程的好处，减少了内存开销，操作系统的内存换页。<br>如果某一个事情，进入了，但是被I/O阻塞了，所以这个线程就阻塞了。<br><em>非阻塞I/O，</em> ：不会傻等I/O语句结束，而会执行后面的语句。<br>非阻塞就能解决问题了么？比如执行着小红的业务，执行过程中，小刚的I/O回调完成了，此时怎么办？？<br><em>事件机制，事件环，</em>：不管是新用户的请求，还是老用户的I/O完成，都将以事件方式加入事件环，等待调度。</p>
+<p>说是三个特点，实际上是一个特点，离开谁都不行，都玩儿不转了。<br>Node.js很像抠门的餐厅老板，只聘请1个服务员，服务很多人。结果，比很多服务员效率还高。<br>Node.js中所有的I/O都是异步的，回调函数，套回调函数。</p>
+<h5 id="适合开发什么"><a href="#适合开发什么" class="headerlink" title="适合开发什么"></a>适合开发什么</h5><p>Node.js适合用来开发什么样的应用程序呢？<br>善于I/O，不善于计算。因为Node.js最擅长的就是任务调度，如果你的业务有很多的CPU计算，实际上也相当于这个计算阻塞了这个单线程，就不适合Node开发。<br>当应用程序需要处理大量并发的I/O，而在向客户端发出响应之前，应用程序内部并不需要进行非常复杂的处理的时候，Node.js非常适合。Node.js也非常适合与web socket配合，开发长连接的实时交互应用程序。</p>
+<p>比如：</p>
+<ul>
+<li>用户表单收集</li>
+<li>考试系统</li>
+<li>聊天室</li>
+<li>图文直播</li>
+<li>提供JSON的API（为前台Angular使用）</li>
+</ul>
+<h4 id="Node-js安装"><a href="#Node-js安装" class="headerlink" title="Node.js安装"></a>Node.js安装</h4><p>Node.js和Java非常像，跨平台的。不管是Linux还是windows编程是完全一致的（有一些不一样，比如路径的表述）。Linux版本的Node.js环境和windows环境是不一样的，但是编程语言一样。很像Java虚拟机。</p>
+<h5 id="node-路径名"><a href="#node-路径名" class="headerlink" title="node 路径名"></a>node 路径名</h5><p>推荐，不要使用完整的路径名，而是通过先进入案例文件夹，然后node相对地址<br>cd命令，就是change directory的缩写，表示更改当前目录。</p>
+<p>Node.js是服务器的程序，写的js语句，都将运行在服务器上。返回给客户的，都是已经处理好的纯html。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//require表示引包，引包就是引用自己的一个特殊功能</span><br><span class="line">var http = require(&quot;http&quot;);</span><br><span class="line">//创建服务器，参数是一个回调函数，表示如果有请求进来，要做什么</span><br><span class="line">var server = http.createServer(function(req,res)&#123;</span><br><span class="line">    //req表示请求，request;  res表示响应，response</span><br><span class="line">    //设置HTTP头部，状态码是200，文件类型是html，字符集是utf8</span><br><span class="line">    res.writeHead(200,&#123;&quot;Content-type&quot;:&quot;text/html;charset=UTF-8&quot;&#125;);</span><br><span class="line">    res.end(&quot;哈哈哈哈，我买了一个iPhone&quot; + (1+2+3) + &quot;s&quot;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//运行服务器，监听3000端口（端口号可以任改）</span><br><span class="line">server.listen(3000,&quot;127.0.0.1&quot;);</span><br></pre></td></tr></table></figure>
+<p>如果想修改程序，必须中断当前运行的服务器，重新node一次，刷新，才行。<br>ctrl+c，就可以打断挂起的服务器程序。此时按上箭头，能够快速调用最近的node命令。</p>
+<p>你会发现，我们本地写一个js，打死都不能直接拖入浏览器运行，但是有了node，我们任何一个js文件，都可以通过node来运行。也就是说，node就是一个js的执行环境。<br>我们现在，要跑起来一个服务器，这个服务器的脚本，要以.js存储。是一个js文件。用node命令运行这个js文件罢了。</p>
+<p>Node.js没有根目录的概念，因为它根本没有任何的web容器！</p>
+<p>让node.js提供一个静态服务，都非常难！<br>也就是说，node.js中，如果看见一个网址是</p>
+<p><code>127.0.0.1:3000/fang</code></p>
+<p>别再去想，一定有一个文件夹，叫做fang了。可能/fang的物理文件，是同目录的test.html<br>URL和真实物理文件，是没有关系的。URL是通过了Node的顶层路由设计，呈递某一个静态文件的。</p>
+<h4 id="HTTP模块"><a href="#HTTP模块" class="headerlink" title="HTTP模块"></a>HTTP模块</h4><p>Node.js中，将很多的功能，划分为了一个个mudule，大陆的书翻译为模块；台湾的书，翻译为模组。<br>这是因为，有一些程序需要使用fs功能（文件读取功能），有一些不用的，所以为了效率，你用啥，你就require啥。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//这个案例简单讲解http模块</span><br><span class="line">//引用模块</span><br><span class="line">var http = require(&quot;http&quot;);</span><br><span class="line"></span><br><span class="line">//创建一个服务器，回调函数表示接收到请求之后做的事情</span><br><span class="line">var server = http.createServer(function(req,res)&#123;</span><br><span class="line">    //req参数表示请求，res表示响应</span><br><span class="line">    console.log(&quot;服务器接收到了请求&quot; + req.url);</span><br><span class="line">    res.end();</span><br><span class="line">&#125;);</span><br><span class="line">//监听端口</span><br><span class="line">server.listen(3000,&quot;127.0.0.1&quot;);</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2018/01/27/5a6b769921be3.png" alt="Node没有HTTP服务器"></p>
+<p>设置一个响应头：</p>
+<p><code>res.writeHead(200,{&quot;Content-Type&quot;:&quot;text/plain;charset=UTF8&quot;});</code></p>
+<p><img src="https://i.loli.net/2018/01/27/5a6b7749b2f94.png" alt="屏幕快照 2018-01-27 02.44.58.png"></p>
+<p>我们现在来看一下req里面能够使用的东西。<br>最关键的就是req.url属性，表示用户的请求URL地址。所有的路由设计，都是通过req.url来实现的。<br>我们比较关心的不是拿到URL，而是识别这个URL。<br>识别URL，用到两个新模块，第一个就是url模块，第二个就是querystring模块</p>
+<p>字符串查询，用querystring处理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">querystring.parse(&apos;foo=bar&amp;baz=qux&amp;baz=quux&amp;corge&apos;)</span><br><span class="line">// returns</span><br><span class="line">&#123; foo: &apos;bar&apos;, baz: [&apos;qux&apos;, &apos;quux&apos;], corge: &apos;&apos; &#125;</span><br><span class="line"></span><br><span class="line">// Suppose gbkDecodeURIComponent function already exists,</span><br><span class="line">// it can decode `gbk` encoding string</span><br><span class="line">querystring.parse(&apos;w=%D6%D0%CE%C4&amp;foo=bar&apos;, null, null,</span><br><span class="line">  &#123; decodeURIComponent: gbkDecodeURIComponent &#125;)</span><br><span class="line">// returns</span><br><span class="line">&#123; w: &apos;中文&apos;, foo: &apos;bar&apos; &#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -397,7 +444,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ios/" rel="tag"># ios</a>
+            <a href="/tags/Node/" rel="tag"># Node</a>
           
         </div>
       
@@ -410,8 +457,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/28/iOS中事件的产生和传递/" rel="next" title="iOS中事件的产生和传递">
-                <i class="fa fa-chevron-left"></i> iOS中事件的产生和传递
+              <a href="/2018/01/17/聊一聊WEB前端安全那些事儿/" rel="next" title="聊一聊WEB前端安全那些事儿">
+                <i class="fa fa-chevron-left"></i> 聊一聊WEB前端安全那些事儿
               </a>
             
           </div>
@@ -419,10 +466,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/28/UI基础控件之UIView详解/" rel="prev" title="UI基础控件之UIView详解">
-                UI基础控件之UIView详解 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -576,7 +619,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#UIView-的使用"><span class="nav-number">1.</span> <span class="nav-text">UIView 的使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node-js简介"><span class="nav-number">1.</span> <span class="nav-text">Node.js简介</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#简介"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#特点"><span class="nav-number">1.2.</span> <span class="nav-text">特点</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#单线程"><span class="nav-number">1.2.1.</span> <span class="nav-text">单线程</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#非阻塞I-O-non-blocking-I-O"><span class="nav-number">1.2.2.</span> <span class="nav-text">非阻塞I/O   non-blocking I/O</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#事件驱动event-driven"><span class="nav-number">1.2.3.</span> <span class="nav-text">事件驱动event-driven</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#适合开发什么"><span class="nav-number">1.3.</span> <span class="nav-text">适合开发什么</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Node-js安装"><span class="nav-number">2.</span> <span class="nav-text">Node.js安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#node-路径名"><span class="nav-number">2.1.</span> <span class="nav-text">node 路径名</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP模块"><span class="nav-number">3.</span> <span class="nav-text">HTTP模块</span></a></li></ol></div>
             
 
           </div>
