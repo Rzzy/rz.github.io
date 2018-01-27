@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="TCP/IP,http," />
+  <meta name="keywords" content="Node," />
 
 
 
@@ -79,27 +79,18 @@
 
 
 
-<meta name="description" content="因为HTTP协议本身存在着明文传输、不能很好的验证通信方的身份和无法验证报文的完整性等一些安全方面的确点，所以才有了HTTPS的缺陷。HTTPS确切的的说不是一种协议，而是HTTP + SSL (TSL)的结合体。HTTP报文经过SSL层加密后交付给TCP层进行传输。SSL(安全套节层)主要采取的是RSA（非对称加密）与AES（对称加密）结合的加密方式。先通过RSA交互AES的密钥，然后通过AES">
-<meta name="keywords" content="TCP&#x2F;IP,http">
+<meta name="description" content="Express框架是后台的Node框架，所以和jQuery、zepto、yui、bootstrap都不一个东西,Express在后台的受欢迎的程度，和jQuery一样，就是企业的事实上的标准。">
+<meta name="keywords" content="Node">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TCP&#x2F;IP协议族(三) 数字签名与HTTPS详解">
-<meta property="og:url" content="http://yoursite.com/2018/01/05/TCP:IP协议族(三) 数字签名与HTTPS详解/index.html">
+<meta property="og:title" content="Node学习笔记（module-3）">
+<meta property="og:url" content="http://yoursite.com/2018/01/27/node学习笔记-3/index.html">
 <meta property="og:site_name" content="Rz">
-<meta property="og:description" content="因为HTTP协议本身存在着明文传输、不能很好的验证通信方的身份和无法验证报文的完整性等一些安全方面的确点，所以才有了HTTPS的缺陷。HTTPS确切的的说不是一种协议，而是HTTP + SSL (TSL)的结合体。HTTP报文经过SSL层加密后交付给TCP层进行传输。SSL(安全套节层)主要采取的是RSA（非对称加密）与AES（对称加密）结合的加密方式。先通过RSA交互AES的密钥，然后通过AES">
+<meta property="og:description" content="Express框架是后台的Node框架，所以和jQuery、zepto、yui、bootstrap都不一个东西,Express在后台的受欢迎的程度，和jQuery一样，就是企业的事实上的标准。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103102253472-2054638254.png">
-<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103110054831-1096826423.png">
-<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103135901253-1997250857.png">
-<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103150606519-1987788124.png">
-<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103153812784-1556239221.png">
-<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103151200550-1287415863.png">
-<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103165008972-1952177713.png">
-<meta property="og:image" content="https://images2015.cnblogs.com/blog/545446/201701/545446-20170104161159112-1899339253.png">
-<meta property="og:updated_time" content="2018-01-04T16:16:45.877Z">
+<meta property="og:updated_time" content="2018-01-27T08:00:12.543Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TCP&#x2F;IP协议族(三) 数字签名与HTTPS详解">
-<meta name="twitter:description" content="因为HTTP协议本身存在着明文传输、不能很好的验证通信方的身份和无法验证报文的完整性等一些安全方面的确点，所以才有了HTTPS的缺陷。HTTPS确切的的说不是一种协议，而是HTTP + SSL (TSL)的结合体。HTTP报文经过SSL层加密后交付给TCP层进行传输。SSL(安全套节层)主要采取的是RSA（非对称加密）与AES（对称加密）结合的加密方式。先通过RSA交互AES的密钥，然后通过AES">
-<meta name="twitter:image" content="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103102253472-2054638254.png">
+<meta name="twitter:title" content="Node学习笔记（module-3）">
+<meta name="twitter:description" content="Express框架是后台的Node框架，所以和jQuery、zepto、yui、bootstrap都不一个东西,Express在后台的受欢迎的程度，和jQuery一样，就是企业的事实上的标准。">
 
 
 
@@ -129,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/05/TCP:IP协议族(三) 数字签名与HTTPS详解/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/27/node学习笔记-3/"/>
 
 
 
 
 
-  <title>TCP/IP协议族(三) 数字签名与HTTPS详解 | Rz</title>
+  <title>Node学习笔记（module-3） | Rz</title>
   
 
 
@@ -291,12 +282,12 @@
   
   
 
-  <article class="post post-type-TCP/IP" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-JavaScript" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/05/TCP:IP协议族(三) 数字签名与HTTPS详解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/27/node学习笔记-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rz">
@@ -313,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">TCP/IP协议族(三) 数字签名与HTTPS详解</h1>
+          <h1 class="post-title" itemprop="name headline">Node学习笔记（module-3）</h1>
         
 
         <div class="post-meta">
@@ -325,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-05T00:00:56+08:00">
-                2018-01-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-27T02:07:50+08:00">
+                2018-01-27
               </time>
             
 
@@ -348,8 +339,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/TCP-IP/" itemprop="url" rel="index">
-                    <span itemprop="name">TCP/IP</span>
+                  <a href="/categories/Node/" itemprop="url" rel="index">
+                    <span itemprop="name">Node</span>
                   </a>
                 </span>
 
@@ -372,7 +363,7 @@
 
           
               <div class="post-description">
-                  因为HTTP协议本身存在着明文传输、不能很好的验证通信方的身份和无法验证报文的完整性等一些安全方面的确点，所以才有了HTTPS的缺陷。HTTPS确切的的说不是一种协议，而是HTTP + SSL (TSL)的结合体。HTTP报文经过SSL层加密后交付给TCP层进行传输。SSL(安全套节层)主要采取的是RSA（非对称加密）与AES（对称加密）结合的加密方式。先通过RSA交互AES的密钥，然后通过AES进行报文加密和解密。本篇博客主要聊的就是HTTPS具体的工作过程
+                  Express框架是后台的Node框架，所以和jQuery、zepto、yui、bootstrap都不一个东西,Express在后台的受欢迎的程度，和jQuery一样，就是企业的事实上的标准。
               </div>
           
 
@@ -389,48 +380,72 @@
       
 
       
-        <blockquote>
-<p>转载：<a href="http://www.cnblogs.com/ludashi/p/6237715.html" target="_blank" rel="noopener">http://www.cnblogs.com/ludashi/p/6237715.html</a></p>
-</blockquote>
-<p>前面几篇博客聊了HTTP的相关东西，今天就来聊一聊HTTPS的东西。因为HTTP协议本身存在着明文传输、不能很好的验证通信方的身份和无法验证报文的完整性等一些安全方面的确点，所以才有了HTTPS的缺陷。HTTPS确切的的说不是一种协议，而是HTTP + SSL (TSL)的结合体。HTTP报文经过SSL层加密后交付给TCP层进行传输。SSL(安全套节层)主要采取的是RSA（非对称加密）与AES（对称加密）结合的加密方式。先通过RSA交互AES的密钥，然后通过AES进行报文加密和解密。本篇博客主要聊的就是HTTPS具体的工作过程。</p>
-<h4 id="RSA与AES简述"><a href="#RSA与AES简述" class="headerlink" title="RSA与AES简述"></a>RSA与AES简述</h4><p>在本篇博客的第一部分呢，先聊一下RAS与AES这两个加密策略，如果你在公司做过支付相关的东西，对数据传输的安全性要求比较高，这时候就得采取一些加密措施将传输的报文进行加密，必要时再进行MD5验签。当然本部分聊的RAS与AES是比较简洁的，关于这两者具体的内容，请自行Google吧。因为HTTPS在传输的过程中使用到了RSA与AES加密算法，所以在聊HTTP+SSL之前呢，我们先简单的聊一下AES与RSA。</p>
-<h5 id="Advanced-Encryption-Standard-（AES-高级加密标准）"><a href="#Advanced-Encryption-Standard-（AES-高级加密标准）" class="headerlink" title="Advanced Encryption Standard （AES: 高级加密标准）"></a>Advanced Encryption Standard （AES: 高级加密标准）</h5><p>AES，全称：Advanced Encryption Standard—-高级加密标准。该加密算法有一个密钥，该密钥可以用来加密，也可以用来解密，所以AES是对称加密算法。下方这个就是AES加密和解密的过程。Client端与Server端有一个共同的Key, 这个Key是用来加密和解密的。如果报文在传输的过程中被窃取了，没有这个key, 对加密的内容进行破解是非常困难的，当然窃取者如果有key的话，也是可以轻而易举的解密的。所以在AES中，key是关键。这也就相当于你们家的门钥匙，谁拿到钥匙后都可以打开你们家的门。即使门锁再结实，再安全，在钥匙面前也是不行呢。</p>
-<p>所以对于AES加密策略来说这个Key的保密措施要做足一些，如果之后有时间的话可以分享一些具体的AES加密策略。比如每次加密的Key都是从一个密码本中动态生成的，而这个密码本服务端和客户端都有同一本，每次传输的是一些参数。这些参数在经过一些算法的映射，从密码本中取出相应的key用来解密。这样一来，就相当于给AES加了一层防盗门，加大了破解的难度。这样做的好处是每次加密的key都是不同的，而且需要密码本以及映射算法的支持。</p>
-<p><img src="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103102253472-2054638254.png" alt="示例"></p>
-<h5 id="RSA-公钥加密算法"><a href="#RSA-公钥加密算法" class="headerlink" title="RSA 公钥加密算法"></a>RSA 公钥加密算法</h5><p>RAS这个名字，就是该算法三位发明者的名字的首字母的组合。RAS是非对称加密，其在加密和解密的过程中，需要两个Key，一个公钥（public key），一个是私钥（private key）。公钥负责加密，而私钥负责解密。从名字就可以看出，公钥是可以开放出去的，任何人都可以持有公钥进行加密。而私钥必须得进行保护，因为是用来解密的。</p>
-<p>这样一来，加密和解密就可以用不同的钥匙来处理。对于加密放来说，即使你可以对报文进行加密，如果没有私有的话也是不可以对你加密的内容进行解密的。这就相当于一个盒子，盒子上有把锁。你可以把东西放进去，然后再锁上盒子。但是如果你没有钥匙的话，也是打不开这把锁的。</p>
-<p>下方这个简图就是服务端单向验证的RAS非对称加密算法，Client内置了一个公钥，该公钥与Server端的私钥是配对的，所以Client端可以使用这个内置的Public key加密，而服务端就可以使用这个private key进行解密。目前最常用的是服务端单向认证机制。</p>
-<p><img src="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103110054831-1096826423.png" alt="图解"></p>
-<h4 id="CA证书"><a href="#CA证书" class="headerlink" title="CA证书"></a>CA证书</h4><p>如果你自己通过RAS算法生成了一个私钥和公钥，在公钥发送给客户端的过程中有可能被篡改成其他的公钥，而客户端在没有其他措施的保护下是不知道该公钥是否就是服务器那边的私钥对应的公钥的。这种自己做的RAS的公钥和私钥有可能在公钥分发的过程中被篡改。下方就是Client从Server端获取公钥时被中间者篡改了，将public换成了自己的伪public key, 同样这个中间者持有这个伪public key所对应的伪private key。如果客户端使用的伪public key进行加密传输的话，那么中间者是可以使用自己的private key进行解密的。</p>
-<p>举个例子来类比一下这个问题。</p>
-<p>假设你在古代，你出门在外，妻子在家养子。你们家有个箱子，箱子上有把锁，这就是你和你妻子互通的工具。你媳妇儿负责往箱子里放东西，然后上锁。你有把独特的钥匙，你负责开锁，取东西。可是你再将箱子给镖局托运的的过程中，被镖局的“小黑”掉包了，箱子的外表一致，锁看起来也一样，可是已经不是你的箱子了。因为路途遥远，古代又没有什么iPhone啥的，你媳妇没办法来辨别该箱子是否是原装的。然后就将一些东西放在了箱子里边，然后上锁交给了镖局的“小黑”。</p>
-<p>因为“小黑”掉包的箱子，所以小黑有箱子的钥匙呢，然后就可以打开这个箱子，取东西了。原来的箱子又在小黑那，小黑就可以往原来的箱子里边随便往箱子放点没有价值的东西给你就行了。当你发现箱子里的东西不是你想要的时候，完了，小黑从镖局辞职了，找不到人了。找镖局的人讨说法，可是镖局的人说“小黑”是镖局的临时工，这个责任镖局说了，我们不能担。鉴于你无权无势，这事儿也就此罢了。（故事纯属虚构，如有雷同纯属巧合）</p>
-<p>关于更多骗子的故事请移步网络剧《毛骗》一二三季。</p>
-<p><img src="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103135901253-1997250857.png" alt="小黑骗钱"></p>
-<p>为了防止“小黑”再次作案，所以颁布一个公正机构来证明你媳妇收到的箱子就是你发出的箱子。在RAS加密中也有一个第三方机构来充当这个角色，负责证明客户端收到的证书就是你发送的证书，中间没有被篡改。这个中间认证机构，就是数组证书认证机构, 其颁发的证书也就是我们常说的CA证书（CA , Certificate Authority）。</p>
-<p>下面我们就来详细的叙述一下证书签名，证书分发以及证书验证的整个过程。</p>
-<ol>
-<li>服务端人员使用RSA算法生成两个密钥，一个用来加密一个用来解密。将负责加密的那个密钥公布出去，所以我们称之为公钥（Public Key），而用来解密的那个密钥，不能对外公布，只有服务端持有，所以我们称之为私钥（Private Key）。服务端在将Public Key进行分发证书之前需要向CA机构申请给将要分发的公钥进行数字签名。（服务器公钥负责加密，服务器私钥负责解密）</li>
-<li>生成数字签名公钥证书：对于CA机构来说，其也有两个密钥，我们暂且称之为CA私钥和CA公钥。CA机构将服务端的Public Key作为输入参数将其转换为一个特有的Hash值。然后使用CA私钥将这个Hash值进行加密处理，并与服务端的Public Key绑定在一起，生成数字签名证书。其实数字签名证书的本质就是服务端的公钥+CA私钥加密的Hash值。（CA私钥负责签名，CA公钥负责验证）</li>
-<li>服务器获取到这个已经含有数字签名并带有公钥的证书，将该证书发送给客户端。当客户端收到该公钥数字证书后，会验证其有效性。大部分客户端都会预装CA机构的公钥，也就是CA公钥。客户端使用CA公钥对数字证书上的签名进行验证，这个验证的过程就是使用CA公钥对CA私钥加密的内容进行解密，将解密后的内容与服务端的Public Key所生成的Hash值进行匹配，如果匹配成功，则说明该证书就是相应的服务端发过来的。否则就是非法证书。</li>
-<li>验证完服务端公钥的合法性后，就可以使用该公钥进行加密通信了。</li>
-</ol>
-<p><img src="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103150606519-1987788124.png" alt="CA"></p>
-<p>下方这个截图就是苹果的根证书的一些信息，从下方可以看出，CA证书内容中包括加密算法，公共密钥以及数字签名。</p>
-<p><img src="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103153812784-1556239221.png" alt="苹果的根证书的一些信息-1"></p>
-<p>下方就是公钥以及数字签名的具体内容，当对下方公共密钥进行验证时，需要使用内置的CA公钥将数字签名进行解密。然后将解密后的内容，与公钥生成的Hash值进行比较，如果匹配成功，那么该证书就是CA机构颁布的合法证书。</p>
-<p><img src="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103151200550-1287415863.png" alt="苹果的根证书的一些信息-2"></p>
-<h4 id="HTTPS安全通信机制的建立"><a href="#HTTPS安全通信机制的建立" class="headerlink" title="HTTPS安全通信机制的建立"></a>HTTPS安全通信机制的建立</h4><p>上面我们聊完AES与RSA加密策略，然后又聊了带有数字签名的公共密钥。上面这两部分内容都是为HTTPS做铺垫的，接下来就看一看HTTP+SSL是如何进行数据传输的。</p>
-<h5 id="HTTPS简介"><a href="#HTTPS简介" class="headerlink" title="HTTPS简介"></a>HTTPS简介</h5><p>在开头的部分也说了，HTTPS不是一个新的通信协议，而是HTTP与SSL（或TSL）的组合。SSL–安全套节层(Secure Socket Layer), TSL（Transport Layer Security 安全传输层）是以SSL为原型开发的协议，IETF以SSL3.0为基准后又制定了TLS1.0、TLS1.1和TLS1.2，当前主流版本为SSL3.0与TLS1.0。</p>
-<p>HTTPS就是在HTTP与TCP层中间添加了一个SSL层。因为HTTPS被HTTP多了这层加密的流程，所以HTTPS的速度要比HTTP慢的多。</p>
-<p><img src="https://images2015.cnblogs.com/blog/545446/201701/545446-20170103165008972-1952177713.png" alt="HTTPS"></p>
-<h5 id="HTTPS的通信过程"><a href="#HTTPS的通信过程" class="headerlink" title="HTTPS的通信过程"></a>HTTPS的通信过程</h5><p>SSL的加密过程是RSA与AES混合进行的。简单概括一下，就是通过RSA加密方式来交换AES加解密的密钥，然后使用AES加密的方式来传输报文。下方是SSL建立连接以及传输数据的图解。在下图中大体可以分为四步：</p>
+        <h4 id="Express框架概览"><a href="#Express框架概览" class="headerlink" title="Express框架概览"></a>Express框架概览</h4><p>Express框架是后台的Node框架，所以和jQuery、zepto、yui、bootstrap都不一个东西。<br>Express在后台的受欢迎的程度，和jQuery一样，就是企业的事实上的标准。</p>
+<p><em>原生Node开发，会发现有很多问题。比如：</em></p>
 <ul>
-<li>第一步：有客户端发起的第一次握手，此次握手过程的主要目的是从服务端获取数字签名证书，服务端在发送数字签名证书之前要先确认客户端的SSL版本、加密算法等信息。</li>
-<li>第二步：完成第一次握手后，接着进行第二次握手。第二次握手是在客户端收到证书后发起的，主要目的是将AES加解密使用的Key （Pre-master secret）发送给服务端。当然这个AES_KEY是使用第一次握手获取的公钥进行加密的。客户端收到这个使用公钥加密后的AES_KEY，使用服务端的私钥进行解密。这样客户端和服务端经过二次握手后都持有了AES加解密的KEY。</li>
-<li>第三步：当Client与Server端都持有AES_KEY后，就可以对HTTP报文进行加解密了。<br>END: 最后就是断开连接了。具体如下图所示：</li>
+<li>呈递静态页面很不方便，需要处理每个HTTP请求，还要考虑304问题</li>
+<li>路由处理代码不直观清晰，需要写很多正则表达式和字符串函数</li>
+<li>不能集中精力写业务，要考虑很多其他的东西</li>
 </ul>
-<p><img src="https://images2015.cnblogs.com/blog/545446/201701/545446-20170104161159112-1899339253.png" alt="https加密过程"></p>
+<p><em>EXPRESS的哲学是在你的想法和服务器之间充当薄薄的一层。这并不意味着他不够健壮，或者没有足够的有用特性，而是尽量少干预你，让你充分表达自己的思想，同时提供一些有用的东西。</em></p>
+<p>英语官网：<a href="http://expressjs.com/" target="_blank" rel="noopener">http://expressjs.com/</a><br>中文官网：<a href="http://www.expressjs.com.cn/" target="_blank" rel="noopener">http://www.expressjs.com.cn/</a></p>
+<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><p><em>安装Express框架，就是使用npm的命令。</em></p>
+<p><code>npm install --save express</code></p>
+<p>–save参数，表示自动修改package.json文件，自动添加依赖项。</p>
+<h5 id="路由能力："><a href="#路由能力：" class="headerlink" title="路由能力："></a>路由能力：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&quot;express&quot;);</span><br><span class="line"></span><br><span class="line">var app = express();</span><br><span class="line"></span><br><span class="line">app.get(&quot;/&quot;,function(req,res)&#123;</span><br><span class="line">    res.send(&quot;你好&quot;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.get(&quot;/haha&quot;,function(req,res)&#123;</span><br><span class="line">    res.send(&quot;这是haha页面，哈哈哈哈哈哈&quot;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.get(/^\/student\/([\d]&#123;10&#125;)$/,function(req,res)&#123;</span><br><span class="line">    res.send(&quot;学生信息，学号&quot; + req.params[0]);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.get(&quot;/teacher/:gonghao&quot;,function(req,res)&#123;</span><br><span class="line">    res.send(&quot;老师信息，工号&quot; + req.params.gonghao);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(3000);</span><br></pre></td></tr></table></figure>
+<h5 id="静态文件伺服能力："><a href="#静态文件伺服能力：" class="headerlink" title="静态文件伺服能力："></a>静态文件伺服能力：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(express.static(&quot;./public&quot;));</span><br></pre></td></tr></table></figure>
+<h5 id="模板引擎："><a href="#模板引擎：" class="headerlink" title="模板引擎："></a>模板引擎：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&quot;express&quot;);</span><br><span class="line"></span><br><span class="line">var app = express();</span><br><span class="line"></span><br><span class="line">app.set(&quot;view engine&quot;,&quot;ejs&quot;);</span><br><span class="line"></span><br><span class="line">app.get(&quot;/&quot;,function(req,res)&#123;</span><br><span class="line">    res.render(&quot;haha&quot;,&#123;</span><br><span class="line">        &quot;news&quot; : [&quot;我是小新闻啊&quot;,&quot;我也是啊&quot;,&quot;哈哈哈哈&quot;]</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(3000);</span><br></pre></td></tr></table></figure>
+<h4 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h4><p>当用get请求访问一个网址的时候，做什么事情：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(&quot;网址&quot;,function(req,res)&#123;</span><br><span class="line">    </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>当用post访问一个网址的时候，做什么事情：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.post(&quot;网址&quot;,function(req,res)&#123;</span><br><span class="line">    </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>如果想处理这个网址的任何method的请求，那么写all</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.all(&quot;/&quot;,function()&#123;</span><br><span class="line">    </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这里的网址，不分大小写，也就是说，你路由是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(&quot;/AAb&quot;,function(req,res)&#123;</span><br><span class="line">    res.send(&quot;你好&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>实际上小写的访问也行。</p>
+<p>所有的GET参数，? 后面的都已经被忽略。 锚点#也被忽略<br>你路由到/a ， 实际/a?id=2&amp;sex=nan 也能被处理。</p>
+<p>正则表达式可以被使用。正则表达式中，未知部分用圆括号分组，然后可以用req.params[0]、[1]得到。<br>req.params类数组对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(/^\/student\/([\d]&#123;10&#125;)$/,function(req,res)&#123;</span><br><span class="line">    res.send(&quot;学生信息，学号&quot; + req.params[0]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>冒号是更推荐的写法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">app.get(&quot;/student/:id&quot;,function(req,res)&#123;</span><br><span class="line">    var id = req.params[&quot;id&quot;];</span><br><span class="line">    var reg= /^[\d]&#123;6&#125;$/;   //正则验证</span><br><span class="line">    if(reg.test(id))&#123;</span><br><span class="line">        res.send(id);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        res.send(&quot;请检查格式&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>表单可以自己提交到自己上:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app.get(&quot;/&quot;,function(req,res)&#123;</span><br><span class="line">    res.render(&quot;form&quot;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.post(&quot;/&quot;,function(req,res)&#123;</span><br><span class="line">    //将数据添加进入数据库</span><br><span class="line">    res.send(&quot;成功&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>适合进行 RESTful路由设计。简单说，就是一个路径，但是http method不同，对这个页面的使用也不同。<br>/student/345345</p>
+<ul>
+<li>get  读取学生信息</li>
+<li>add  添加学生信息</li>
+<li>delete  删除学生新</li>
+</ul>
+<h4 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h4><p>如果我的的get、post回调函数中，没有next参数，那么就匹配上第一个路由，就不会往下匹配了。<br>如果想往下匹配的话，那么需要写next()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app.get(&quot;/&quot;,function(req,res,next)&#123;</span><br><span class="line">    console.log(&quot;1&quot;);</span><br><span class="line">    next();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.get(&quot;/&quot;,function(req,res)&#123;</span><br><span class="line">    console.log(&quot;2&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>下面两个路由，感觉没有关系：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">app.get(&quot;/:username/:id&quot;,function(req,res)&#123;</span><br><span class="line">    console.log(&quot;1&quot;);</span><br><span class="line">    res.send(&quot;用户信息&quot; + req.params.username);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.get(&quot;/admin/login&quot;,function(req,res)&#123;</span><br><span class="line">    console.log(&quot;2&quot;);</span><br><span class="line">    res.send(&quot;管理员登录&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>但是实际上冲突了，因为admin可以当做用户名 login可以当做id。</p>
+<p><em>解决方法1：</em><br>交换位置。 也就是说，express中所有的路由（中间件）的顺序至关重要。<br>匹配上第一个，就不会往下匹配了。 具体的往上写，抽象的往下写。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">app.get(&quot;/admin/login&quot;,function(req,res)&#123;</span><br><span class="line">    console.log(&quot;2&quot;);</span><br><span class="line">    res.send(&quot;管理员登录&quot;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.get(&quot;/:username/:id&quot;,function(req,res)&#123;</span><br><span class="line">    console.log(&quot;1&quot;);</span><br><span class="line">    res.send(&quot;用户信息&quot; + req.params.username);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><em>解决方法2：</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">app.get(&quot;/:username/:id&quot;,function(req,res,next)&#123;</span><br><span class="line">    var username = req.params.username;</span><br><span class="line">    //检索数据库，如果username不存在，那么next()</span><br><span class="line">    if(检索数据库)&#123;</span><br><span class="line">        console.log(&quot;1&quot;);</span><br><span class="line">        res.send(&quot;用户信息&quot;);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        next();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.get(&quot;/admin/login&quot;,function(req,res)&#123;</span><br><span class="line">    console.log(&quot;2&quot;);</span><br><span class="line">    res.send(&quot;管理员登录&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>路由get、post这些东西，就是中间件，中间件讲究顺序，匹配上第一个之后，就不会往后匹配了。next函数才能够继续往后匹配。</p>
+<p><code>app.use()</code>也是一个中间件。与get、post不同的是，他的网址不是精确匹配的。而是能够有小文件夹拓展的。<br>比如网址：  <a href="http://127.0.0.1:3000/admin/aa/bb/cc/dd" target="_blank" rel="noopener">http://127.0.0.1:3000/admin/aa/bb/cc/dd</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">app.use(&quot;/admin&quot;,function(req,res)&#123; </span><br><span class="line">    res.write(req.originalUrl + &quot;\n&quot;);   //    /admin/aa/bb/cc/dd</span><br><span class="line">    res.write(req.baseUrl + &quot;\n&quot;);  //   /admin</span><br><span class="line">    res.write(req.path + &quot;\n&quot;);   //    /aa/bb/cc/dd</span><br><span class="line">    res.end(&quot;你好&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>如果写一个”/“</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//当你不写路径的时候，实际上就相当于&quot;/&quot;，就是所有网址</span><br><span class="line">app.use(function(req,res,next)&#123;</span><br><span class="line">    console.log(new Date());</span><br><span class="line">    next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>app.use()就给了我们增加一些特定功能的便利场所。</p>
+<p>实际上app.use()的东西，基本上都从第三方能得到。</p>
+<ul>
+<li>大多数情况下，渲染内容用res.render()，将会根据views中的模板文件进行渲染。如果不想使用views文件夹，想自己设置文件夹名字，那么app.set(“views”,”aaaa”);</li>
+<li>如果想写一个快速测试页，当然可以使用res.send()。这个函数将根据内容，自动帮我们设置了Content-Type头部和200状态码。send()只能用一次，和end一样。和end不一样在哪里？能够自动设置MIME类型。</li>
+<li>如果想使用不同的状态码，可以：<br>  <code>res.status(404).send(&#39;Sorry, we cannot find that!&#39;)</code>;</li>
+<li>如果想使用不同的Content-Type，可以：<br>  <code>res.set(&#39;Content-Type&#39;, &#39;text/html&#39;)</code>;</li>
+</ul>
+<h4 id="GET请求和POST请求的参数"><a href="#GET请求和POST请求的参数" class="headerlink" title="GET请求和POST请求的参数"></a>GET请求和POST请求的参数</h4><ul>
+<li>GET请求的参数在URL中，在原生Node中，需要使用url模块来识别参数字符串。在Express中，不需要使用url模块了。可以直接使用req.query对象。</li>
+<li>POST请求在express中不能直接获得，必须使用body-parser模块。使用后，将可以用req.body得到参数。但是如果表单中含有文件上传，那么还是需要使用formidable模块。</li>
+</ul>
+<p>Node中全是回调函数，所以我们自己封装的函数，里面如果有异步的方法，比如I/O，那么就要用回调函数的方法封装。</p>
+<p><em>错误：</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">res.reder(&quot;index&quot;,&#123;</span><br><span class="line">    &quot;name&quot; : student.getDetailById(234234).name</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p><em>正确:</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">student.getDetailByXueHao(234234,function(detail)&#123;</span><br><span class="line">    res.render(&quot;index&quot;,&#123;</span><br><span class="line">        &quot;name&quot; : detail.name</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -448,9 +463,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/TCP-IP/" rel="tag"># TCP/IP</a>
-          
-            <a href="/tags/http/" rel="tag"># http</a>
+            <a href="/tags/Node/" rel="tag"># Node</a>
           
         </div>
       
@@ -463,8 +476,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/04/TCP:IP协议族(二) HTTP报文头解析/" rel="next" title="TCP/IP协议族(二) HTTP报文头解析">
-                <i class="fa fa-chevron-left"></i> TCP/IP协议族(二) HTTP报文头解析
+              <a href="/2018/01/27/node学习笔记-2/" rel="next" title="Node学习笔记（module-2）">
+                <i class="fa fa-chevron-left"></i> Node学习笔记（module-2）
               </a>
             
           </div>
@@ -472,10 +485,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/05/Proxy/" rel="prev" title="es6中的代理Proxy">
-                es6中的代理Proxy <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -629,7 +638,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#RSA与AES简述"><span class="nav-number">1.</span> <span class="nav-text">RSA与AES简述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Advanced-Encryption-Standard-（AES-高级加密标准）"><span class="nav-number">1.1.</span> <span class="nav-text">Advanced Encryption Standard （AES: 高级加密标准）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#RSA-公钥加密算法"><span class="nav-number">1.2.</span> <span class="nav-text">RSA 公钥加密算法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CA证书"><span class="nav-number">2.</span> <span class="nav-text">CA证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTPS安全通信机制的建立"><span class="nav-number">3.</span> <span class="nav-text">HTTPS安全通信机制的建立</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#HTTPS简介"><span class="nav-number">3.1.</span> <span class="nav-text">HTTPS简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTTPS的通信过程"><span class="nav-number">3.2.</span> <span class="nav-text">HTTPS的通信过程</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Express框架概览"><span class="nav-number">1.</span> <span class="nav-text">Express框架概览</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#路由能力："><span class="nav-number">1.2.</span> <span class="nav-text">路由能力：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#静态文件伺服能力："><span class="nav-number">1.3.</span> <span class="nav-text">静态文件伺服能力：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#模板引擎："><span class="nav-number">1.4.</span> <span class="nav-text">模板引擎：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#路由"><span class="nav-number">2.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中间件"><span class="nav-number">3.</span> <span class="nav-text">中间件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GET请求和POST请求的参数"><span class="nav-number">4.</span> <span class="nav-text">GET请求和POST请求的参数</span></a></li></ol></div>
             
 
           </div>
