@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Node," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,18 +79,16 @@
 
 
 
-<meta name="description" content="本篇介绍关于Node的模块，post请求和模版引擎">
-<meta name="keywords" content="Node">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Node学习笔记（module-2）">
-<meta property="og:url" content="http://yoursite.com/2018/01/27/node学习笔记-2/index.html">
+<meta name="description" content="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rz">
+<meta property="og:url" content="http://yoursite.com/archives/2018/page/3/index.html">
 <meta property="og:site_name" content="Rz">
-<meta property="og:description" content="本篇介绍关于Node的模块，post请求和模版引擎">
+<meta property="og:description" content="description">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-27T03:50:14.306Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Node学习笔记（module-2）">
-<meta name="twitter:description" content="本篇介绍关于Node的模块，post请求和模版引擎">
+<meta name="twitter:title" content="Rz">
+<meta name="twitter:description" content="description">
 
 
 
@@ -120,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/27/node学习笔记-2/"/>
+  <link rel="canonical" href="http://yoursite.com/archives/2018/page/3/"/>
 
 
 
 
 
-  <title>Node学习笔记（module-2） | Rz</title>
+  <title>归档 | Rz</title>
   
 
 
@@ -145,7 +143,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left page-archive">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -273,246 +271,78 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
 
-  
+      <span class="archive-page-counter">
+        
+        
+        
+          
+        
+        嗯..! 目前共计 28 篇日志。 继续努力。
+      </span>
 
-  
-  
-  
-
-  <article class="post post-type-JavaScript" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/27/node学习笔记-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Rz">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rz">
-    </span>
-
-    
-      <header class="post-header">
+      
 
         
         
-          <h1 class="post-title" itemprop="name headline">Node学习笔记（module-2）</h1>
         
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-27T02:07:50+08:00">
-                2018-01-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Node/" itemprop="url" rel="index">
-                    <span itemprop="name">Node</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-              <div class="post-description">
-                  本篇介绍关于Node的模块，post请求和模版引擎
-              </div>
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h4 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h4><ul>
-<li>在Node.js中，以模块为单位划分所有功能，并且提供了一个完整的模块加载机制，这时的我们可以将应用程序划分为各个不同的部分。<br>不可能用一个js文件去写全部的业务。肯定要有MVC。</li>
-<li>狭义的说，每一个JavaScript文件都是一个模块；而多个JavaScript文件之间可以相互require，他们共同实现了一个功能，他们整体对外，又称为一个广义上的模块。</li>
-<li>Node.js中，一个JavaScript文件中定义的变量、函数，都只在这个文件内部有效。当需要从此JS文件外部引用这些变量、函数时，必须使用exports对象进行暴露。使用者要用require()命令引用这个JS文件。</li>
-</ul>
-<p>foo.js文件中的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var msg = &quot;你好&quot;;</span><br><span class="line"></span><br><span class="line">exports.msg = msg;</span><br></pre></td></tr></table></figure></p>
-<p>msg这个变量，是一个js文件内部才有作用域的变量。<br>如果别人想用这个变量，那么就要用exports进行暴露。</p>
-<p>使用者：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var foo = require(&quot;./test/foo.js&quot;);</span><br><span class="line"></span><br><span class="line">console.log(foo.msg);</span><br></pre></td></tr></table></figure></p>
-<p>使用者用foo来接收exports对象，也就是说，这里的foo变量，就是文件中的exports变量。</p>
-<ul>
-<li>一个JavaScript文件，可以向外exports无数个变量、函数。但是require的时候，仅仅需要require这个JS文件一次。使用的它的变量、函数的时候，用点语法即可。所以，无形之中，增加了一个顶层命名空间。</li>
-</ul>
-<p>js文件中，可以用exports暴露很多东西，比如函数、变量。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var msg = &quot;你好&quot;;</span><br><span class="line">var info = &quot;呵呵&quot;;</span><br><span class="line"></span><br><span class="line">function showInfo()&#123;</span><br><span class="line">    console.log(info);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports.msg = msg;</span><br><span class="line">exports.info = info;</span><br><span class="line">exports.showInfo = showInfo;</span><br></pre></td></tr></table></figure>
-<p>在使用者中，只需要require一次。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var foo = require(&quot;./test/foo.js&quot;);</span><br></pre></td></tr></table></figure>
-<p>相当于增加了顶层变量。所有的函数、变量都要从这个顶层变量走：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.log(foo.msg);</span><br><span class="line"></span><br><span class="line">console.log(foo.info);</span><br><span class="line"></span><br><span class="line">foo.showInfo();</span><br></pre></td></tr></table></figure></p>
-<p>Node中，js文件和js文件，就是被一个个exports和require构建成为网状的。<br>不是靠html文件统一在一起的。</p>
-<ul>
-<li>可以将一个JavaScript文件中，描述一个类。用<code>module.export = 构造函数名</code>;的方式向外暴露一个类。</li>
-</ul>
-<blockquote>
-<p>也就是说，js文件和js文件之间有两种合作的模式：</p>
-<ol>
-<li>某一个js文件中，提供了函数，供别人使用。 只需要暴露函数就行了； exports.msg=msg;</li>
-<li>某一个js文件，描述了一个类。   module.exports = People;</li>
-</ol>
-</blockquote>
-<ul>
-<li><p>如果在require命令中，这么写:<code>var foo = require(&quot;foo.js&quot;);   //没有写./</code>， 所以不是一个相对路径。是一个特殊的路径<br>那么Node.js将该文件视为node_modules目录下的一个文件</p>
-</li>
-<li><p>node_modules文件夹并不一定在同级目录里面，在任何直接祖先级目录中，都可以。甚至可以放到NODE_PATH环境变量的文件夹中。这样做的好处稍后你将知道：分享项目的时候，不需要带着modules一起给别人。</p>
-</li>
-<li><p>我们可以使用文件夹来管理模块，比如<code>var bar = require(&quot;bar&quot;)</code>;<br>那么Node.js将会去寻找node_modules目录下的bar文件夹中的index.js去执行。</p>
-</li>
-</ul>
-<p>每一个模块文件夹中，推荐都写一个<code>package.json</code>文件，这个文件的名字不能改。node将自动读取里面的配置。有一个main项，就是入口文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;kaoladebar&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.1&quot;,</span><br><span class="line">  &quot;main&quot; : &quot;app.js&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>package.json文件，要放到模块文件夹的根目录去。</p>
-<p>模块就是一些功能的封装，所以一些成熟的、经常使用的功能，都有人封装成为了模块。并且放到了社区中，供人免费下载。<br>这个伟大的社区，叫做npm。 也是一个工具名字  node package management<br><a href="https://www.npmjs.com/" target="_blank" rel="noopener">https://www.npmjs.com/</a></p>
-<p>去社区搜索需求，然后点进去，看api。<br>如果要配置一个模块，那么直接在cmd使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install 模块名字</span><br></pre></td></tr></table></figure>
-<p>就可以安装。 模块名字全球唯一。<br>安装的时候，要注意，命令提示符的所在位置。</p>
-<ol>
-<li>我们的依赖包，可能在随时更新，我们永远想保持更新，或者某持某一个版本；</li>
-<li>项目越来越大的时候，给别人看的时候，没有必要再次共享我们引用的第三方模块。</li>
-</ol>
-<p>我们可以用package.json来管理依赖。<br>在cmd中，使用<code>npm init</code>可以初始化一个package.json文件，用回答问题的方式生成一个新的package.json文件。</p>
-<p>使用<code>npm install</code>将能安装所有依赖。<br>npm也有文档，这是package.json的介绍：<br><a href="https://docs.npmjs.com/files/package.json" target="_blank" rel="noopener">https://docs.npmjs.com/files/package.json</a></p>
-<p>require()别的js文件的时候，将执行那个js文件。</p>
-<blockquote>
-<p>注意：require()中的路径，是从当前这个js文件出发，找到别人。而fs是从命令提示符所在目录出发找到别人。<br>所以，桌面上有一个a.js， test文件夹中有b.js、c.js、1.txt</p>
-</blockquote>
-<p>a要引用b：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var b = require(“./test/b.js”);</span><br></pre></td></tr></table></figure></p>
-<p>b要引用c：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var b = require(“./c.js”);</span><br></pre></td></tr></table></figure></p>
-<p>但是，fs等其他的模块用到路径的时候，都是相对于cmd命令光标所在位置。<br>所以，在b.js中想读1.txt文件，推荐用绝对路径：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(__dirname + &quot;/1.txt&quot;,function(err,data)&#123;</span><br><span class="line">    if(err) &#123; throw err; &#125;</span><br><span class="line">    console.log(data.toString());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h4 id="post请求"><a href="#post请求" class="headerlink" title="post请求"></a>post请求</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var alldata = &quot;&quot;;</span><br><span class="line">//下面是post请求接收的一个公式</span><br><span class="line">//node为了追求极致，它是一个小段一个小段接收的。</span><br><span class="line">//接受了一小段，可能就给别人去服务了。防止一个过大的表单阻塞了整个进程</span><br><span class="line">req.addListener(&quot;data&quot;,function(chunk)&#123;</span><br><span class="line">    alldata += chunk;</span><br><span class="line">&#125;);</span><br><span class="line">//全部传输完毕</span><br><span class="line">req.addListener(&quot;end&quot;,function()&#123;</span><br><span class="line">    console.log(alldata.toString());</span><br><span class="line">    res.end(&quot;success&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>原生写POST处理，比较复杂，要写两个监听。文件上传业务比较难写。<br>所以，用第三方模块。formidable。</p>
-<p>只要涉及文件上传，那么form标签要加一个属性：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=&quot;http://127.0.0.1/dopost&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;&lt;%= url %&gt;&quot;&gt;&lt;img src=&quot;&lt;%= imageURL %&gt;&quot; alt=&quot;&quot;&gt;&lt;/a&gt;</span><br></pre></td></tr></table></figure>
-<p>数据绑定，就成为一个完整的html字符串了。<br>前台的模板，我们现在要学习的是后台的模板。<br>后台模板，著名的有两个，第一个叫做ejs； 第二个叫做jade。</p>
-<p>是npm第三方包。</p>
-<h5 id="EJS"><a href="#EJS" class="headerlink" title="EJS"></a>EJS</h5><p>Embedded JavaScript templates<br>后台模板引擎</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;% for(var i = 0 ; i &lt; news.length ; i++)&#123; %&gt;</span><br><span class="line">        &lt;li&gt;&lt;%= news[i] %&gt;&lt;/li&gt;</span><br><span class="line">    &lt;% &#125; %&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var dictionary = &#123;</span><br><span class="line">          a:6,</span><br><span class="line">          news : [&quot;1期班太牛逼了&quot;,&quot;高薪就业&quot;,&quot;哈哈哈哈哈&quot;]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by Danny on 2015/9/20 16:59.</span><br><span class="line"> */</span><br><span class="line">var ejs = require(&quot;ejs&quot;);</span><br><span class="line">var fs = require(&quot;fs&quot;);</span><br><span class="line">var http = require(&quot;http&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">var server = http.createServer(function(req,res)&#123;</span><br><span class="line">    fs.readFile(&quot;./views/index.ejs&quot;,function(err,data)&#123;</span><br><span class="line">        //绑定模板</span><br><span class="line">        var template = data.toString();</span><br><span class="line">        var dictionary = &#123;</span><br><span class="line">            a:6,</span><br><span class="line">            news : [</span><br><span class="line">                &#123;&quot;title&quot;:&quot;陈伟我爱你&quot;,&quot;count&quot;:10&#125;,</span><br><span class="line">                &#123;&quot;title&quot;:&quot;哈哈哈哈&quot;,&quot;count&quot;:20&#125;,</span><br><span class="line">                &#123;&quot;title&quot;:&quot;逗你玩儿的&quot;,&quot;count&quot;:30&#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;;</span><br><span class="line">        var html = ejs.render(template,dictionary);</span><br><span class="line"></span><br><span class="line">        //显示</span><br><span class="line">        res.writeHead(200,&#123;&quot;Content-Type&quot;:&quot;text/html;charset=UTF8&quot;&#125;);</span><br><span class="line">        res.end(html);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">server.listen(80,&quot;127.0.0.1&quot;);</span><br></pre></td></tr></table></figure>
-<p>ejs详解：<br>npm：<a href="https://www.npmjs.com/package/ejs" target="_blank" rel="noopener">https://www.npmjs.com/package/ejs</a><br><a href="https://segmentfault.com/a/1190000004286562" target="_blank" rel="noopener">中文版，译者：飞龙</a></p>
-<h5 id="jade"><a href="#jade" class="headerlink" title="jade"></a>jade</h5><p><a href="https://www.npmjs.com/package/jade" target="_blank" rel="noopener">https://www.npmjs.com/package/jade</a><br><a href="http://expressjs.jser.us/jade.html" target="_blank" rel="noopener">草依山 翻译</a></p>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Node/" rel="tag"># Node</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/01/27/node学习笔记-3/" rel="next" title="Node学习笔记（module-3）">
-                <i class="fa fa-chevron-left"></i> Node学习笔记（module-3）
-              </a>
-            
+          <div class="collection-title">
+            <h1 class="archive-year" id="archive-year-2018">2018</h1>
           </div>
+        
+        
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/27/node学习笔记-1/" rel="prev" title="Node学习笔记（module-1）">
-                Node学习笔记（module-1） <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
+  <article class="post post-type-es6" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2018/01/01/iterator-die-dai-qi/" itemprop="url">
+              
+                <span itemprop="name">iterator 迭代器</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-01-01T00:48:56+08:00"
+              content="2018-01-01" >
+          01-01
+        </time>
+      </div>
+
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
       
+
     </div>
   </div>
+  
+  
+  
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/archives/2018/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2018/">1</a><a class="page-number" href="/archives/2018/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
+
 
 
           </div>
@@ -520,10 +350,6 @@
 
 
           
-
-  
-
-
 
         </div>
         
@@ -544,17 +370,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -636,22 +453,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#模块"><span class="nav-number">1.</span> <span class="nav-text">模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#post请求"><span class="nav-number">2.</span> <span class="nav-text">post请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模板引擎"><span class="nav-number">3.</span> <span class="nav-text">模板引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#EJS"><span class="nav-number">3.1.</span> <span class="nav-text">EJS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#jade"><span class="nav-number">3.2.</span> <span class="nav-text">jade</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -785,10 +586,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 

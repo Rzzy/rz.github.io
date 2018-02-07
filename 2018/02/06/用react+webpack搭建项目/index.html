@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Node," />
+  <meta name="keywords" content="JavaScript,React," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="本篇介绍关于Node的模块，post请求和模版引擎">
-<meta name="keywords" content="Node">
+<meta name="description" content="准备工作安装 Webpack12345mkdir my-project &amp;amp;&amp;amp; cd my-project; // 创建并打开项目文件夹npm init y;  // 生成package.jsonnpm install webpack --save-dev  // 本地安装webpack 我们的项目目录结构：  /app main.js component.js   /build b">
+<meta name="keywords" content="JavaScript,React">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Node学习笔记（module-2）">
-<meta property="og:url" content="http://yoursite.com/2018/01/27/node学习笔记-2/index.html">
+<meta property="og:title" content="使用webpack+reack开发项目">
+<meta property="og:url" content="http://yoursite.com/2018/02/06/用react+webpack搭建项目/index.html">
 <meta property="og:site_name" content="Rz">
-<meta property="og:description" content="本篇介绍关于Node的模块，post请求和模版引擎">
+<meta property="og:description" content="准备工作安装 Webpack12345mkdir my-project &amp;amp;&amp;amp; cd my-project; // 创建并打开项目文件夹npm init y;  // 生成package.jsonnpm install webpack --save-dev  // 本地安装webpack 我们的项目目录结构：  /app main.js component.js   /build b">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-27T03:50:14.306Z">
+<meta property="og:updated_time" content="2018-02-07T04:00:26.854Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Node学习笔记（module-2）">
-<meta name="twitter:description" content="本篇介绍关于Node的模块，post请求和模版引擎">
+<meta name="twitter:title" content="使用webpack+reack开发项目">
+<meta name="twitter:description" content="准备工作安装 Webpack12345mkdir my-project &amp;amp;&amp;amp; cd my-project; // 创建并打开项目文件夹npm init y;  // 生成package.jsonnpm install webpack --save-dev  // 本地安装webpack 我们的项目目录结构：  /app main.js component.js   /build b">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/27/node学习笔记-2/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/06/用react+webpack搭建项目/"/>
 
 
 
 
 
-  <title>Node学习笔记（module-2） | Rz</title>
+  <title>使用webpack+reack开发项目 | Rz</title>
   
 
 
@@ -287,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/27/node学习笔记-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/06/用react+webpack搭建项目/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rz">
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Node学习笔记（module-2）</h1>
+          <h1 class="post-title" itemprop="name headline">使用webpack+reack开发项目</h1>
         
 
         <div class="post-meta">
@@ -316,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-27T02:07:50+08:00">
-                2018-01-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-06T22:53:12+08:00">
+                2018-02-06
               </time>
             
 
@@ -339,8 +339,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Node/" itemprop="url" rel="index">
-                    <span itemprop="name">Node</span>
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
                   </a>
                 </span>
 
@@ -362,10 +362,6 @@
           
 
           
-              <div class="post-description">
-                  本篇介绍关于Node的模块，post请求和模版引擎
-              </div>
-          
 
         </div>
       </header>
@@ -380,77 +376,101 @@
       
 
       
-        <h4 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h4><ul>
-<li>在Node.js中，以模块为单位划分所有功能，并且提供了一个完整的模块加载机制，这时的我们可以将应用程序划分为各个不同的部分。<br>不可能用一个js文件去写全部的业务。肯定要有MVC。</li>
-<li>狭义的说，每一个JavaScript文件都是一个模块；而多个JavaScript文件之间可以相互require，他们共同实现了一个功能，他们整体对外，又称为一个广义上的模块。</li>
-<li>Node.js中，一个JavaScript文件中定义的变量、函数，都只在这个文件内部有效。当需要从此JS文件外部引用这些变量、函数时，必须使用exports对象进行暴露。使用者要用require()命令引用这个JS文件。</li>
-</ul>
-<p>foo.js文件中的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var msg = &quot;你好&quot;;</span><br><span class="line"></span><br><span class="line">exports.msg = msg;</span><br></pre></td></tr></table></figure></p>
-<p>msg这个变量，是一个js文件内部才有作用域的变量。<br>如果别人想用这个变量，那么就要用exports进行暴露。</p>
-<p>使用者：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var foo = require(&quot;./test/foo.js&quot;);</span><br><span class="line"></span><br><span class="line">console.log(foo.msg);</span><br></pre></td></tr></table></figure></p>
-<p>使用者用foo来接收exports对象，也就是说，这里的foo变量，就是文件中的exports变量。</p>
+        <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><h4 id="安装-Webpack"><a href="#安装-Webpack" class="headerlink" title="安装 Webpack"></a>安装 Webpack</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir my-project &amp;&amp; cd my-project; // 创建并打开项目文件夹</span><br><span class="line"></span><br><span class="line">npm init y;  // 生成package.json</span><br><span class="line"></span><br><span class="line">npm install webpack --save-dev  // 本地安装webpack</span><br></pre></td></tr></table></figure>
+<p>我们的项目目录结构：</p>
 <ul>
-<li>一个JavaScript文件，可以向外exports无数个变量、函数。但是require的时候，仅仅需要require这个JS文件一次。使用的它的变量、函数的时候，用点语法即可。所以，无形之中，增加了一个顶层命名空间。</li>
+<li>/app<ul>
+<li>main.js</li>
+<li>component.js</li>
 </ul>
-<p>js文件中，可以用exports暴露很多东西，比如函数、变量。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var msg = &quot;你好&quot;;</span><br><span class="line">var info = &quot;呵呵&quot;;</span><br><span class="line"></span><br><span class="line">function showInfo()&#123;</span><br><span class="line">    console.log(info);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports.msg = msg;</span><br><span class="line">exports.info = info;</span><br><span class="line">exports.showInfo = showInfo;</span><br></pre></td></tr></table></figure>
-<p>在使用者中，只需要require一次。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var foo = require(&quot;./test/foo.js&quot;);</span><br></pre></td></tr></table></figure>
-<p>相当于增加了顶层变量。所有的函数、变量都要从这个顶层变量走：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.log(foo.msg);</span><br><span class="line"></span><br><span class="line">console.log(foo.info);</span><br><span class="line"></span><br><span class="line">foo.showInfo();</span><br></pre></td></tr></table></figure></p>
-<p>Node中，js文件和js文件，就是被一个个exports和require构建成为网状的。<br>不是靠html文件统一在一起的。</p>
-<ul>
-<li>可以将一个JavaScript文件中，描述一个类。用<code>module.export = 构造函数名</code>;的方式向外暴露一个类。</li>
+</li>
+<li>/build<ul>
+<li>bundle.js (自动创建)</li>
+<li>index.html</li>
 </ul>
+</li>
+<li>package.json</li>
+<li>webpack.config.js</li>
+</ul>
+<h4 id="设置-Webpack"><a href="#设置-Webpack" class="headerlink" title="设置 Webpack"></a>设置 Webpack</h4><p>webpack.config.js 的配置文件长这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var path = require(&apos;path&apos;);</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">    entry: path.resolve(__dirname, &apos;./app/main.js&apos;),</span><br><span class="line">    output: &#123;</span><br><span class="line">        path: path.resolve(__dirname, &apos;./build&apos;),</span><br><span class="line">        filename: &apos;bundle.js&apos;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="第一个编译"><a href="#第一个编译" class="headerlink" title="第一个编译"></a>第一个编译</h4><p>现在我们有了一个最简单的配置，我们需要有什么东西去编译，让我们开始一个经典的 Hello World，设置 /app 像这样：</p>
+<p><em>app/component.js</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line"></span><br><span class="line">module.exports = function () &#123;</span><br><span class="line">    var element = document.createElement(&apos;h1&apos;);</span><br><span class="line"></span><br><span class="line">    element.innerHTML = &apos;Hello world&apos;;</span><br><span class="line"></span><br><span class="line">    return element;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><em>app/main.js</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line">var component = require(&apos;./component.js&apos;);</span><br><span class="line"></span><br><span class="line">document.body.appendChild(component());</span><br></pre></td></tr></table></figure>
+<p>在命令行运行 webpack，然后你的应用会开始编译，一个 bundle.js 文件就这样出现在你的 /build 文件夹下，需要在 build/ 下的 index.html 去启动项目。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;/&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;script src=&quot;bundle.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>也就是说，js文件和js文件之间有两种合作的模式：</p>
-<ol>
-<li>某一个js文件中，提供了函数，供别人使用。 只需要暴露函数就行了； exports.msg=msg;</li>
-<li>某一个js文件，描述了一个类。   module.exports = People;</li>
-</ol>
+<p>这个文件可以用 <a href="https://www.npmjs.com/package/html-webpack-plugin" target="_blank" rel="noopener"><code>html-webpack-plugin</code></a> 来生成。如果你觉得冒险，那就把剩下的工具交给它来做。使用它就只有一个配置的问题。一般来说使用 Webpack 来工作就是这么个套路。</p>
 </blockquote>
+<h4 id="运行应用"><a href="#运行应用" class="headerlink" title="运行应用"></a>运行应用</h4><p>只要双击 index.html 或者设置一个 Web 服务指向 build/ 文件夹。</p>
+<h4 id="设置-package-json-scripts"><a href="#设置-package-json-scripts" class="headerlink" title="设置 package.json scripts"></a>设置 package.json scripts</h4><p>npm 是一个非常好用的用来编译的指令，通过 npm 你可以不用去担心项目中使用了什么技术，你只要调用这个指令就可以了，只要你在 package.json 中设置 scripts 的值就可以了。</p>
+<p>在这个案例中我们把编译步骤放到 npm run build 中是这样：</p>
+<ol>
+<li>npm i webpack –save - 如果你只是想要作为一个开发依赖安装 Webpack，你可以使用 –save-dev 参数。当你开发的项目中不依赖这个工具的时候这个命令是非常便利的。（不是个好主意！）</li>
+<li>把下面的内容添加到 package.json中。</li>
+</ol>
+<blockquote>
+<p>–save和–save-dev的区别:<br>相同点：都是写入到package.json中<br>不同点：1使用 –save-dev 安装的 插件，被写入到 devDependencies 对象里面去，而使用 –save 安装的插件，则被写入到 dependencies 对象里面去。<br>devDependencies  里面的插件只用于开发环境，不用于生产环境，而 dependencies  是需要发布到生产环境的。</p>
+</blockquote>
+<p>现在你可以输入 <code>npm run build</code> 就可以编译了。</p>
+<p>当项目越发复杂的时候，这样的方法会变得越来越有效。你可以把所有复杂的操作隐藏在 scripts 里面来保证界面的简洁。</p>
+<p>不过潜在的问题是这种方法会导致如果你使用一些特殊的指令的时候只能在 Unix 环境中使用。所以如果你需要考虑一些未知的环境中的话，那么 <a href="https://www.npmjs.com/package/gulp-webpack" target="_blank" rel="noopener">gulp-webpack</a> 会是一个好的解决方案。</p>
+<p>注意 NPM 会找到 Webpack，npm run 会把他临时加到 PATH来让我们这个神奇的命令工作。</p>
+<p>如果需要一直输入 npm run build 确实是一件非常无聊的事情，幸运的是，我们可以把让他安静的运行，让我们设置 webpack-dev-server。</p>
+<h4 id="设置-webpack-dev-server"><a href="#设置-webpack-dev-server" class="headerlink" title="设置 webpack-dev-server"></a>设置 webpack-dev-server</h4><p>第一步，输入 <code>npm i webpack-dev-server --save</code>，此外，我们需要去调整 package.json scripts 部分去包含这个指令，下面是基本的设置：</p>
+<p><em>package.json</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;build&quot;: &quot;webpack&quot;,</span><br><span class="line">    &quot;dev&quot;: &quot;webpack-dev-server --devtool eval --progress --colors --hot --content-base build&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当你在命令行里运行 npm run dev 的时候他会执行 dev 属性里的值。这是这些指令的意思：</p>
+<ol>
+<li>webpack-dev-server - 在 localhost:8080 建立一个 Web 服务器</li>
+<li>–devtool eval - 为你的代码创建源地址。当有任何报错的时候可以让你更加精确地定位到文件和行号</li>
+<li>–progress - 显示合并代码进度</li>
+<li>–colors - Yay，命令行中显示颜色！</li>
+<li>–content-base build - 指向设置的输出目录</li>
+</ol>
+<p>总的来说，当你运行 <code>npm run dev</code> 的时候，会启动一个 Web 服务器，然后监听文件修改，然后自动重新合并你的代码。真的非常简洁！</p>
+<h4 id="浏览器自动刷新"><a href="#浏览器自动刷新" class="headerlink" title="浏览器自动刷新"></a>浏览器自动刷新</h4><p>当运行 webpack-dev-server 的时候，它会监听你的文件修改。当项目重新合并之后，会通知浏览器刷新。为了能够触发这样的行为，你需要把你的 index.html 放到 build/ 文件夹下，然后做这样的修改：</p>
+<p><em>build/index.html</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;/&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">   &lt;!--主要是这行--&gt;</span><br><span class="line">    &lt;script src=&quot;http://localhost:8080/webpack-dev-server.js&quot;&gt;&lt;/script&gt;  </span><br><span class="line">    &lt;script src=&quot;bundle.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>我们需要增加一个脚本当发生改动的时候去自动刷新应用，你需要在配置中增加一个入口点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var path = require(&quot;path&quot;);</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">    entry: [</span><br><span class="line">        &apos;webpack-dev-server/client?http://localhost:8080&apos;, // 主要是这行</span><br><span class="line">        path.resolve(__dirname, &apos;./app/main.js&apos;), //entry引入的文件</span><br><span class="line">    ],</span><br><span class="line">    output: &#123;</span><br><span class="line">        path: path.resolve(__dirname, &apos;./build&apos;),</span><br><span class="line">        filename: &apos;bundle.js&apos; //output  打包到的文件</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>就是这样！现在你的应用就可以在文件修改之后自动刷新了。</p>
+<p>在上面的例子中我们创建了 index.html 文件来获取更多的自由和控制。同样也可以从 <a href="http://localhost:8080/webpack-dev-server/bundle" target="_blank" rel="noopener">http://localhost:8080/webpack-dev-server/bundle</a> 运行应用。这会触发一个默认的你不能控制的 index.html ，它同样会触发一个允许iFrame中显示重合并的过程。</p>
+<blockquote>
+<p>我探讨了一个可供代替的方法，inline 是基于 Developing with Webpack 中 SurviveJS - Webpack and React 章节的方案。</p>
+<p>参考文章：<a href="https://segmentfault.com/a/1190000006670084" target="_blank" rel="noopener">https://segmentfault.com/a/1190000006670084</a></p>
+</blockquote>
+<h4 id="引入文件"><a href="#引入文件" class="headerlink" title="引入文件"></a>引入文件</h4><p>Webpack 允许你使用不同的模块类型，但是 “底层”必须使用同一种实现。所有的模块都能够开箱即用。</p>
+<p><em>ES6 模块</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import MyModule from &apos;./MyModule.js&apos;;</span><br></pre></td></tr></table></figure>
+<p><em>CommonJS</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var MyModule = require(&apos;./MyModule.js&apos;);</span><br></pre></td></tr></table></figure>
+<p><em>AMD</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">define([&apos;./MyModule.js&apos;], function (MyModule) &#123;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="理解文件路径"><a href="#理解文件路径" class="headerlink" title="理解文件路径"></a>理解文件路径</h5><p>一个模块会按它的文件路径来加载，看一下下面的这个结构：</p>
 <ul>
-<li><p>如果在require命令中，这么写:<code>var foo = require(&quot;foo.js&quot;);   //没有写./</code>， 所以不是一个相对路径。是一个特殊的路径<br>那么Node.js将该文件视为node_modules目录下的一个文件</p>
+<li>/app<ul>
+<li>/modules<ul>
+<li>MyModule.js</li>
+</ul>
 </li>
-<li><p>node_modules文件夹并不一定在同级目录里面，在任何直接祖先级目录中，都可以。甚至可以放到NODE_PATH环境变量的文件夹中。这样做的好处稍后你将知道：分享项目的时候，不需要带着modules一起给别人。</p>
-</li>
-<li><p>我们可以使用文件夹来管理模块，比如<code>var bar = require(&quot;bar&quot;)</code>;<br>那么Node.js将会去寻找node_modules目录下的bar文件夹中的index.js去执行。</p>
+<li>main.js (entry point)</li>
+<li>utils.js</li>
+</ul>
 </li>
 </ul>
-<p>每一个模块文件夹中，推荐都写一个<code>package.json</code>文件，这个文件的名字不能改。node将自动读取里面的配置。有一个main项，就是入口文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;kaoladebar&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.1&quot;,</span><br><span class="line">  &quot;main&quot; : &quot;app.js&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>package.json文件，要放到模块文件夹的根目录去。</p>
-<p>模块就是一些功能的封装，所以一些成熟的、经常使用的功能，都有人封装成为了模块。并且放到了社区中，供人免费下载。<br>这个伟大的社区，叫做npm。 也是一个工具名字  node package management<br><a href="https://www.npmjs.com/" target="_blank" rel="noopener">https://www.npmjs.com/</a></p>
-<p>去社区搜索需求，然后点进去，看api。<br>如果要配置一个模块，那么直接在cmd使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install 模块名字</span><br></pre></td></tr></table></figure>
-<p>就可以安装。 模块名字全球唯一。<br>安装的时候，要注意，命令提示符的所在位置。</p>
-<ol>
-<li>我们的依赖包，可能在随时更新，我们永远想保持更新，或者某持某一个版本；</li>
-<li>项目越来越大的时候，给别人看的时候，没有必要再次共享我们引用的第三方模块。</li>
-</ol>
-<p>我们可以用package.json来管理依赖。<br>在cmd中，使用<code>npm init</code>可以初始化一个package.json文件，用回答问题的方式生成一个新的package.json文件。</p>
-<p>使用<code>npm install</code>将能安装所有依赖。<br>npm也有文档，这是package.json的介绍：<br><a href="https://docs.npmjs.com/files/package.json" target="_blank" rel="noopener">https://docs.npmjs.com/files/package.json</a></p>
-<p>require()别的js文件的时候，将执行那个js文件。</p>
-<blockquote>
-<p>注意：require()中的路径，是从当前这个js文件出发，找到别人。而fs是从命令提示符所在目录出发找到别人。<br>所以，桌面上有一个a.js， test文件夹中有b.js、c.js、1.txt</p>
-</blockquote>
-<p>a要引用b：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var b = require(“./test/b.js”);</span><br></pre></td></tr></table></figure></p>
-<p>b要引用c：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var b = require(“./c.js”);</span><br></pre></td></tr></table></figure></p>
-<p>但是，fs等其他的模块用到路径的时候，都是相对于cmd命令光标所在位置。<br>所以，在b.js中想读1.txt文件，推荐用绝对路径：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(__dirname + &quot;/1.txt&quot;,function(err,data)&#123;</span><br><span class="line">    if(err) &#123; throw err; &#125;</span><br><span class="line">    console.log(data.toString());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h4 id="post请求"><a href="#post请求" class="headerlink" title="post请求"></a>post请求</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var alldata = &quot;&quot;;</span><br><span class="line">//下面是post请求接收的一个公式</span><br><span class="line">//node为了追求极致，它是一个小段一个小段接收的。</span><br><span class="line">//接受了一小段，可能就给别人去服务了。防止一个过大的表单阻塞了整个进程</span><br><span class="line">req.addListener(&quot;data&quot;,function(chunk)&#123;</span><br><span class="line">    alldata += chunk;</span><br><span class="line">&#125;);</span><br><span class="line">//全部传输完毕</span><br><span class="line">req.addListener(&quot;end&quot;,function()&#123;</span><br><span class="line">    console.log(alldata.toString());</span><br><span class="line">    res.end(&quot;success&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>原生写POST处理，比较复杂，要写两个监听。文件上传业务比较难写。<br>所以，用第三方模块。formidable。</p>
-<p>只要涉及文件上传，那么form标签要加一个属性：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=&quot;http://127.0.0.1/dopost&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;&lt;%= url %&gt;&quot;&gt;&lt;img src=&quot;&lt;%= imageURL %&gt;&quot; alt=&quot;&quot;&gt;&lt;/a&gt;</span><br></pre></td></tr></table></figure>
-<p>数据绑定，就成为一个完整的html字符串了。<br>前台的模板，我们现在要学习的是后台的模板。<br>后台模板，著名的有两个，第一个叫做ejs； 第二个叫做jade。</p>
-<p>是npm第三方包。</p>
-<h5 id="EJS"><a href="#EJS" class="headerlink" title="EJS"></a>EJS</h5><p>Embedded JavaScript templates<br>后台模板引擎</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;% for(var i = 0 ; i &lt; news.length ; i++)&#123; %&gt;</span><br><span class="line">        &lt;li&gt;&lt;%= news[i] %&gt;&lt;/li&gt;</span><br><span class="line">    &lt;% &#125; %&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var dictionary = &#123;</span><br><span class="line">          a:6,</span><br><span class="line">          news : [&quot;1期班太牛逼了&quot;,&quot;高薪就业&quot;,&quot;哈哈哈哈哈&quot;]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Created by Danny on 2015/9/20 16:59.</span><br><span class="line"> */</span><br><span class="line">var ejs = require(&quot;ejs&quot;);</span><br><span class="line">var fs = require(&quot;fs&quot;);</span><br><span class="line">var http = require(&quot;http&quot;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">var server = http.createServer(function(req,res)&#123;</span><br><span class="line">    fs.readFile(&quot;./views/index.ejs&quot;,function(err,data)&#123;</span><br><span class="line">        //绑定模板</span><br><span class="line">        var template = data.toString();</span><br><span class="line">        var dictionary = &#123;</span><br><span class="line">            a:6,</span><br><span class="line">            news : [</span><br><span class="line">                &#123;&quot;title&quot;:&quot;陈伟我爱你&quot;,&quot;count&quot;:10&#125;,</span><br><span class="line">                &#123;&quot;title&quot;:&quot;哈哈哈哈&quot;,&quot;count&quot;:20&#125;,</span><br><span class="line">                &#123;&quot;title&quot;:&quot;逗你玩儿的&quot;,&quot;count&quot;:30&#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;;</span><br><span class="line">        var html = ejs.render(template,dictionary);</span><br><span class="line"></span><br><span class="line">        //显示</span><br><span class="line">        res.writeHead(200,&#123;&quot;Content-Type&quot;:&quot;text/html;charset=UTF8&quot;&#125;);</span><br><span class="line">        res.end(html);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">server.listen(80,&quot;127.0.0.1&quot;);</span><br></pre></td></tr></table></figure>
-<p>ejs详解：<br>npm：<a href="https://www.npmjs.com/package/ejs" target="_blank" rel="noopener">https://www.npmjs.com/package/ejs</a><br><a href="https://segmentfault.com/a/1190000004286562" target="_blank" rel="noopener">中文版，译者：飞龙</a></p>
-<h5 id="jade"><a href="#jade" class="headerlink" title="jade"></a>jade</h5><p><a href="https://www.npmjs.com/package/jade" target="_blank" rel="noopener">https://www.npmjs.com/package/jade</a><br><a href="http://expressjs.jser.us/jade.html" target="_blank" rel="noopener">草依山 翻译</a></p>
-
+<p>打开 <code>main.js</code> 然后可以通过下面两种方式引入 <code>app/modules/MyModule.js</code></p>
+<p><em>app/main.js</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// ES6</span><br><span class="line">import MyModule from &apos;./modules/MyModule.js&apos;;</span><br><span class="line"></span><br><span class="line">// CommonJS</span><br><span class="line">var MyModule = require(&apos;./modules/MyModule.js&apos;);</span><br></pre></td></tr></table></figure>
+<p>最开始的 ./ 是 “相对当前文件路径”<br>让我们打开 MyModule.js 然后引入 app/utils：</p>
+<p><em>app/modules/MyModule.js</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// ES6 相对路径</span><br><span class="line">import utils from &apos;./../utils.js&apos;;</span><br><span class="line"></span><br><span class="line">// ES6 绝对路径</span><br><span class="line">import utils from &apos;/utils.js&apos;;</span><br><span class="line"></span><br><span class="line">// CommonJS 相对路径</span><br><span class="line">var utils = require(&apos;./../utils.js&apos;);</span><br><span class="line"></span><br><span class="line">// CommonJS 绝对路径</span><br><span class="line">var utils = require(&apos;/utils.js&apos;);</span><br></pre></td></tr></table></figure>
+<p>相对路径是相对当前目录。绝对路径是相对入口文件，这个案例中是 main.js。</p>
+<h5 id="我需要使用文件后缀么？"><a href="#我需要使用文件后缀么？" class="headerlink" title="我需要使用文件后缀么？"></a>我需要使用文件后缀么？</h5><p>不，你不需要去特意去使用 .js，但是他能够更让你更清楚你正引入的档案。因為你可能有一些 .js 文件和一些 .jsx 文件，甚至一些图片和 css 可以用 Webpack 來引入。加入文件后缀，可以让你清楚地区分你引入的是 node_modules 或特定档案还是一般文件档案。</p>
+<p>记住，Webpack 只是一个模块合并器！也就是说你可以设置他去加载任何你写的匹配，只要有一个加载器。我们稍后会继续深入这个话题。</p>
+<h3 id="ReactJs"><a href="#ReactJs" class="headerlink" title="ReactJs"></a>ReactJs</h3>
       
     </div>
     
@@ -467,7 +487,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Node/" rel="tag"># Node</a>
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/React/" rel="tag"># React</a>
           
         </div>
       
@@ -480,8 +502,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/27/node学习笔记-3/" rel="next" title="Node学习笔记（module-3）">
-                <i class="fa fa-chevron-left"></i> Node学习笔记（module-3）
+              <a href="/2018/01/27/node学习笔记-1/" rel="next" title="Node学习笔记（module-1）">
+                <i class="fa fa-chevron-left"></i> Node学习笔记（module-1）
               </a>
             
           </div>
@@ -489,10 +511,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/27/node学习笔记-1/" rel="prev" title="Node学习笔记（module-1）">
-                Node学习笔记（module-1） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -646,7 +664,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#模块"><span class="nav-number">1.</span> <span class="nav-text">模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#post请求"><span class="nav-number">2.</span> <span class="nav-text">post请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模板引擎"><span class="nav-number">3.</span> <span class="nav-text">模板引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#EJS"><span class="nav-number">3.1.</span> <span class="nav-text">EJS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#jade"><span class="nav-number">3.2.</span> <span class="nav-text">jade</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装-Webpack"><span class="nav-number">1.1.</span> <span class="nav-text">安装 Webpack</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置-Webpack"><span class="nav-number">1.2.</span> <span class="nav-text">设置 Webpack</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第一个编译"><span class="nav-number">1.3.</span> <span class="nav-text">第一个编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行应用"><span class="nav-number">1.4.</span> <span class="nav-text">运行应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置-package-json-scripts"><span class="nav-number">1.5.</span> <span class="nav-text">设置 package.json scripts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置-webpack-dev-server"><span class="nav-number">1.6.</span> <span class="nav-text">设置 webpack-dev-server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器自动刷新"><span class="nav-number">1.7.</span> <span class="nav-text">浏览器自动刷新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引入文件"><span class="nav-number">1.8.</span> <span class="nav-text">引入文件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#理解文件路径"><span class="nav-number">1.8.1.</span> <span class="nav-text">理解文件路径</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#我需要使用文件后缀么？"><span class="nav-number">1.8.2.</span> <span class="nav-text">我需要使用文件后缀么？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReactJs"><span class="nav-number">2.</span> <span class="nav-text">ReactJs</span></a></li></ol></div>
             
 
           </div>
